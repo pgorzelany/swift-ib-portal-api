@@ -1,3 +1,5 @@
 # SwiftIBPortalApi
 
-A description of this package.
+A Swift wrapper for the InteractiveBrokers Portal API
+
+

@@ -5,7 +5,7 @@
 
 import Foundation
 
-extension API.Order {
+extension IBPortalApi.Order {
 
     /**
     Cancel Order
@@ -53,15 +53,15 @@ extension API.Order {
         public enum Response: APIResponseValue, CustomStringConvertible, CustomDebugStringConvertible {
 
             /** Cancels an open order. Must call /iserver/accounts endpoint prior to cancelling an order. Use /iservers/account/orders endpoint to review open-order(s) and get latest order status. */
-            public class Status200: APIModel {
+            public struct Status200: APIModel {
 
-                public var account: String?
+                public let account: String?
 
-                public var conid: Int?
+                public let conid: Int?
 
-                public var msg: String?
+                public let msg: String?
 
-                public var orderId: String?
+                public let orderId: String?
 
                 public init(account: String? = nil, conid: Int? = nil, msg: String? = nil, orderId: String? = nil) {
                     self.account = account
@@ -70,7 +70,7 @@ extension API.Order {
                     self.orderId = orderId
                 }
 
-                public required init(from decoder: Decoder) throws {
+                public init(from decoder: Decoder) throws {
                     let container = try decoder.container(keyedBy: StringCodingKey.self)
 
                     account = try container.decodeIfPresent("account")
@@ -88,18 +88,6 @@ extension API.Order {
                     try container.encodeIfPresent(orderId, forKey: "order_id")
                 }
 
-                public func isEqual(to object: Any?) -> Bool {
-                  guard let object = object as? Status200 else { return false }
-                  guard self.account == object.account else { return false }
-                  guard self.conid == object.conid else { return false }
-                  guard self.msg == object.msg else { return false }
-                  guard self.orderId == object.orderId else { return false }
-                  return true
-                }
-
-                public static func == (lhs: Status200, rhs: Status200) -> Bool {
-                    return lhs.isEqual(to: rhs)
-                }
             }
             public typealias SuccessType = Status200
 

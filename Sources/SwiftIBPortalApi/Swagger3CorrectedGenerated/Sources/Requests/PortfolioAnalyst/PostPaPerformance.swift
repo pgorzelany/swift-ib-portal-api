@@ -5,7 +5,7 @@
 
 import Foundation
 
-extension API.PortfolioAnalyst {
+extension IBPortalApi.PortfolioAnalyst {
 
     /**
     Account Performance
@@ -18,7 +18,7 @@ extension API.PortfolioAnalyst {
 
         /** Frequency of cumulative performance data points: 'D'aily, 'M'onthly,'Q'uarterly.
          */
-        public enum Freq: String, Codable, Equatable, CaseIterable {
+        public enum IBFreq: String, Codable, Equatable, CaseIterable {
             case d = "D"
             case m = "M"
             case q = "Q"
@@ -27,28 +27,28 @@ extension API.PortfolioAnalyst {
         public final class Request: APIRequest<Response> {
 
             /** Returns the performance (MTM) for the given accounts, if more than one account is passed, the result is consolidated. */
-            public class Body: APIModel {
+            public struct Body: APIModel {
 
                 /** Frequency of cumulative performance data points: 'D'aily, 'M'onthly,'Q'uarterly.
                  */
-                public enum Freq: String, Codable, Equatable, CaseIterable {
+                public enum IBFreq: String, Codable, Equatable, CaseIterable {
                     case d = "D"
                     case m = "M"
                     case q = "Q"
                 }
 
-                public var acctIds: [String]?
+                public let acctIds: [String]?
 
                 /** Frequency of cumulative performance data points: 'D'aily, 'M'onthly,'Q'uarterly.
              */
-                public var freq: Freq?
+                public let freq: IBFreq?
 
-                public init(acctIds: [String]? = nil, freq: Freq? = nil) {
+                public init(acctIds: [String]? = nil, freq: IBFreq? = nil) {
                     self.acctIds = acctIds
                     self.freq = freq
                 }
 
-                public required init(from decoder: Decoder) throws {
+                public init(from decoder: Decoder) throws {
                     let container = try decoder.container(keyedBy: StringCodingKey.self)
 
                     acctIds = try container.decodeArrayIfPresent("acctIds")
@@ -62,16 +62,6 @@ extension API.PortfolioAnalyst {
                     try container.encodeIfPresent(freq, forKey: "freq")
                 }
 
-                public func isEqual(to object: Any?) -> Bool {
-                  guard let object = object as? Body else { return false }
-                  guard self.acctIds == object.acctIds else { return false }
-                  guard self.freq == object.freq else { return false }
-                  return true
-                }
-
-                public static func == (lhs: Body, rhs: Body) -> Bool {
-                    return lhs.isEqual(to: rhs)
-                }
             }
 
             public struct Options {
@@ -80,9 +70,9 @@ extension API.PortfolioAnalyst {
 
                 /** Frequency of cumulative performance data points: 'D'aily, 'M'onthly,'Q'uarterly.
  */
-                public var freq: Freq?
+                public var freq: IBFreq?
 
-                public init(acctIds: [String]? = nil, freq: Freq? = nil) {
+                public init(acctIds: [String]? = nil, freq: IBFreq? = nil) {
                     self.acctIds = acctIds
                     self.freq = freq
                 }
@@ -101,7 +91,7 @@ extension API.PortfolioAnalyst {
             }
 
             /// convenience initialiser so an Option doesn't have to be created
-            public convenience init(acctIds: [String]? = nil, freq: Freq? = nil, body: Body) {
+            public convenience init(acctIds: [String]? = nil, freq: IBFreq? = nil, body: Body) {
                 let options = Options(acctIds: acctIds, freq: freq)
                 self.init(body: body, options: options)
             }
@@ -119,12 +109,12 @@ extension API.PortfolioAnalyst {
         }
 
         public enum Response: APIResponseValue, CustomStringConvertible, CustomDebugStringConvertible {
-            public typealias SuccessType = Performance
+            public typealias SuccessType = IBPerformance
 
             /** returns an object */
-            case status200(Performance)
+            case status200(IBPerformance)
 
-            public var success: Performance? {
+            public var success: IBPerformance? {
                 switch self {
                 case .status200(let response): return response
                 }
@@ -150,7 +140,7 @@ extension API.PortfolioAnalyst {
 
             public init(statusCode: Int, data: Data, decoder: ResponseDecoder) throws {
                 switch statusCode {
-                case 200: self = try .status200(decoder.decode(Performance.self, from: data))
+                case 200: self = try .status200(decoder.decode(IBPerformance.self, from: data))
                 default: throw APIClientError.unexpectedStatusCode(statusCode: statusCode, data: data)
                 }
             }

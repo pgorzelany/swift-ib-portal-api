@@ -5,7 +5,7 @@
 
 import Foundation
 
-extension API.Order {
+extension IBPortalApi.Order {
 
     /**
     Place Orders (Support bracket orders)
@@ -20,20 +20,20 @@ extension API.Order {
 
             /** You can pass a list of orders here
              */
-            public class Body: APIModel {
+            public struct Body: APIModel {
 
                 /** Notes for bracket orders: 1. Children orders will not have its own "cOID", so please donot pass "cOID"
             parameter in child order.Instead, they will have a "parentId" which must be equal to "cOID" of parent.
             2. When you cancel a parent order, it will cancel all bracket orders, when you cancel one child order,
             it will also cancel its sibling order.
              */
-                public var orders: [OrderRequest]?
+                public let orders: [IBOrderRequest]?
 
-                public init(orders: [OrderRequest]? = nil) {
+                public init(orders: [IBOrderRequest]? = nil) {
                     self.orders = orders
                 }
 
-                public required init(from decoder: Decoder) throws {
+                public init(from decoder: Decoder) throws {
                     let container = try decoder.container(keyedBy: StringCodingKey.self)
 
                     orders = try container.decodeArrayIfPresent("orders")
@@ -45,15 +45,6 @@ extension API.Order {
                     try container.encodeIfPresent(orders, forKey: "orders")
                 }
 
-                public func isEqual(to object: Any?) -> Bool {
-                  guard let object = object as? Body else { return false }
-                  guard self.orders == object.orders else { return false }
-                  return true
-                }
-
-                public static func == (lhs: Body, rhs: Body) -> Bool {
-                    return lhs.isEqual(to: rhs)
-                }
             }
 
             public struct Options {
@@ -66,9 +57,9 @@ parameter in child order.Instead, they will have a "parentId" which must be equa
 2. When you cancel a parent order, it will cancel all bracket orders, when you cancel one child order,
 it will also cancel its sibling order.
  */
-                public var orders: [OrderRequest]?
+                public var orders: [IBOrderRequest]?
 
-                public init(accountId: String, orders: [OrderRequest]? = nil) {
+                public init(accountId: String, orders: [IBOrderRequest]? = nil) {
                     self.accountId = accountId
                     self.orders = orders
                 }
@@ -87,7 +78,7 @@ it will also cancel its sibling order.
             }
 
             /// convenience initialiser so an Option doesn't have to be created
-            public convenience init(accountId: String, orders: [OrderRequest]? = nil, body: Body) {
+            public convenience init(accountId: String, orders: [IBOrderRequest]? = nil, body: Body) {
                 let options = Options(accountId: accountId, orders: orders)
                 self.init(body: body, options: options)
             }
@@ -109,21 +100,21 @@ it will also cancel its sibling order.
 
             /** You can pass a list of orders here
              */
-            public class Status200: APIModel {
+            public struct Status200: APIModel {
 
-                public var id: String?
+                public let id: String?
 
                 /** Please note here, if the message is a question, you have to reply to question in order to submit
             the order successfully. See more in the "/iserver/reply/{replyid}" endpoint.
              */
-                public var message: [String]?
+                public let message: [String]?
 
                 public init(id: String? = nil, message: [String]? = nil) {
                     self.id = id
                     self.message = message
                 }
 
-                public required init(from decoder: Decoder) throws {
+                public init(from decoder: Decoder) throws {
                     let container = try decoder.container(keyedBy: StringCodingKey.self)
 
                     id = try container.decodeIfPresent("id")
@@ -137,16 +128,6 @@ it will also cancel its sibling order.
                     try container.encodeIfPresent(message, forKey: "message")
                 }
 
-                public func isEqual(to object: Any?) -> Bool {
-                  guard let object = object as? Status200 else { return false }
-                  guard self.id == object.id else { return false }
-                  guard self.message == object.message else { return false }
-                  return true
-                }
-
-                public static func == (lhs: Status200, rhs: Status200) -> Bool {
-                    return lhs.isEqual(to: rhs)
-                }
             }
             public typealias SuccessType = [Status200]
 

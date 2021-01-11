@@ -5,7 +5,7 @@
 
 import Foundation
 
-extension API.Portfolio {
+extension IBPortalApi.Portfolio {
 
     /**
     Positions by Conid
@@ -49,15 +49,15 @@ extension API.Portfolio {
         public enum Response: APIResponseValue, CustomStringConvertible, CustomDebugStringConvertible {
 
             /** Returns an object of all positions matching the conid for all the selected accounts. For portfolio models the conid could be in more than one model, returning an array with the name of the model it belongs to. /portfolio/accounts or /portfolio/subaccounts must be called prior to this endpoint. */
-            public class Status200: APIModel {
+            public struct Status200: APIModel {
 
-                public var acctid: Positions?
+                public let acctid: IBPositions?
 
-                public init(acctid: Positions? = nil) {
+                public init(acctid: IBPositions? = nil) {
                     self.acctid = acctid
                 }
 
-                public required init(from decoder: Decoder) throws {
+                public init(from decoder: Decoder) throws {
                     let container = try decoder.container(keyedBy: StringCodingKey.self)
 
                     acctid = try container.decodeIfPresent("ACCTID")
@@ -69,15 +69,6 @@ extension API.Portfolio {
                     try container.encodeIfPresent(acctid, forKey: "ACCTID")
                 }
 
-                public func isEqual(to object: Any?) -> Bool {
-                  guard let object = object as? Status200 else { return false }
-                  guard self.acctid == object.acctid else { return false }
-                  return true
-                }
-
-                public static func == (lhs: Status200, rhs: Status200) -> Bool {
-                    return lhs.isEqual(to: rhs)
-                }
             }
             public typealias SuccessType = Status200
 

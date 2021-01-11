@@ -5,7 +5,7 @@
 
 import Foundation
 
-extension API.Alert {
+extension IBPortalApi.Alert {
 
     /**
     Get a list of available alerts
@@ -49,27 +49,27 @@ extension API.Alert {
         public enum Response: APIResponseValue, CustomStringConvertible, CustomDebugStringConvertible {
 
             /** The response will contain both active and inactive alerts, but it won't have MTA alert */
-            public class Status200: APIModel {
+            public struct Status200: APIModel {
 
                 /** account id */
-                public var account: String?
+                public let account: String?
 
                 /** Value can only be 0 or 1, 1 means active */
-                public var alertActive: Int?
+                public let alertActive: Int?
 
-                public var alertName: String?
+                public let alertName: String?
 
                 /** whether the alert can be repeatable or not, value can be 1 or 0. 1 means true */
-                public var alertRepeatable: Int?
+                public let alertRepeatable: Int?
 
                 /** whether the alert has been triggered or not */
-                public var alertTriggered: Bool?
+                public let alertTriggered: Bool?
 
-                public var orderId: Int?
+                public let orderId: Int?
 
                 /** format, YYYYMMDD-HH:mm:ss, the time when you created the alert
              */
-                public var orderTime: String?
+                public let orderTime: String?
 
                 public init(account: String? = nil, alertActive: Int? = nil, alertName: String? = nil, alertRepeatable: Int? = nil, alertTriggered: Bool? = nil, orderId: Int? = nil, orderTime: String? = nil) {
                     self.account = account
@@ -81,7 +81,7 @@ extension API.Alert {
                     self.orderTime = orderTime
                 }
 
-                public required init(from decoder: Decoder) throws {
+                public init(from decoder: Decoder) throws {
                     let container = try decoder.container(keyedBy: StringCodingKey.self)
 
                     account = try container.decodeIfPresent("account")
@@ -105,21 +105,6 @@ extension API.Alert {
                     try container.encodeIfPresent(orderTime, forKey: "order_time")
                 }
 
-                public func isEqual(to object: Any?) -> Bool {
-                  guard let object = object as? Status200 else { return false }
-                  guard self.account == object.account else { return false }
-                  guard self.alertActive == object.alertActive else { return false }
-                  guard self.alertName == object.alertName else { return false }
-                  guard self.alertRepeatable == object.alertRepeatable else { return false }
-                  guard self.alertTriggered == object.alertTriggered else { return false }
-                  guard self.orderId == object.orderId else { return false }
-                  guard self.orderTime == object.orderTime else { return false }
-                  return true
-                }
-
-                public static func == (lhs: Status200, rhs: Status200) -> Bool {
-                    return lhs.isEqual(to: rhs)
-                }
             }
             public typealias SuccessType = [Status200]
 

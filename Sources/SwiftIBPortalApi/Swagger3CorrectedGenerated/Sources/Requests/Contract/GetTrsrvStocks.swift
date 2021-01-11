@@ -5,7 +5,7 @@
 
 import Foundation
 
-extension API.Contract {
+extension IBPortalApi.Contract {
 
     /**
     Security Stocks by Symbol
@@ -51,15 +51,15 @@ extension API.Contract {
         public enum Response: APIResponseValue, CustomStringConvertible, CustomDebugStringConvertible {
 
             /** Returns an object contains all stock contracts for given symbol(s) */
-            public class Status200: APIModel {
+            public struct Status200: APIModel {
 
-                public var symbol: Stocks?
+                public let symbol: IBStocks?
 
-                public init(symbol: Stocks? = nil) {
+                public init(symbol: IBStocks? = nil) {
                     self.symbol = symbol
                 }
 
-                public required init(from decoder: Decoder) throws {
+                public init(from decoder: Decoder) throws {
                     let container = try decoder.container(keyedBy: StringCodingKey.self)
 
                     symbol = try container.decodeIfPresent("symbol")
@@ -71,27 +71,18 @@ extension API.Contract {
                     try container.encodeIfPresent(symbol, forKey: "symbol")
                 }
 
-                public func isEqual(to object: Any?) -> Bool {
-                  guard let object = object as? Status200 else { return false }
-                  guard self.symbol == object.symbol else { return false }
-                  return true
-                }
-
-                public static func == (lhs: Status200, rhs: Status200) -> Bool {
-                    return lhs.isEqual(to: rhs)
-                }
             }
 
             /** Returns an object contains all stock contracts for given symbol(s) */
-            public class Status500: APIModel {
+            public struct Status500: APIModel {
 
-                public var error: String?
+                public let error: String?
 
                 public init(error: String? = nil) {
                     self.error = error
                 }
 
-                public required init(from decoder: Decoder) throws {
+                public init(from decoder: Decoder) throws {
                     let container = try decoder.container(keyedBy: StringCodingKey.self)
 
                     error = try container.decodeIfPresent("error")
@@ -103,15 +94,6 @@ extension API.Contract {
                     try container.encodeIfPresent(error, forKey: "error")
                 }
 
-                public func isEqual(to object: Any?) -> Bool {
-                  guard let object = object as? Status500 else { return false }
-                  guard self.error == object.error else { return false }
-                  return true
-                }
-
-                public static func == (lhs: Status500, rhs: Status500) -> Bool {
-                    return lhs.isEqual(to: rhs)
-                }
             }
             public typealias SuccessType = Status200
 

@@ -5,7 +5,7 @@
 
 import Foundation
 
-extension API.FYI {
+extension IBPortalApi.FYI {
 
     /** Get a list of notifications */
     public enum PutFyiNotificationsByNotificationId {

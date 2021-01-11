@@ -5,7 +5,7 @@
 
 import Foundation
 
-extension API.Order {
+extension IBPortalApi.Order {
 
     /**
     Modify Order
@@ -34,9 +34,9 @@ extension API.Order {
 
             public var options: Options
 
-            public var body: ModifyOrder
+            public var body: IBModifyOrder
 
-            public init(body: ModifyOrder, options: Options, encoder: RequestEncoder? = nil) {
+            public init(body: IBModifyOrder, options: Options, encoder: RequestEncoder? = nil) {
                 self.body = body
                 self.options = options
                 super.init(service: PostIserverAccountByAccountIdOrderByOrderId.service) { defaultEncoder in
@@ -45,7 +45,7 @@ extension API.Order {
             }
 
             /// convenience initialiser so an Option doesn't have to be created
-            public convenience init(accountId: String, orderId: String, body: ModifyOrder) {
+            public convenience init(accountId: String, orderId: String, body: IBModifyOrder) {
                 let options = Options(accountId: accountId, orderId: orderId)
                 self.init(body: body, options: options)
             }
@@ -58,13 +58,13 @@ extension API.Order {
         public enum Response: APIResponseValue, CustomStringConvertible, CustomDebugStringConvertible {
 
             /** Modifies an open order. Must call /iserver/accounts endpoint prior to modifying an order. Use /iservers/account/orders endpoint to review open-order(s). */
-            public class Status200: APIModel {
+            public struct Status200: APIModel {
 
-                public var localOrderId: String?
+                public let localOrderId: String?
 
-                public var orderId: String?
+                public let orderId: String?
 
-                public var orderStatus: String?
+                public let orderStatus: String?
 
                 public init(localOrderId: String? = nil, orderId: String? = nil, orderStatus: String? = nil) {
                     self.localOrderId = localOrderId
@@ -72,7 +72,7 @@ extension API.Order {
                     self.orderStatus = orderStatus
                 }
 
-                public required init(from decoder: Decoder) throws {
+                public init(from decoder: Decoder) throws {
                     let container = try decoder.container(keyedBy: StringCodingKey.self)
 
                     localOrderId = try container.decodeIfPresent("local_order_id")
@@ -88,17 +88,6 @@ extension API.Order {
                     try container.encodeIfPresent(orderStatus, forKey: "order_status")
                 }
 
-                public func isEqual(to object: Any?) -> Bool {
-                  guard let object = object as? Status200 else { return false }
-                  guard self.localOrderId == object.localOrderId else { return false }
-                  guard self.orderId == object.orderId else { return false }
-                  guard self.orderStatus == object.orderStatus else { return false }
-                  return true
-                }
-
-                public static func == (lhs: Status200, rhs: Status200) -> Bool {
-                    return lhs.isEqual(to: rhs)
-                }
             }
             public typealias SuccessType = [Status200]
 

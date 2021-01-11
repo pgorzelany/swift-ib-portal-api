@@ -5,7 +5,7 @@
 
 import Foundation
 
-extension API.Order {
+extension IBPortalApi.Order {
 
     /**
     Live Orders
@@ -28,15 +28,15 @@ To receive streaming live orders the endpoint /ws can be used. Refer to [Streami
             Notifications contains information about execute orders as they happen, see status field.
             To receive streaming live orders the endpoint /ws can be used. Refer to [Streaming WebSocket Data](https://interactivebrokers.github.io/cpwebapi/RealtimeSubscription.html) for details.
              */
-            public class Body: APIModel {
+            public struct Body: APIModel {
 
-                public var filters: [String]?
+                public let filters: [String]?
 
                 public init(filters: [String]? = nil) {
                     self.filters = filters
                 }
 
-                public required init(from decoder: Decoder) throws {
+                public init(from decoder: Decoder) throws {
                     let container = try decoder.container(keyedBy: StringCodingKey.self)
 
                     filters = try container.decodeArrayIfPresent("filters")
@@ -48,15 +48,6 @@ To receive streaming live orders the endpoint /ws can be used. Refer to [Streami
                     try container.encodeIfPresent(filters, forKey: "filters")
                 }
 
-                public func isEqual(to object: Any?) -> Bool {
-                  guard let object = object as? Body else { return false }
-                  guard self.filters == object.filters else { return false }
-                  return true
-                }
-
-                public static func == (lhs: Body, rhs: Body) -> Bool {
-                    return lhs.isEqual(to: rhs)
-                }
             }
 
             public struct Options {
@@ -103,12 +94,12 @@ To receive streaming live orders the endpoint /ws can be used. Refer to [Streami
             Notifications contains information about execute orders as they happen, see status field.
             To receive streaming live orders the endpoint /ws can be used. Refer to [Streaming WebSocket Data](https://interactivebrokers.github.io/cpwebapi/RealtimeSubscription.html) for details.
              */
-            public class Status200: APIModel {
+            public struct Status200: APIModel {
 
-                public var orders: [Orders]?
+                public let orders: [Orders]?
 
                 /** If live order update is a snapshot */
-                public var snapshot: Bool?
+                public let snapshot: Bool?
 
                 /** The endpoint is meant to be used in polling mode, e.g. requesting every x seconds.
                 The response will contain two objects, one is notification, the other is orders. 
@@ -116,85 +107,85 @@ To receive streaming live orders the endpoint /ws can be used. Refer to [Streami
                 Notifications contains information about execute orders as they happen, see status field.
                 To receive streaming live orders the endpoint /ws can be used. Refer to [Streaming WebSocket Data](https://interactivebrokers.github.io/cpwebapi/RealtimeSubscription.html) for details.
                  */
-                public class Orders: APIModel {
+                public struct Orders: APIModel {
 
                     /** Account number */
-                    public var acct: String?
+                    public let acct: String?
 
                     /** background color in hex format */
-                    public var bgColor: String?
+                    public let bgColor: String?
 
                     /** Cash currency */
-                    public var cashCcy: String?
+                    public let cashCcy: String?
 
                     /** Company Name */
-                    public var companyName: String?
+                    public let companyName: String?
 
                     /** Contract identifier */
-                    public var conid: Double?
+                    public let conid: Double?
 
                     /** Formatted ticker description */
-                    public var description1: String?
+                    public let description1: String?
 
                     /** Exchange or trading venue */
-                    public var exchange: String?
+                    public let exchange: String?
 
                     /** foreground color in hex format */
-                    public var fgColor: String?
+                    public let fgColor: String?
 
                     /** Quantity filled */
-                    public var filledQuantity: Double?
+                    public let filledQuantity: Double?
 
                     /** Last status update in format YYMMDDhhmms based in GMT */
-                    public var lastExecutionTime: Double?
+                    public let lastExecutionTime: Double?
 
                     /** Last status update unix time in ms */
-                    public var lastExecutionTimer: Double?
+                    public let lastExecutionTimer: Double?
 
                     /** Listing Exchange */
-                    public var listingExchange: String?
+                    public let listingExchange: String?
 
                     /** Order description */
-                    public var orderDesc: String?
+                    public let orderDesc: String?
 
                     /** Order identifier */
-                    public var orderId: String?
+                    public let orderId: String?
 
                     /** Order type */
-                    public var orderType: String?
+                    public let orderType: String?
 
                     /** Order reference */
-                    public var orderRef: String?
+                    public let orderRef: String?
 
                     /** Original order type */
-                    public var origOrderType: String?
+                    public let origOrderType: String?
 
                     /** Price of order */
-                    public var price: Double?
+                    public let price: Double?
 
                     /** Quantity remaining */
-                    public var remainingQuantity: Double?
+                    public let remainingQuantity: Double?
 
                     /** Asset class */
-                    public var secType: String?
+                    public let secType: String?
 
                     /** Side of order */
-                    public var side: String?
+                    public let side: String?
 
                     /** Quantity outstanding and total quantity concatenated with forward slash separator */
-                    public var sizeAndFills: Double?
+                    public let sizeAndFills: Double?
 
                     /** Status of the order */
-                    public var status: String?
+                    public let status: String?
 
                     /** Supports Tax Optimization with 0 for no and 1 for yes */
-                    public var supportsTaxOpt: Double?
+                    public let supportsTaxOpt: Double?
 
                     /** Underlying symbol */
-                    public var ticker: String?
+                    public let ticker: String?
 
                     /** Time in force */
-                    public var timeInForce: String?
+                    public let timeInForce: String?
 
                     public init(acct: String? = nil, bgColor: String? = nil, cashCcy: String? = nil, companyName: String? = nil, conid: Double? = nil, description1: String? = nil, exchange: String? = nil, fgColor: String? = nil, filledQuantity: Double? = nil, lastExecutionTime: Double? = nil, lastExecutionTimer: Double? = nil, listingExchange: String? = nil, orderDesc: String? = nil, orderId: String? = nil, orderType: String? = nil, orderRef: String? = nil, origOrderType: String? = nil, price: Double? = nil, remainingQuantity: Double? = nil, secType: String? = nil, side: String? = nil, sizeAndFills: Double? = nil, status: String? = nil, supportsTaxOpt: Double? = nil, ticker: String? = nil, timeInForce: String? = nil) {
                         self.acct = acct
@@ -225,7 +216,7 @@ To receive streaming live orders the endpoint /ws can be used. Refer to [Streami
                         self.timeInForce = timeInForce
                     }
 
-                    public required init(from decoder: Decoder) throws {
+                    public init(from decoder: Decoder) throws {
                         let container = try decoder.container(keyedBy: StringCodingKey.self)
 
                         acct = try container.decodeIfPresent("acct")
@@ -287,40 +278,6 @@ To receive streaming live orders the endpoint /ws can be used. Refer to [Streami
                         try container.encodeIfPresent(timeInForce, forKey: "timeInForce")
                     }
 
-                    public func isEqual(to object: Any?) -> Bool {
-                      guard let object = object as? Orders else { return false }
-                      guard self.acct == object.acct else { return false }
-                      guard self.bgColor == object.bgColor else { return false }
-                      guard self.cashCcy == object.cashCcy else { return false }
-                      guard self.companyName == object.companyName else { return false }
-                      guard self.conid == object.conid else { return false }
-                      guard self.description1 == object.description1 else { return false }
-                      guard self.exchange == object.exchange else { return false }
-                      guard self.fgColor == object.fgColor else { return false }
-                      guard self.filledQuantity == object.filledQuantity else { return false }
-                      guard self.lastExecutionTime == object.lastExecutionTime else { return false }
-                      guard self.lastExecutionTimer == object.lastExecutionTimer else { return false }
-                      guard self.listingExchange == object.listingExchange else { return false }
-                      guard self.orderDesc == object.orderDesc else { return false }
-                      guard self.orderId == object.orderId else { return false }
-                      guard self.orderType == object.orderType else { return false }
-                      guard self.orderRef == object.orderRef else { return false }
-                      guard self.origOrderType == object.origOrderType else { return false }
-                      guard self.price == object.price else { return false }
-                      guard self.remainingQuantity == object.remainingQuantity else { return false }
-                      guard self.secType == object.secType else { return false }
-                      guard self.side == object.side else { return false }
-                      guard self.sizeAndFills == object.sizeAndFills else { return false }
-                      guard self.status == object.status else { return false }
-                      guard self.supportsTaxOpt == object.supportsTaxOpt else { return false }
-                      guard self.ticker == object.ticker else { return false }
-                      guard self.timeInForce == object.timeInForce else { return false }
-                      return true
-                    }
-
-                    public static func == (lhs: Orders, rhs: Orders) -> Bool {
-                        return lhs.isEqual(to: rhs)
-                    }
                 }
 
                 public init(orders: [Orders]? = nil, snapshot: Bool? = nil) {
@@ -328,7 +285,7 @@ To receive streaming live orders the endpoint /ws can be used. Refer to [Streami
                     self.snapshot = snapshot
                 }
 
-                public required init(from decoder: Decoder) throws {
+                public init(from decoder: Decoder) throws {
                     let container = try decoder.container(keyedBy: StringCodingKey.self)
 
                     orders = try container.decodeArrayIfPresent("orders")
@@ -342,16 +299,6 @@ To receive streaming live orders the endpoint /ws can be used. Refer to [Streami
                     try container.encodeIfPresent(snapshot, forKey: "snapshot")
                 }
 
-                public func isEqual(to object: Any?) -> Bool {
-                  guard let object = object as? Status200 else { return false }
-                  guard self.orders == object.orders else { return false }
-                  guard self.snapshot == object.snapshot else { return false }
-                  return true
-                }
-
-                public static func == (lhs: Status200, rhs: Status200) -> Bool {
-                    return lhs.isEqual(to: rhs)
-                }
             }
             public typealias SuccessType = Status200
 

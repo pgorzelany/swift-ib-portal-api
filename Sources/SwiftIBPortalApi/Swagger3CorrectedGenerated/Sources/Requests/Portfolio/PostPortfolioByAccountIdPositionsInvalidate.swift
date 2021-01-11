@@ -5,7 +5,7 @@
 
 import Foundation
 
-extension API.Portfolio {
+extension IBPortalApi.Portfolio {
 
     /** Invalidates the backend cache of the Portfolio */
     public enum PostPortfolioByAccountIdPositionsInvalidate {

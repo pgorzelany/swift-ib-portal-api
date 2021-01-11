@@ -5,7 +5,7 @@
 
 import Foundation
 
-extension API.Scanner {
+extension IBPortalApi.Scanner {
 
     /**
     get lists of available scanners
@@ -26,26 +26,26 @@ extension API.Scanner {
         public enum Response: APIResponseValue, CustomStringConvertible, CustomDebugStringConvertible {
 
             /** Returns an object contains four lists contain all parameters for scanners */
-            public class Status200: APIModel {
+            public struct Status200: APIModel {
 
-                public var filterList: [FilterList]?
+                public let filterList: [FilterList]?
 
-                public var instrumentList: [InstrumentList]?
+                public let instrumentList: [InstrumentList]?
 
-                public var locationTree: [LocationTree]?
+                public let locationTree: [LocationTree]?
 
-                public var scanTypeList: [ScanTypeList]?
+                public let scanTypeList: [ScanTypeList]?
 
                 /** Returns an object contains four lists contain all parameters for scanners */
-                public class FilterList: APIModel {
+                public struct FilterList: APIModel {
 
-                    public var code: String?
+                    public let code: String?
 
-                    public var displayName: String?
+                    public let displayName: String?
 
-                    public var group: String?
+                    public let group: String?
 
-                    public var type: String?
+                    public let type: String?
 
                     public init(code: String? = nil, displayName: String? = nil, group: String? = nil, type: String? = nil) {
                         self.code = code
@@ -54,7 +54,7 @@ extension API.Scanner {
                         self.type = type
                     }
 
-                    public required init(from decoder: Decoder) throws {
+                    public init(from decoder: Decoder) throws {
                         let container = try decoder.container(keyedBy: StringCodingKey.self)
 
                         code = try container.decodeIfPresent("code")
@@ -72,28 +72,16 @@ extension API.Scanner {
                         try container.encodeIfPresent(type, forKey: "type")
                     }
 
-                    public func isEqual(to object: Any?) -> Bool {
-                      guard let object = object as? FilterList else { return false }
-                      guard self.code == object.code else { return false }
-                      guard self.displayName == object.displayName else { return false }
-                      guard self.group == object.group else { return false }
-                      guard self.type == object.type else { return false }
-                      return true
-                    }
-
-                    public static func == (lhs: FilterList, rhs: FilterList) -> Bool {
-                        return lhs.isEqual(to: rhs)
-                    }
                 }
 
                 /** Returns an object contains four lists contain all parameters for scanners */
-                public class InstrumentList: APIModel {
+                public struct InstrumentList: APIModel {
 
-                    public var displayName: String?
+                    public let displayName: String?
 
-                    public var filters: [String]?
+                    public let filters: [String]?
 
-                    public var type: String?
+                    public let type: String?
 
                     public init(displayName: String? = nil, filters: [String]? = nil, type: String? = nil) {
                         self.displayName = displayName
@@ -101,7 +89,7 @@ extension API.Scanner {
                         self.type = type
                     }
 
-                    public required init(from decoder: Decoder) throws {
+                    public init(from decoder: Decoder) throws {
                         let container = try decoder.container(keyedBy: StringCodingKey.self)
 
                         displayName = try container.decodeIfPresent("display_name")
@@ -117,41 +105,30 @@ extension API.Scanner {
                         try container.encodeIfPresent(type, forKey: "type")
                     }
 
-                    public func isEqual(to object: Any?) -> Bool {
-                      guard let object = object as? InstrumentList else { return false }
-                      guard self.displayName == object.displayName else { return false }
-                      guard self.filters == object.filters else { return false }
-                      guard self.type == object.type else { return false }
-                      return true
-                    }
-
-                    public static func == (lhs: InstrumentList, rhs: InstrumentList) -> Bool {
-                        return lhs.isEqual(to: rhs)
-                    }
                 }
 
                 /** Returns an object contains four lists contain all parameters for scanners */
-                public class LocationTree: APIModel {
+                public struct LocationTree: APIModel {
 
-                    public var displayName: String?
+                    public let displayName: String?
 
-                    public var locations: [Locations]?
+                    public let locations: [Locations]?
 
-                    public var type: String?
+                    public let type: String?
 
                     /** Returns an object contains four lists contain all parameters for scanners */
-                    public class Locations: APIModel {
+                    public struct Locations: APIModel {
 
-                        public var displayName: String?
+                        public let displayName: String?
 
-                        public var type: String?
+                        public let type: String?
 
                         public init(displayName: String? = nil, type: String? = nil) {
                             self.displayName = displayName
                             self.type = type
                         }
 
-                        public required init(from decoder: Decoder) throws {
+                        public init(from decoder: Decoder) throws {
                             let container = try decoder.container(keyedBy: StringCodingKey.self)
 
                             displayName = try container.decodeIfPresent("display_name")
@@ -165,16 +142,6 @@ extension API.Scanner {
                             try container.encodeIfPresent(type, forKey: "type")
                         }
 
-                        public func isEqual(to object: Any?) -> Bool {
-                          guard let object = object as? Locations else { return false }
-                          guard self.displayName == object.displayName else { return false }
-                          guard self.type == object.type else { return false }
-                          return true
-                        }
-
-                        public static func == (lhs: Locations, rhs: Locations) -> Bool {
-                            return lhs.isEqual(to: rhs)
-                        }
                     }
 
                     public init(displayName: String? = nil, locations: [Locations]? = nil, type: String? = nil) {
@@ -183,7 +150,7 @@ extension API.Scanner {
                         self.type = type
                     }
 
-                    public required init(from decoder: Decoder) throws {
+                    public init(from decoder: Decoder) throws {
                         let container = try decoder.container(keyedBy: StringCodingKey.self)
 
                         displayName = try container.decodeIfPresent("display_name")
@@ -199,27 +166,16 @@ extension API.Scanner {
                         try container.encodeIfPresent(type, forKey: "type")
                     }
 
-                    public func isEqual(to object: Any?) -> Bool {
-                      guard let object = object as? LocationTree else { return false }
-                      guard self.displayName == object.displayName else { return false }
-                      guard self.locations == object.locations else { return false }
-                      guard self.type == object.type else { return false }
-                      return true
-                    }
-
-                    public static func == (lhs: LocationTree, rhs: LocationTree) -> Bool {
-                        return lhs.isEqual(to: rhs)
-                    }
                 }
 
                 /** Returns an object contains four lists contain all parameters for scanners */
-                public class ScanTypeList: APIModel {
+                public struct ScanTypeList: APIModel {
 
-                    public var code: String?
+                    public let code: String?
 
-                    public var displayName: String?
+                    public let displayName: String?
 
-                    public var instruments: [String]?
+                    public let instruments: [String]?
 
                     public init(code: String? = nil, displayName: String? = nil, instruments: [String]? = nil) {
                         self.code = code
@@ -227,7 +183,7 @@ extension API.Scanner {
                         self.instruments = instruments
                     }
 
-                    public required init(from decoder: Decoder) throws {
+                    public init(from decoder: Decoder) throws {
                         let container = try decoder.container(keyedBy: StringCodingKey.self)
 
                         code = try container.decodeIfPresent("code")
@@ -243,17 +199,6 @@ extension API.Scanner {
                         try container.encodeIfPresent(instruments, forKey: "instruments")
                     }
 
-                    public func isEqual(to object: Any?) -> Bool {
-                      guard let object = object as? ScanTypeList else { return false }
-                      guard self.code == object.code else { return false }
-                      guard self.displayName == object.displayName else { return false }
-                      guard self.instruments == object.instruments else { return false }
-                      return true
-                    }
-
-                    public static func == (lhs: ScanTypeList, rhs: ScanTypeList) -> Bool {
-                        return lhs.isEqual(to: rhs)
-                    }
                 }
 
                 public init(filterList: [FilterList]? = nil, instrumentList: [InstrumentList]? = nil, locationTree: [LocationTree]? = nil, scanTypeList: [ScanTypeList]? = nil) {
@@ -263,7 +208,7 @@ extension API.Scanner {
                     self.scanTypeList = scanTypeList
                 }
 
-                public required init(from decoder: Decoder) throws {
+                public init(from decoder: Decoder) throws {
                     let container = try decoder.container(keyedBy: StringCodingKey.self)
 
                     filterList = try container.decodeArrayIfPresent("filter_list")
@@ -281,18 +226,6 @@ extension API.Scanner {
                     try container.encodeIfPresent(scanTypeList, forKey: "scan_type_list")
                 }
 
-                public func isEqual(to object: Any?) -> Bool {
-                  guard let object = object as? Status200 else { return false }
-                  guard self.filterList == object.filterList else { return false }
-                  guard self.instrumentList == object.instrumentList else { return false }
-                  guard self.locationTree == object.locationTree else { return false }
-                  guard self.scanTypeList == object.scanTypeList else { return false }
-                  return true
-                }
-
-                public static func == (lhs: Status200, rhs: Status200) -> Bool {
-                    return lhs.isEqual(to: rhs)
-                }
             }
             public typealias SuccessType = Status200
 

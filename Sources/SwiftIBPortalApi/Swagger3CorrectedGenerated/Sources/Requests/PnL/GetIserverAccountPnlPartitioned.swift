@@ -5,7 +5,7 @@
 
 import Foundation
 
-extension API.PnL {
+extension IBPortalApi.PnL {
 
     /**
     PnL for the selected account
@@ -29,15 +29,15 @@ To receive streaming PnL the endpoint /ws can be used. Refer to [Streaming WebSo
             /** Returns an object containing PnL for the selected account and its models (if any).
             To receive streaming PnL the endpoint /ws can be used. Refer to [Streaming WebSocket Data](https://interactivebrokers.github.io/cpwebapi/RealtimeSubscription.html) for details.
              */
-            public class Status200: APIModel {
+            public struct Status200: APIModel {
 
-                public var acctId: [String: Any]?
+                public let acctId: [String: Any]?
 
                 public init(acctId: [String: Any]? = nil) {
                     self.acctId = acctId
                 }
 
-                public required init(from decoder: Decoder) throws {
+                public init(from decoder: Decoder) throws {
                     let container = try decoder.container(keyedBy: StringCodingKey.self)
 
                     acctId = try container.decodeAnyIfPresent("acctId")
@@ -49,15 +49,6 @@ To receive streaming PnL the endpoint /ws can be used. Refer to [Streaming WebSo
                     try container.encodeAnyIfPresent(acctId, forKey: "acctId")
                 }
 
-                public func isEqual(to object: Any?) -> Bool {
-                  guard let object = object as? Status200 else { return false }
-                  guard NSDictionary(dictionary: self.acctId ?? [:]).isEqual(to: object.acctId ?? [:]) else { return false }
-                  return true
-                }
-
-                public static func == (lhs: Status200, rhs: Status200) -> Bool {
-                    return lhs.isEqual(to: rhs)
-                }
             }
             public typealias SuccessType = Status200
 

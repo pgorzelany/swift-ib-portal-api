@@ -5,7 +5,7 @@
 
 import Foundation
 
-extension API.Account {
+extension IBPortalApi.Account {
 
     /**
     Account Summary
@@ -49,267 +49,267 @@ extension API.Account {
         public enum Response: APIResponseValue, CustomStringConvertible, CustomDebugStringConvertible {
 
             /** Returns information about margin, cash balances and other information related to specified account. See also /portfolio/{accountId}/ledger. /portfolio/accounts or /portfolio/subaccounts must be called prior to this endpoint. */
-            public class Status200: APIModel {
+            public struct Status200: APIModel {
 
-                public var accountready: Summary?
+                public let accountready: IBSummary?
 
-                public var accounttype: Summary?
+                public let accounttype: IBSummary?
 
-                public var accruedcash: Summary?
+                public let accruedcash: IBSummary?
 
-                public var accruedcashc: Summary?
+                public let accruedcashc: IBSummary?
 
-                public var accruedcashf: Summary?
+                public let accruedcashf: IBSummary?
 
-                public var accruedcashs: Summary?
+                public let accruedcashs: IBSummary?
 
-                public var accrueddividend: Summary?
+                public let accrueddividend: IBSummary?
 
-                public var accrueddividendc: Summary?
+                public let accrueddividendc: IBSummary?
 
-                public var accrueddividendf: Summary?
+                public let accrueddividendf: IBSummary?
 
-                public var accrueddividends: Summary?
+                public let accrueddividends: IBSummary?
 
-                public var availablefunds: Summary?
+                public let availablefunds: IBSummary?
 
-                public var availablefundsc: Summary?
+                public let availablefundsc: IBSummary?
 
-                public var availablefundsf: Summary?
+                public let availablefundsf: IBSummary?
 
-                public var availablefundss: Summary?
+                public let availablefundss: IBSummary?
 
-                public var billable: Summary?
+                public let billable: IBSummary?
 
-                public var billablec: Summary?
+                public let billablec: IBSummary?
 
-                public var billablef: Summary?
+                public let billablef: IBSummary?
 
-                public var billables: Summary?
+                public let billables: IBSummary?
 
-                public var buyingpower: Summary?
+                public let buyingpower: IBSummary?
 
-                public var cushion: Summary?
+                public let cushion: IBSummary?
 
-                public var daytradesremaining: Summary?
+                public let daytradesremaining: IBSummary?
 
-                public var daytradesremainingt1: Summary?
+                public let daytradesremainingt1: IBSummary?
 
-                public var daytradesremainingt2: Summary?
+                public let daytradesremainingt2: IBSummary?
 
-                public var daytradesremainingt3: Summary?
+                public let daytradesremainingt3: IBSummary?
 
-                public var daytradesremainingt4: Summary?
+                public let daytradesremainingt4: IBSummary?
 
-                public var equitywithloanvalue: Summary?
+                public let equitywithloanvalue: IBSummary?
 
-                public var equitywithloanvaluec: Summary?
+                public let equitywithloanvaluec: IBSummary?
 
-                public var equitywithloanvaluef: Summary?
+                public let equitywithloanvaluef: IBSummary?
 
-                public var equitywithloanvalues: Summary?
+                public let equitywithloanvalues: IBSummary?
 
-                public var excessliquidity: Summary?
+                public let excessliquidity: IBSummary?
 
-                public var excessliquidityc: Summary?
+                public let excessliquidityc: IBSummary?
 
-                public var excessliquidityf: Summary?
+                public let excessliquidityf: IBSummary?
 
-                public var excessliquiditys: Summary?
+                public let excessliquiditys: IBSummary?
 
-                public var fullavailablefunds: Summary?
+                public let fullavailablefunds: IBSummary?
 
-                public var fullavailablefundsc: Summary?
+                public let fullavailablefundsc: IBSummary?
 
-                public var fullavailablefundsf: Summary?
+                public let fullavailablefundsf: IBSummary?
 
-                public var fullavailablefundss: Summary?
+                public let fullavailablefundss: IBSummary?
 
-                public var fullexcessliquidity: Summary?
+                public let fullexcessliquidity: IBSummary?
 
-                public var fullexcessliquidityc: Summary?
+                public let fullexcessliquidityc: IBSummary?
 
-                public var fullexcessliquidityf: Summary?
+                public let fullexcessliquidityf: IBSummary?
 
-                public var fullexcessliquiditys: Summary?
+                public let fullexcessliquiditys: IBSummary?
 
-                public var fullinitmarginreq: Summary?
+                public let fullinitmarginreq: IBSummary?
 
-                public var fullinitmarginreqc: Summary?
+                public let fullinitmarginreqc: IBSummary?
 
-                public var fullinitmarginreqf: Summary?
+                public let fullinitmarginreqf: IBSummary?
 
-                public var fullinitmarginreqs: Summary?
+                public let fullinitmarginreqs: IBSummary?
 
-                public var fullmaintmarginreq: Summary?
+                public let fullmaintmarginreq: IBSummary?
 
-                public var fullmaintmarginreqc: Summary?
+                public let fullmaintmarginreqc: IBSummary?
 
-                public var fullmaintmarginreqf: Summary?
+                public let fullmaintmarginreqf: IBSummary?
 
-                public var fullmaintmarginreqs: Summary?
+                public let fullmaintmarginreqs: IBSummary?
 
-                public var grosspositionvalue: Summary?
+                public let grosspositionvalue: IBSummary?
 
-                public var grosspositionvaluec: Summary?
+                public let grosspositionvaluec: IBSummary?
 
-                public var grosspositionvaluef: Summary?
+                public let grosspositionvaluef: IBSummary?
 
-                public var grosspositionvalues: Summary?
+                public let grosspositionvalues: IBSummary?
 
-                public var guarantee: Summary?
+                public let guarantee: IBSummary?
 
-                public var guaranteec: Summary?
+                public let guaranteec: IBSummary?
 
-                public var guaranteef: Summary?
+                public let guaranteef: IBSummary?
 
-                public var guarantees: Summary?
+                public let guarantees: IBSummary?
 
-                public var highestseverity: Summary?
+                public let highestseverity: IBSummary?
 
-                public var highestseverityc: Summary?
+                public let highestseverityc: IBSummary?
 
-                public var highestseverityf: Summary?
+                public let highestseverityf: IBSummary?
 
-                public var highestseveritys: Summary?
+                public let highestseveritys: IBSummary?
 
-                public var indianstockhaircut: Summary?
+                public let indianstockhaircut: IBSummary?
 
-                public var indianstockhaircutc: Summary?
+                public let indianstockhaircutc: IBSummary?
 
-                public var indianstockhaircutf: Summary?
+                public let indianstockhaircutf: IBSummary?
 
-                public var indianstockhaircuts: Summary?
+                public let indianstockhaircuts: IBSummary?
 
-                public var initmarginreq: Summary?
+                public let initmarginreq: IBSummary?
 
-                public var initmarginreqc: Summary?
+                public let initmarginreqc: IBSummary?
 
-                public var initmarginreqf: Summary?
+                public let initmarginreqf: IBSummary?
 
-                public var initmarginreqs: Summary?
+                public let initmarginreqs: IBSummary?
 
-                public var leverage: Summary?
+                public let leverage: IBSummary?
 
-                public var leveragec: Summary?
+                public let leveragec: IBSummary?
 
-                public var leveragef: Summary?
+                public let leveragef: IBSummary?
 
-                public var leverages: Summary?
+                public let leverages: IBSummary?
 
-                public var lookaheadavailablefunds: Summary?
+                public let lookaheadavailablefunds: IBSummary?
 
-                public var lookaheadavailablefundsc: Summary?
+                public let lookaheadavailablefundsc: IBSummary?
 
-                public var lookaheadavailablefundsf: Summary?
+                public let lookaheadavailablefundsf: IBSummary?
 
-                public var lookaheadavailablefundss: Summary?
+                public let lookaheadavailablefundss: IBSummary?
 
-                public var lookaheadexcessliquidity: Summary?
+                public let lookaheadexcessliquidity: IBSummary?
 
-                public var lookaheadexcessliquidityc: Summary?
+                public let lookaheadexcessliquidityc: IBSummary?
 
-                public var lookaheadexcessliquidityf: Summary?
+                public let lookaheadexcessliquidityf: IBSummary?
 
-                public var lookaheadexcessliquiditys: Summary?
+                public let lookaheadexcessliquiditys: IBSummary?
 
-                public var lookaheadinitmarginreq: Summary?
+                public let lookaheadinitmarginreq: IBSummary?
 
-                public var lookaheadinitmarginreqc: Summary?
+                public let lookaheadinitmarginreqc: IBSummary?
 
-                public var lookaheadinitmarginreqf: Summary?
+                public let lookaheadinitmarginreqf: IBSummary?
 
-                public var lookaheadinitmarginreqs: Summary?
+                public let lookaheadinitmarginreqs: IBSummary?
 
-                public var lookaheadmaintmarginreq: Summary?
+                public let lookaheadmaintmarginreq: IBSummary?
 
-                public var lookaheadmaintmarginreqc: Summary?
+                public let lookaheadmaintmarginreqc: IBSummary?
 
-                public var lookaheadmaintmarginreqf: Summary?
+                public let lookaheadmaintmarginreqf: IBSummary?
 
-                public var lookaheadmaintmarginreqs: Summary?
+                public let lookaheadmaintmarginreqs: IBSummary?
 
-                public var lookaheadnextchange: Summary?
+                public let lookaheadnextchange: IBSummary?
 
-                public var maintmarginreq: Summary?
+                public let maintmarginreq: IBSummary?
 
-                public var maintmarginreqc: Summary?
+                public let maintmarginreqc: IBSummary?
 
-                public var maintmarginreqf: Summary?
+                public let maintmarginreqf: IBSummary?
 
-                public var maintmarginreqs: Summary?
+                public let maintmarginreqs: IBSummary?
 
-                public var netliquidation: Summary?
+                public let netliquidation: IBSummary?
 
-                public var netliquidationc: Summary?
+                public let netliquidationc: IBSummary?
 
-                public var netliquidationf: Summary?
+                public let netliquidationf: IBSummary?
 
-                public var netliquidations: Summary?
+                public let netliquidations: IBSummary?
 
-                public var netliquidationuncertainty: Summary?
+                public let netliquidationuncertainty: IBSummary?
 
-                public var nlvandmargininreview: Summary?
+                public let nlvandmargininreview: IBSummary?
 
-                public var pasharesvalue: Summary?
+                public let pasharesvalue: IBSummary?
 
-                public var pasharesvaluec: Summary?
+                public let pasharesvaluec: IBSummary?
 
-                public var pasharesvaluef: Summary?
+                public let pasharesvaluef: IBSummary?
 
-                public var pasharesvalues: Summary?
+                public let pasharesvalues: IBSummary?
 
-                public var postexpirationexcess: Summary?
+                public let postexpirationexcess: IBSummary?
 
-                public var postexpirationexcessc: Summary?
+                public let postexpirationexcessc: IBSummary?
 
-                public var postexpirationexcessf: Summary?
+                public let postexpirationexcessf: IBSummary?
 
-                public var postexpirationexcesss: Summary?
+                public let postexpirationexcesss: IBSummary?
 
-                public var postexpirationmargin: Summary?
+                public let postexpirationmargin: IBSummary?
 
-                public var postexpirationmarginc: Summary?
+                public let postexpirationmarginc: IBSummary?
 
-                public var postexpirationmarginf: Summary?
+                public let postexpirationmarginf: IBSummary?
 
-                public var postexpirationmargins: Summary?
+                public let postexpirationmargins: IBSummary?
 
-                public var previousdayequitywithloanvalue: Summary?
+                public let previousdayequitywithloanvalue: IBSummary?
 
-                public var previousdayequitywithloanvaluec: Summary?
+                public let previousdayequitywithloanvaluec: IBSummary?
 
-                public var previousdayequitywithloanvaluef: Summary?
+                public let previousdayequitywithloanvaluef: IBSummary?
 
-                public var previousdayequitywithloanvalues: Summary?
+                public let previousdayequitywithloanvalues: IBSummary?
 
-                public var segmenttitlec: Summary?
+                public let segmenttitlec: IBSummary?
 
-                public var segmenttitlef: Summary?
+                public let segmenttitlef: IBSummary?
 
-                public var segmenttitles: Summary?
+                public let segmenttitles: IBSummary?
 
-                public var totalcashvalue: Summary?
+                public let totalcashvalue: IBSummary?
 
-                public var totalcashvaluec: Summary?
+                public let totalcashvaluec: IBSummary?
 
-                public var totalcashvaluef: Summary?
+                public let totalcashvaluef: IBSummary?
 
-                public var totalcashvalues: Summary?
+                public let totalcashvalues: IBSummary?
 
-                public var totaldebitcardpendingcharges: Summary?
+                public let totaldebitcardpendingcharges: IBSummary?
 
-                public var totaldebitcardpendingchargesc: Summary?
+                public let totaldebitcardpendingchargesc: IBSummary?
 
-                public var totaldebitcardpendingchargesf: Summary?
+                public let totaldebitcardpendingchargesf: IBSummary?
 
-                public var totaldebitcardpendingchargess: Summary?
+                public let totaldebitcardpendingchargess: IBSummary?
 
-                public var tradingtypef: Summary?
+                public let tradingtypef: IBSummary?
 
-                public var tradingtypes: Summary?
+                public let tradingtypes: IBSummary?
 
-                public init(accountready: Summary? = nil, accounttype: Summary? = nil, accruedcash: Summary? = nil, accruedcashc: Summary? = nil, accruedcashf: Summary? = nil, accruedcashs: Summary? = nil, accrueddividend: Summary? = nil, accrueddividendc: Summary? = nil, accrueddividendf: Summary? = nil, accrueddividends: Summary? = nil, availablefunds: Summary? = nil, availablefundsc: Summary? = nil, availablefundsf: Summary? = nil, availablefundss: Summary? = nil, billable: Summary? = nil, billablec: Summary? = nil, billablef: Summary? = nil, billables: Summary? = nil, buyingpower: Summary? = nil, cushion: Summary? = nil, daytradesremaining: Summary? = nil, daytradesremainingt1: Summary? = nil, daytradesremainingt2: Summary? = nil, daytradesremainingt3: Summary? = nil, daytradesremainingt4: Summary? = nil, equitywithloanvalue: Summary? = nil, equitywithloanvaluec: Summary? = nil, equitywithloanvaluef: Summary? = nil, equitywithloanvalues: Summary? = nil, excessliquidity: Summary? = nil, excessliquidityc: Summary? = nil, excessliquidityf: Summary? = nil, excessliquiditys: Summary? = nil, fullavailablefunds: Summary? = nil, fullavailablefundsc: Summary? = nil, fullavailablefundsf: Summary? = nil, fullavailablefundss: Summary? = nil, fullexcessliquidity: Summary? = nil, fullexcessliquidityc: Summary? = nil, fullexcessliquidityf: Summary? = nil, fullexcessliquiditys: Summary? = nil, fullinitmarginreq: Summary? = nil, fullinitmarginreqc: Summary? = nil, fullinitmarginreqf: Summary? = nil, fullinitmarginreqs: Summary? = nil, fullmaintmarginreq: Summary? = nil, fullmaintmarginreqc: Summary? = nil, fullmaintmarginreqf: Summary? = nil, fullmaintmarginreqs: Summary? = nil, grosspositionvalue: Summary? = nil, grosspositionvaluec: Summary? = nil, grosspositionvaluef: Summary? = nil, grosspositionvalues: Summary? = nil, guarantee: Summary? = nil, guaranteec: Summary? = nil, guaranteef: Summary? = nil, guarantees: Summary? = nil, highestseverity: Summary? = nil, highestseverityc: Summary? = nil, highestseverityf: Summary? = nil, highestseveritys: Summary? = nil, indianstockhaircut: Summary? = nil, indianstockhaircutc: Summary? = nil, indianstockhaircutf: Summary? = nil, indianstockhaircuts: Summary? = nil, initmarginreq: Summary? = nil, initmarginreqc: Summary? = nil, initmarginreqf: Summary? = nil, initmarginreqs: Summary? = nil, leverage: Summary? = nil, leveragec: Summary? = nil, leveragef: Summary? = nil, leverages: Summary? = nil, lookaheadavailablefunds: Summary? = nil, lookaheadavailablefundsc: Summary? = nil, lookaheadavailablefundsf: Summary? = nil, lookaheadavailablefundss: Summary? = nil, lookaheadexcessliquidity: Summary? = nil, lookaheadexcessliquidityc: Summary? = nil, lookaheadexcessliquidityf: Summary? = nil, lookaheadexcessliquiditys: Summary? = nil, lookaheadinitmarginreq: Summary? = nil, lookaheadinitmarginreqc: Summary? = nil, lookaheadinitmarginreqf: Summary? = nil, lookaheadinitmarginreqs: Summary? = nil, lookaheadmaintmarginreq: Summary? = nil, lookaheadmaintmarginreqc: Summary? = nil, lookaheadmaintmarginreqf: Summary? = nil, lookaheadmaintmarginreqs: Summary? = nil, lookaheadnextchange: Summary? = nil, maintmarginreq: Summary? = nil, maintmarginreqc: Summary? = nil, maintmarginreqf: Summary? = nil, maintmarginreqs: Summary? = nil, netliquidation: Summary? = nil, netliquidationc: Summary? = nil, netliquidationf: Summary? = nil, netliquidations: Summary? = nil, netliquidationuncertainty: Summary? = nil, nlvandmargininreview: Summary? = nil, pasharesvalue: Summary? = nil, pasharesvaluec: Summary? = nil, pasharesvaluef: Summary? = nil, pasharesvalues: Summary? = nil, postexpirationexcess: Summary? = nil, postexpirationexcessc: Summary? = nil, postexpirationexcessf: Summary? = nil, postexpirationexcesss: Summary? = nil, postexpirationmargin: Summary? = nil, postexpirationmarginc: Summary? = nil, postexpirationmarginf: Summary? = nil, postexpirationmargins: Summary? = nil, previousdayequitywithloanvalue: Summary? = nil, previousdayequitywithloanvaluec: Summary? = nil, previousdayequitywithloanvaluef: Summary? = nil, previousdayequitywithloanvalues: Summary? = nil, segmenttitlec: Summary? = nil, segmenttitlef: Summary? = nil, segmenttitles: Summary? = nil, totalcashvalue: Summary? = nil, totalcashvaluec: Summary? = nil, totalcashvaluef: Summary? = nil, totalcashvalues: Summary? = nil, totaldebitcardpendingcharges: Summary? = nil, totaldebitcardpendingchargesc: Summary? = nil, totaldebitcardpendingchargesf: Summary? = nil, totaldebitcardpendingchargess: Summary? = nil, tradingtypef: Summary? = nil, tradingtypes: Summary? = nil) {
+                public init(accountready: IBSummary? = nil, accounttype: IBSummary? = nil, accruedcash: IBSummary? = nil, accruedcashc: IBSummary? = nil, accruedcashf: IBSummary? = nil, accruedcashs: IBSummary? = nil, accrueddividend: IBSummary? = nil, accrueddividendc: IBSummary? = nil, accrueddividendf: IBSummary? = nil, accrueddividends: IBSummary? = nil, availablefunds: IBSummary? = nil, availablefundsc: IBSummary? = nil, availablefundsf: IBSummary? = nil, availablefundss: IBSummary? = nil, billable: IBSummary? = nil, billablec: IBSummary? = nil, billablef: IBSummary? = nil, billables: IBSummary? = nil, buyingpower: IBSummary? = nil, cushion: IBSummary? = nil, daytradesremaining: IBSummary? = nil, daytradesremainingt1: IBSummary? = nil, daytradesremainingt2: IBSummary? = nil, daytradesremainingt3: IBSummary? = nil, daytradesremainingt4: IBSummary? = nil, equitywithloanvalue: IBSummary? = nil, equitywithloanvaluec: IBSummary? = nil, equitywithloanvaluef: IBSummary? = nil, equitywithloanvalues: IBSummary? = nil, excessliquidity: IBSummary? = nil, excessliquidityc: IBSummary? = nil, excessliquidityf: IBSummary? = nil, excessliquiditys: IBSummary? = nil, fullavailablefunds: IBSummary? = nil, fullavailablefundsc: IBSummary? = nil, fullavailablefundsf: IBSummary? = nil, fullavailablefundss: IBSummary? = nil, fullexcessliquidity: IBSummary? = nil, fullexcessliquidityc: IBSummary? = nil, fullexcessliquidityf: IBSummary? = nil, fullexcessliquiditys: IBSummary? = nil, fullinitmarginreq: IBSummary? = nil, fullinitmarginreqc: IBSummary? = nil, fullinitmarginreqf: IBSummary? = nil, fullinitmarginreqs: IBSummary? = nil, fullmaintmarginreq: IBSummary? = nil, fullmaintmarginreqc: IBSummary? = nil, fullmaintmarginreqf: IBSummary? = nil, fullmaintmarginreqs: IBSummary? = nil, grosspositionvalue: IBSummary? = nil, grosspositionvaluec: IBSummary? = nil, grosspositionvaluef: IBSummary? = nil, grosspositionvalues: IBSummary? = nil, guarantee: IBSummary? = nil, guaranteec: IBSummary? = nil, guaranteef: IBSummary? = nil, guarantees: IBSummary? = nil, highestseverity: IBSummary? = nil, highestseverityc: IBSummary? = nil, highestseverityf: IBSummary? = nil, highestseveritys: IBSummary? = nil, indianstockhaircut: IBSummary? = nil, indianstockhaircutc: IBSummary? = nil, indianstockhaircutf: IBSummary? = nil, indianstockhaircuts: IBSummary? = nil, initmarginreq: IBSummary? = nil, initmarginreqc: IBSummary? = nil, initmarginreqf: IBSummary? = nil, initmarginreqs: IBSummary? = nil, leverage: IBSummary? = nil, leveragec: IBSummary? = nil, leveragef: IBSummary? = nil, leverages: IBSummary? = nil, lookaheadavailablefunds: IBSummary? = nil, lookaheadavailablefundsc: IBSummary? = nil, lookaheadavailablefundsf: IBSummary? = nil, lookaheadavailablefundss: IBSummary? = nil, lookaheadexcessliquidity: IBSummary? = nil, lookaheadexcessliquidityc: IBSummary? = nil, lookaheadexcessliquidityf: IBSummary? = nil, lookaheadexcessliquiditys: IBSummary? = nil, lookaheadinitmarginreq: IBSummary? = nil, lookaheadinitmarginreqc: IBSummary? = nil, lookaheadinitmarginreqf: IBSummary? = nil, lookaheadinitmarginreqs: IBSummary? = nil, lookaheadmaintmarginreq: IBSummary? = nil, lookaheadmaintmarginreqc: IBSummary? = nil, lookaheadmaintmarginreqf: IBSummary? = nil, lookaheadmaintmarginreqs: IBSummary? = nil, lookaheadnextchange: IBSummary? = nil, maintmarginreq: IBSummary? = nil, maintmarginreqc: IBSummary? = nil, maintmarginreqf: IBSummary? = nil, maintmarginreqs: IBSummary? = nil, netliquidation: IBSummary? = nil, netliquidationc: IBSummary? = nil, netliquidationf: IBSummary? = nil, netliquidations: IBSummary? = nil, netliquidationuncertainty: IBSummary? = nil, nlvandmargininreview: IBSummary? = nil, pasharesvalue: IBSummary? = nil, pasharesvaluec: IBSummary? = nil, pasharesvaluef: IBSummary? = nil, pasharesvalues: IBSummary? = nil, postexpirationexcess: IBSummary? = nil, postexpirationexcessc: IBSummary? = nil, postexpirationexcessf: IBSummary? = nil, postexpirationexcesss: IBSummary? = nil, postexpirationmargin: IBSummary? = nil, postexpirationmarginc: IBSummary? = nil, postexpirationmarginf: IBSummary? = nil, postexpirationmargins: IBSummary? = nil, previousdayequitywithloanvalue: IBSummary? = nil, previousdayequitywithloanvaluec: IBSummary? = nil, previousdayequitywithloanvaluef: IBSummary? = nil, previousdayequitywithloanvalues: IBSummary? = nil, segmenttitlec: IBSummary? = nil, segmenttitlef: IBSummary? = nil, segmenttitles: IBSummary? = nil, totalcashvalue: IBSummary? = nil, totalcashvaluec: IBSummary? = nil, totalcashvaluef: IBSummary? = nil, totalcashvalues: IBSummary? = nil, totaldebitcardpendingcharges: IBSummary? = nil, totaldebitcardpendingchargesc: IBSummary? = nil, totaldebitcardpendingchargesf: IBSummary? = nil, totaldebitcardpendingchargess: IBSummary? = nil, tradingtypef: IBSummary? = nil, tradingtypes: IBSummary? = nil) {
                     self.accountready = accountready
                     self.accounttype = accounttype
                     self.accruedcash = accruedcash
@@ -441,7 +441,7 @@ extension API.Account {
                     self.tradingtypes = tradingtypes
                 }
 
-                public required init(from decoder: Decoder) throws {
+                public init(from decoder: Decoder) throws {
                     let container = try decoder.container(keyedBy: StringCodingKey.self)
 
                     accountready = try container.decodeIfPresent("accountready")
@@ -709,143 +709,6 @@ extension API.Account {
                     try container.encodeIfPresent(tradingtypes, forKey: "tradingtype-s")
                 }
 
-                public func isEqual(to object: Any?) -> Bool {
-                  guard let object = object as? Status200 else { return false }
-                  guard self.accountready == object.accountready else { return false }
-                  guard self.accounttype == object.accounttype else { return false }
-                  guard self.accruedcash == object.accruedcash else { return false }
-                  guard self.accruedcashc == object.accruedcashc else { return false }
-                  guard self.accruedcashf == object.accruedcashf else { return false }
-                  guard self.accruedcashs == object.accruedcashs else { return false }
-                  guard self.accrueddividend == object.accrueddividend else { return false }
-                  guard self.accrueddividendc == object.accrueddividendc else { return false }
-                  guard self.accrueddividendf == object.accrueddividendf else { return false }
-                  guard self.accrueddividends == object.accrueddividends else { return false }
-                  guard self.availablefunds == object.availablefunds else { return false }
-                  guard self.availablefundsc == object.availablefundsc else { return false }
-                  guard self.availablefundsf == object.availablefundsf else { return false }
-                  guard self.availablefundss == object.availablefundss else { return false }
-                  guard self.billable == object.billable else { return false }
-                  guard self.billablec == object.billablec else { return false }
-                  guard self.billablef == object.billablef else { return false }
-                  guard self.billables == object.billables else { return false }
-                  guard self.buyingpower == object.buyingpower else { return false }
-                  guard self.cushion == object.cushion else { return false }
-                  guard self.daytradesremaining == object.daytradesremaining else { return false }
-                  guard self.daytradesremainingt1 == object.daytradesremainingt1 else { return false }
-                  guard self.daytradesremainingt2 == object.daytradesremainingt2 else { return false }
-                  guard self.daytradesremainingt3 == object.daytradesremainingt3 else { return false }
-                  guard self.daytradesremainingt4 == object.daytradesremainingt4 else { return false }
-                  guard self.equitywithloanvalue == object.equitywithloanvalue else { return false }
-                  guard self.equitywithloanvaluec == object.equitywithloanvaluec else { return false }
-                  guard self.equitywithloanvaluef == object.equitywithloanvaluef else { return false }
-                  guard self.equitywithloanvalues == object.equitywithloanvalues else { return false }
-                  guard self.excessliquidity == object.excessliquidity else { return false }
-                  guard self.excessliquidityc == object.excessliquidityc else { return false }
-                  guard self.excessliquidityf == object.excessliquidityf else { return false }
-                  guard self.excessliquiditys == object.excessliquiditys else { return false }
-                  guard self.fullavailablefunds == object.fullavailablefunds else { return false }
-                  guard self.fullavailablefundsc == object.fullavailablefundsc else { return false }
-                  guard self.fullavailablefundsf == object.fullavailablefundsf else { return false }
-                  guard self.fullavailablefundss == object.fullavailablefundss else { return false }
-                  guard self.fullexcessliquidity == object.fullexcessliquidity else { return false }
-                  guard self.fullexcessliquidityc == object.fullexcessliquidityc else { return false }
-                  guard self.fullexcessliquidityf == object.fullexcessliquidityf else { return false }
-                  guard self.fullexcessliquiditys == object.fullexcessliquiditys else { return false }
-                  guard self.fullinitmarginreq == object.fullinitmarginreq else { return false }
-                  guard self.fullinitmarginreqc == object.fullinitmarginreqc else { return false }
-                  guard self.fullinitmarginreqf == object.fullinitmarginreqf else { return false }
-                  guard self.fullinitmarginreqs == object.fullinitmarginreqs else { return false }
-                  guard self.fullmaintmarginreq == object.fullmaintmarginreq else { return false }
-                  guard self.fullmaintmarginreqc == object.fullmaintmarginreqc else { return false }
-                  guard self.fullmaintmarginreqf == object.fullmaintmarginreqf else { return false }
-                  guard self.fullmaintmarginreqs == object.fullmaintmarginreqs else { return false }
-                  guard self.grosspositionvalue == object.grosspositionvalue else { return false }
-                  guard self.grosspositionvaluec == object.grosspositionvaluec else { return false }
-                  guard self.grosspositionvaluef == object.grosspositionvaluef else { return false }
-                  guard self.grosspositionvalues == object.grosspositionvalues else { return false }
-                  guard self.guarantee == object.guarantee else { return false }
-                  guard self.guaranteec == object.guaranteec else { return false }
-                  guard self.guaranteef == object.guaranteef else { return false }
-                  guard self.guarantees == object.guarantees else { return false }
-                  guard self.highestseverity == object.highestseverity else { return false }
-                  guard self.highestseverityc == object.highestseverityc else { return false }
-                  guard self.highestseverityf == object.highestseverityf else { return false }
-                  guard self.highestseveritys == object.highestseveritys else { return false }
-                  guard self.indianstockhaircut == object.indianstockhaircut else { return false }
-                  guard self.indianstockhaircutc == object.indianstockhaircutc else { return false }
-                  guard self.indianstockhaircutf == object.indianstockhaircutf else { return false }
-                  guard self.indianstockhaircuts == object.indianstockhaircuts else { return false }
-                  guard self.initmarginreq == object.initmarginreq else { return false }
-                  guard self.initmarginreqc == object.initmarginreqc else { return false }
-                  guard self.initmarginreqf == object.initmarginreqf else { return false }
-                  guard self.initmarginreqs == object.initmarginreqs else { return false }
-                  guard self.leverage == object.leverage else { return false }
-                  guard self.leveragec == object.leveragec else { return false }
-                  guard self.leveragef == object.leveragef else { return false }
-                  guard self.leverages == object.leverages else { return false }
-                  guard self.lookaheadavailablefunds == object.lookaheadavailablefunds else { return false }
-                  guard self.lookaheadavailablefundsc == object.lookaheadavailablefundsc else { return false }
-                  guard self.lookaheadavailablefundsf == object.lookaheadavailablefundsf else { return false }
-                  guard self.lookaheadavailablefundss == object.lookaheadavailablefundss else { return false }
-                  guard self.lookaheadexcessliquidity == object.lookaheadexcessliquidity else { return false }
-                  guard self.lookaheadexcessliquidityc == object.lookaheadexcessliquidityc else { return false }
-                  guard self.lookaheadexcessliquidityf == object.lookaheadexcessliquidityf else { return false }
-                  guard self.lookaheadexcessliquiditys == object.lookaheadexcessliquiditys else { return false }
-                  guard self.lookaheadinitmarginreq == object.lookaheadinitmarginreq else { return false }
-                  guard self.lookaheadinitmarginreqc == object.lookaheadinitmarginreqc else { return false }
-                  guard self.lookaheadinitmarginreqf == object.lookaheadinitmarginreqf else { return false }
-                  guard self.lookaheadinitmarginreqs == object.lookaheadinitmarginreqs else { return false }
-                  guard self.lookaheadmaintmarginreq == object.lookaheadmaintmarginreq else { return false }
-                  guard self.lookaheadmaintmarginreqc == object.lookaheadmaintmarginreqc else { return false }
-                  guard self.lookaheadmaintmarginreqf == object.lookaheadmaintmarginreqf else { return false }
-                  guard self.lookaheadmaintmarginreqs == object.lookaheadmaintmarginreqs else { return false }
-                  guard self.lookaheadnextchange == object.lookaheadnextchange else { return false }
-                  guard self.maintmarginreq == object.maintmarginreq else { return false }
-                  guard self.maintmarginreqc == object.maintmarginreqc else { return false }
-                  guard self.maintmarginreqf == object.maintmarginreqf else { return false }
-                  guard self.maintmarginreqs == object.maintmarginreqs else { return false }
-                  guard self.netliquidation == object.netliquidation else { return false }
-                  guard self.netliquidationc == object.netliquidationc else { return false }
-                  guard self.netliquidationf == object.netliquidationf else { return false }
-                  guard self.netliquidations == object.netliquidations else { return false }
-                  guard self.netliquidationuncertainty == object.netliquidationuncertainty else { return false }
-                  guard self.nlvandmargininreview == object.nlvandmargininreview else { return false }
-                  guard self.pasharesvalue == object.pasharesvalue else { return false }
-                  guard self.pasharesvaluec == object.pasharesvaluec else { return false }
-                  guard self.pasharesvaluef == object.pasharesvaluef else { return false }
-                  guard self.pasharesvalues == object.pasharesvalues else { return false }
-                  guard self.postexpirationexcess == object.postexpirationexcess else { return false }
-                  guard self.postexpirationexcessc == object.postexpirationexcessc else { return false }
-                  guard self.postexpirationexcessf == object.postexpirationexcessf else { return false }
-                  guard self.postexpirationexcesss == object.postexpirationexcesss else { return false }
-                  guard self.postexpirationmargin == object.postexpirationmargin else { return false }
-                  guard self.postexpirationmarginc == object.postexpirationmarginc else { return false }
-                  guard self.postexpirationmarginf == object.postexpirationmarginf else { return false }
-                  guard self.postexpirationmargins == object.postexpirationmargins else { return false }
-                  guard self.previousdayequitywithloanvalue == object.previousdayequitywithloanvalue else { return false }
-                  guard self.previousdayequitywithloanvaluec == object.previousdayequitywithloanvaluec else { return false }
-                  guard self.previousdayequitywithloanvaluef == object.previousdayequitywithloanvaluef else { return false }
-                  guard self.previousdayequitywithloanvalues == object.previousdayequitywithloanvalues else { return false }
-                  guard self.segmenttitlec == object.segmenttitlec else { return false }
-                  guard self.segmenttitlef == object.segmenttitlef else { return false }
-                  guard self.segmenttitles == object.segmenttitles else { return false }
-                  guard self.totalcashvalue == object.totalcashvalue else { return false }
-                  guard self.totalcashvaluec == object.totalcashvaluec else { return false }
-                  guard self.totalcashvaluef == object.totalcashvaluef else { return false }
-                  guard self.totalcashvalues == object.totalcashvalues else { return false }
-                  guard self.totaldebitcardpendingcharges == object.totaldebitcardpendingcharges else { return false }
-                  guard self.totaldebitcardpendingchargesc == object.totaldebitcardpendingchargesc else { return false }
-                  guard self.totaldebitcardpendingchargesf == object.totaldebitcardpendingchargesf else { return false }
-                  guard self.totaldebitcardpendingchargess == object.totaldebitcardpendingchargess else { return false }
-                  guard self.tradingtypef == object.tradingtypef else { return false }
-                  guard self.tradingtypes == object.tradingtypes else { return false }
-                  return true
-                }
-
-                public static func == (lhs: Status200, rhs: Status200) -> Bool {
-                    return lhs.isEqual(to: rhs)
-                }
             }
             public typealias SuccessType = Status200
 

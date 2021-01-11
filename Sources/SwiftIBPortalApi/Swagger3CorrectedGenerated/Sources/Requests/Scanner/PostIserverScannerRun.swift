@@ -5,7 +5,7 @@
 
 import Foundation
 
-extension API.Scanner {
+extension IBPortalApi.Scanner {
 
     /** run scanner to get a list of contracts */
     public enum PostIserverScannerRun {
@@ -14,9 +14,9 @@ extension API.Scanner {
 
         public final class Request: APIRequest<Response> {
 
-            public var body: ScannerParams
+            public var body: IBScannerParams
 
-            public init(body: ScannerParams, encoder: RequestEncoder? = nil) {
+            public init(body: IBScannerParams, encoder: RequestEncoder? = nil) {
                 self.body = body
                 super.init(service: PostIserverScannerRun.service) { defaultEncoder in
                     return try (encoder ?? defaultEncoder).encode(body)
@@ -26,27 +26,27 @@ extension API.Scanner {
 
         public enum Response: APIResponseValue, CustomStringConvertible, CustomDebugStringConvertible {
 
-            public class Status200: APIModel {
+            public struct Status200: APIModel {
 
-                public var availableChartPeriods: String?
+                public let availableChartPeriods: String?
 
-                public var columnName: String?
+                public let columnName: String?
 
-                public var companyName: String?
+                public let companyName: String?
 
-                public var conId: Double?
+                public let conId: Double?
 
-                public var conidex: String?
+                public let conidex: String?
 
-                public var contractDescription1: String?
+                public let contractDescription1: String?
 
-                public var listingExchange: String?
+                public let listingExchange: String?
 
-                public var secType: String?
+                public let secType: String?
 
-                public var serverId: String?
+                public let serverId: String?
 
-                public var symbol: String?
+                public let symbol: String?
 
                 public init(availableChartPeriods: String? = nil, columnName: String? = nil, companyName: String? = nil, conId: Double? = nil, conidex: String? = nil, contractDescription1: String? = nil, listingExchange: String? = nil, secType: String? = nil, serverId: String? = nil, symbol: String? = nil) {
                     self.availableChartPeriods = availableChartPeriods
@@ -61,7 +61,7 @@ extension API.Scanner {
                     self.symbol = symbol
                 }
 
-                public required init(from decoder: Decoder) throws {
+                public init(from decoder: Decoder) throws {
                     let container = try decoder.container(keyedBy: StringCodingKey.self)
 
                     availableChartPeriods = try container.decodeIfPresent("available_chart_periods")
@@ -91,24 +91,6 @@ extension API.Scanner {
                     try container.encodeIfPresent(symbol, forKey: "symbol")
                 }
 
-                public func isEqual(to object: Any?) -> Bool {
-                  guard let object = object as? Status200 else { return false }
-                  guard self.availableChartPeriods == object.availableChartPeriods else { return false }
-                  guard self.columnName == object.columnName else { return false }
-                  guard self.companyName == object.companyName else { return false }
-                  guard self.conId == object.conId else { return false }
-                  guard self.conidex == object.conidex else { return false }
-                  guard self.contractDescription1 == object.contractDescription1 else { return false }
-                  guard self.listingExchange == object.listingExchange else { return false }
-                  guard self.secType == object.secType else { return false }
-                  guard self.serverId == object.serverId else { return false }
-                  guard self.symbol == object.symbol else { return false }
-                  return true
-                }
-
-                public static func == (lhs: Status200, rhs: Status200) -> Bool {
-                    return lhs.isEqual(to: rhs)
-                }
             }
             public typealias SuccessType = [Status200]
 

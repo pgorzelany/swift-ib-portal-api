@@ -5,7 +5,7 @@
 
 import Foundation
 
-extension API.FYI {
+extension IBPortalApi.FYI {
 
     /**
     Get unread number of fyis. The HTTP method POST is also supported.
@@ -27,16 +27,16 @@ extension API.FYI {
 
             /** Returns the total number of unread fyis
              */
-            public class Status200: APIModel {
+            public struct Status200: APIModel {
 
                 /** unread number */
-                public var bn: Int?
+                public let bn: Int?
 
                 public init(bn: Int? = nil) {
                     self.bn = bn
                 }
 
-                public required init(from decoder: Decoder) throws {
+                public init(from decoder: Decoder) throws {
                     let container = try decoder.container(keyedBy: StringCodingKey.self)
 
                     bn = try container.decodeIfPresent("BN")
@@ -48,15 +48,6 @@ extension API.FYI {
                     try container.encodeIfPresent(bn, forKey: "BN")
                 }
 
-                public func isEqual(to object: Any?) -> Bool {
-                  guard let object = object as? Status200 else { return false }
-                  guard self.bn == object.bn else { return false }
-                  return true
-                }
-
-                public static func == (lhs: Status200, rhs: Status200) -> Bool {
-                    return lhs.isEqual(to: rhs)
-                }
             }
             public typealias SuccessType = Status200
 

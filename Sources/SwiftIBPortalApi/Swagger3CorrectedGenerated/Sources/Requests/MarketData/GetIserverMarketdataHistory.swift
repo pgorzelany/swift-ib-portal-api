@@ -5,7 +5,7 @@
 
 import Foundation
 
-extension API.MarketData {
+extension IBPortalApi.MarketData {
 
     /**
     Market Data History
@@ -84,15 +84,15 @@ e.g. period =1y with bar =1w returns 52 data points (Max of 1000 data points sup
             e.g. period =1y with bar =1w returns 52 data points (Max of 1000 data points supported).
             **Note**: There's a limit of 5 concurrent requests. Excessive requests will return a 'Too many requests' status 429 response.
              */
-            public class Status429: APIModel {
+            public struct Status429: APIModel {
 
-                public var error: String?
+                public let error: String?
 
                 public init(error: String? = nil) {
                     self.error = error
                 }
 
-                public required init(from decoder: Decoder) throws {
+                public init(from decoder: Decoder) throws {
                     let container = try decoder.container(keyedBy: StringCodingKey.self)
 
                     error = try container.decodeIfPresent("error")
@@ -104,28 +104,19 @@ e.g. period =1y with bar =1w returns 52 data points (Max of 1000 data points sup
                     try container.encodeIfPresent(error, forKey: "error")
                 }
 
-                public func isEqual(to object: Any?) -> Bool {
-                  guard let object = object as? Status429 else { return false }
-                  guard self.error == object.error else { return false }
-                  return true
-                }
-
-                public static func == (lhs: Status429, rhs: Status429) -> Bool {
-                    return lhs.isEqual(to: rhs)
-                }
             }
-            public typealias SuccessType = HistoryData
+            public typealias SuccessType = IBHistoryData
 
             /** Returns an object */
-            case status200(HistoryData)
+            case status200(IBHistoryData)
 
             /** Too many requests */
             case status429(Status429)
 
             /** System Error */
-            case status500(SystemError)
+            case status500(IBSystemError)
 
-            public var success: HistoryData? {
+            public var success: IBHistoryData? {
                 switch self {
                 case .status200(let response): return response
                 default: return nil
@@ -158,9 +149,9 @@ e.g. period =1y with bar =1w returns 52 data points (Max of 1000 data points sup
 
             public init(statusCode: Int, data: Data, decoder: ResponseDecoder) throws {
                 switch statusCode {
-                case 200: self = try .status200(decoder.decode(HistoryData.self, from: data))
+                case 200: self = try .status200(decoder.decode(IBHistoryData.self, from: data))
                 case 429: self = try .status429(decoder.decode(Status429.self, from: data))
-                case 500: self = try .status500(decoder.decode(SystemError.self, from: data))
+                case 500: self = try .status500(decoder.decode(IBSystemError.self, from: data))
                 default: throw APIClientError.unexpectedStatusCode(statusCode: statusCode, data: data)
                 }
             }

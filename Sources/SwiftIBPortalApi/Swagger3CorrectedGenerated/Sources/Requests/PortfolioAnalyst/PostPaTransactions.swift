@@ -5,7 +5,7 @@
 
 import Foundation
 
-extension API.PortfolioAnalyst {
+extension IBPortalApi.PortfolioAnalyst {
 
     /**
     Position's Transaction History
@@ -22,17 +22,17 @@ Types of transactions include dividend payments, buy and sell transactions, tran
             /** transaction history for a given number of conids and accounts.
             Types of transactions include dividend payments, buy and sell transactions, transfers.
              */
-            public class Body: APIModel {
+            public struct Body: APIModel {
 
-                public var acctIds: [String]?
+                public let acctIds: [String]?
 
-                public var conids: [Double]?
+                public let conids: [Double]?
 
                 /** optional defaults to USD. */
-                public var currency: String?
+                public let currency: String?
 
                 /** optional, default value is 90 */
-                public var days: Double?
+                public let days: Double?
 
                 public init(acctIds: [String]? = nil, conids: [Double]? = nil, currency: String? = nil, days: Double? = nil) {
                     self.acctIds = acctIds
@@ -41,7 +41,7 @@ Types of transactions include dividend payments, buy and sell transactions, tran
                     self.days = days
                 }
 
-                public required init(from decoder: Decoder) throws {
+                public init(from decoder: Decoder) throws {
                     let container = try decoder.container(keyedBy: StringCodingKey.self)
 
                     acctIds = try container.decodeArrayIfPresent("acctIds")
@@ -59,18 +59,6 @@ Types of transactions include dividend payments, buy and sell transactions, tran
                     try container.encodeIfPresent(days, forKey: "days")
                 }
 
-                public func isEqual(to object: Any?) -> Bool {
-                  guard let object = object as? Body else { return false }
-                  guard self.acctIds == object.acctIds else { return false }
-                  guard self.conids == object.conids else { return false }
-                  guard self.currency == object.currency else { return false }
-                  guard self.days == object.days else { return false }
-                  return true
-                }
-
-                public static func == (lhs: Body, rhs: Body) -> Bool {
-                    return lhs.isEqual(to: rhs)
-                }
             }
 
             public struct Options {
@@ -130,12 +118,12 @@ Types of transactions include dividend payments, buy and sell transactions, tran
         }
 
         public enum Response: APIResponseValue, CustomStringConvertible, CustomDebugStringConvertible {
-            public typealias SuccessType = Transactions
+            public typealias SuccessType = IBTransactions
 
             /** returns an object */
-            case status200(Transactions)
+            case status200(IBTransactions)
 
-            public var success: Transactions? {
+            public var success: IBTransactions? {
                 switch self {
                 case .status200(let response): return response
                 }
@@ -161,7 +149,7 @@ Types of transactions include dividend payments, buy and sell transactions, tran
 
             public init(statusCode: Int, data: Data, decoder: ResponseDecoder) throws {
                 switch statusCode {
-                case 200: self = try .status200(decoder.decode(Transactions.self, from: data))
+                case 200: self = try .status200(decoder.decode(IBTransactions.self, from: data))
                 default: throw APIClientError.unexpectedStatusCode(statusCode: statusCode, data: data)
                 }
             }

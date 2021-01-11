@@ -5,7 +5,7 @@
 
 import Foundation
 
-extension API.Order {
+extension IBPortalApi.Order {
 
     /**
     Preview Order
@@ -31,9 +31,9 @@ commission information in the response.
 
             public var options: Options
 
-            public var body: OrderRequest
+            public var body: IBOrderRequest
 
-            public init(body: OrderRequest, options: Options, encoder: RequestEncoder? = nil) {
+            public init(body: IBOrderRequest, options: Options, encoder: RequestEncoder? = nil) {
                 self.body = body
                 self.options = options
                 super.init(service: PostIserverAccountByAccountIdOrderWhatif.service) { defaultEncoder in
@@ -42,7 +42,7 @@ commission information in the response.
             }
 
             /// convenience initialiser so an Option doesn't have to be created
-            public convenience init(accountId: String, body: OrderRequest) {
+            public convenience init(accountId: String, body: IBOrderRequest) {
                 let options = Options(accountId: accountId)
                 self.init(body: body, options: options)
             }
@@ -57,32 +57,32 @@ commission information in the response.
             /** This endpoint allows you to preview order without actually submitting the order and you can get
             commission information in the response.
              */
-            public class Status200: APIModel {
+            public struct Status200: APIModel {
 
-                public var amount: Amount?
+                public let amount: Amount?
 
-                public var equity: Equity?
+                public let equity: Equity?
 
-                public var error: String?
+                public let error: String?
 
-                public var initial: Initial?
+                public let initial: Initial?
 
-                public var maintenance: Maintenance?
+                public let maintenance: Maintenance?
 
-                public var warn: String?
+                public let warn: String?
 
                 /** This endpoint allows you to preview order without actually submitting the order and you can get
                 commission information in the response.
                  */
-                public class Amount: APIModel {
+                public struct Amount: APIModel {
 
                     /** for example 23,000 USD */
-                    public var amount: String?
+                    public let amount: String?
 
                     /** for example 1.1 ... 1.2 USD */
-                    public var commission: String?
+                    public let commission: String?
 
-                    public var total: String?
+                    public let total: String?
 
                     public init(amount: String? = nil, commission: String? = nil, total: String? = nil) {
                         self.amount = amount
@@ -90,7 +90,7 @@ commission information in the response.
                         self.total = total
                     }
 
-                    public required init(from decoder: Decoder) throws {
+                    public init(from decoder: Decoder) throws {
                         let container = try decoder.container(keyedBy: StringCodingKey.self)
 
                         amount = try container.decodeIfPresent("amount")
@@ -106,29 +106,18 @@ commission information in the response.
                         try container.encodeIfPresent(total, forKey: "total")
                     }
 
-                    public func isEqual(to object: Any?) -> Bool {
-                      guard let object = object as? Amount else { return false }
-                      guard self.amount == object.amount else { return false }
-                      guard self.commission == object.commission else { return false }
-                      guard self.total == object.total else { return false }
-                      return true
-                    }
-
-                    public static func == (lhs: Amount, rhs: Amount) -> Bool {
-                        return lhs.isEqual(to: rhs)
-                    }
                 }
 
                 /** This endpoint allows you to preview order without actually submitting the order and you can get
                 commission information in the response.
                  */
-                public class Equity: APIModel {
+                public struct Equity: APIModel {
 
-                    public var after: String?
+                    public let after: String?
 
-                    public var change: String?
+                    public let change: String?
 
-                    public var current: String?
+                    public let current: String?
 
                     public init(after: String? = nil, change: String? = nil, current: String? = nil) {
                         self.after = after
@@ -136,7 +125,7 @@ commission information in the response.
                         self.current = current
                     }
 
-                    public required init(from decoder: Decoder) throws {
+                    public init(from decoder: Decoder) throws {
                         let container = try decoder.container(keyedBy: StringCodingKey.self)
 
                         after = try container.decodeIfPresent("after")
@@ -152,29 +141,18 @@ commission information in the response.
                         try container.encodeIfPresent(current, forKey: "current")
                     }
 
-                    public func isEqual(to object: Any?) -> Bool {
-                      guard let object = object as? Equity else { return false }
-                      guard self.after == object.after else { return false }
-                      guard self.change == object.change else { return false }
-                      guard self.current == object.current else { return false }
-                      return true
-                    }
-
-                    public static func == (lhs: Equity, rhs: Equity) -> Bool {
-                        return lhs.isEqual(to: rhs)
-                    }
                 }
 
                 /** This endpoint allows you to preview order without actually submitting the order and you can get
                 commission information in the response.
                  */
-                public class Initial: APIModel {
+                public struct Initial: APIModel {
 
-                    public var after: String?
+                    public let after: String?
 
-                    public var change: String?
+                    public let change: String?
 
-                    public var current: String?
+                    public let current: String?
 
                     public init(after: String? = nil, change: String? = nil, current: String? = nil) {
                         self.after = after
@@ -182,7 +160,7 @@ commission information in the response.
                         self.current = current
                     }
 
-                    public required init(from decoder: Decoder) throws {
+                    public init(from decoder: Decoder) throws {
                         let container = try decoder.container(keyedBy: StringCodingKey.self)
 
                         after = try container.decodeIfPresent("after")
@@ -198,29 +176,18 @@ commission information in the response.
                         try container.encodeIfPresent(current, forKey: "current")
                     }
 
-                    public func isEqual(to object: Any?) -> Bool {
-                      guard let object = object as? Initial else { return false }
-                      guard self.after == object.after else { return false }
-                      guard self.change == object.change else { return false }
-                      guard self.current == object.current else { return false }
-                      return true
-                    }
-
-                    public static func == (lhs: Initial, rhs: Initial) -> Bool {
-                        return lhs.isEqual(to: rhs)
-                    }
                 }
 
                 /** This endpoint allows you to preview order without actually submitting the order and you can get
                 commission information in the response.
                  */
-                public class Maintenance: APIModel {
+                public struct Maintenance: APIModel {
 
-                    public var after: String?
+                    public let after: String?
 
-                    public var change: String?
+                    public let change: String?
 
-                    public var current: String?
+                    public let current: String?
 
                     public init(after: String? = nil, change: String? = nil, current: String? = nil) {
                         self.after = after
@@ -228,7 +195,7 @@ commission information in the response.
                         self.current = current
                     }
 
-                    public required init(from decoder: Decoder) throws {
+                    public init(from decoder: Decoder) throws {
                         let container = try decoder.container(keyedBy: StringCodingKey.self)
 
                         after = try container.decodeIfPresent("after")
@@ -244,17 +211,6 @@ commission information in the response.
                         try container.encodeIfPresent(current, forKey: "current")
                     }
 
-                    public func isEqual(to object: Any?) -> Bool {
-                      guard let object = object as? Maintenance else { return false }
-                      guard self.after == object.after else { return false }
-                      guard self.change == object.change else { return false }
-                      guard self.current == object.current else { return false }
-                      return true
-                    }
-
-                    public static func == (lhs: Maintenance, rhs: Maintenance) -> Bool {
-                        return lhs.isEqual(to: rhs)
-                    }
                 }
 
                 public init(amount: Amount? = nil, equity: Equity? = nil, error: String? = nil, initial: Initial? = nil, maintenance: Maintenance? = nil, warn: String? = nil) {
@@ -266,7 +222,7 @@ commission information in the response.
                     self.warn = warn
                 }
 
-                public required init(from decoder: Decoder) throws {
+                public init(from decoder: Decoder) throws {
                     let container = try decoder.container(keyedBy: StringCodingKey.self)
 
                     amount = try container.decodeIfPresent("amount")
@@ -288,20 +244,6 @@ commission information in the response.
                     try container.encodeIfPresent(warn, forKey: "warn")
                 }
 
-                public func isEqual(to object: Any?) -> Bool {
-                  guard let object = object as? Status200 else { return false }
-                  guard self.amount == object.amount else { return false }
-                  guard self.equity == object.equity else { return false }
-                  guard self.error == object.error else { return false }
-                  guard self.initial == object.initial else { return false }
-                  guard self.maintenance == object.maintenance else { return false }
-                  guard self.warn == object.warn else { return false }
-                  return true
-                }
-
-                public static func == (lhs: Status200, rhs: Status200) -> Bool {
-                    return lhs.isEqual(to: rhs)
-                }
             }
             public typealias SuccessType = Status200
 

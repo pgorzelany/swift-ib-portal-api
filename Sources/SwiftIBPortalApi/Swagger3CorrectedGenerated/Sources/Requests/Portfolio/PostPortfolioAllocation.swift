@@ -5,7 +5,7 @@
 
 import Foundation
 
-extension API.Portfolio {
+extension IBPortalApi.Portfolio {
 
     /**
     Account Alloction (All Accounts)
@@ -19,15 +19,15 @@ extension API.Portfolio {
         public final class Request: APIRequest<Response> {
 
             /** Similar to /portfolio/{accountId}/allocation but returns a consolidated view of of all the accounts returned by /portfolio/accounts. /portfolio/accounts or /portfolio/subaccounts must be called prior to this endpoint. */
-            public class Body: APIModel {
+            public struct Body: APIModel {
 
-                public var acctIds: [String]?
+                public let acctIds: [String]?
 
                 public init(acctIds: [String]? = nil) {
                     self.acctIds = acctIds
                 }
 
-                public required init(from decoder: Decoder) throws {
+                public init(from decoder: Decoder) throws {
                     let container = try decoder.container(keyedBy: StringCodingKey.self)
 
                     acctIds = try container.decodeArrayIfPresent("acctIds")
@@ -39,15 +39,6 @@ extension API.Portfolio {
                     try container.encodeIfPresent(acctIds, forKey: "acctIds")
                 }
 
-                public func isEqual(to object: Any?) -> Bool {
-                  guard let object = object as? Body else { return false }
-                  guard self.acctIds == object.acctIds else { return false }
-                  return true
-                }
-
-                public static func == (lhs: Body, rhs: Body) -> Bool {
-                    return lhs.isEqual(to: rhs)
-                }
             }
 
             public struct Options {
@@ -87,12 +78,12 @@ extension API.Portfolio {
         }
 
         public enum Response: APIResponseValue, CustomStringConvertible, CustomDebugStringConvertible {
-            public typealias SuccessType = Allocations
+            public typealias SuccessType = IBAllocations
 
             /** returns an object of three different allocations */
-            case status200(Allocations)
+            case status200(IBAllocations)
 
-            public var success: Allocations? {
+            public var success: IBAllocations? {
                 switch self {
                 case .status200(let response): return response
                 }
@@ -118,7 +109,7 @@ extension API.Portfolio {
 
             public init(statusCode: Int, data: Data, decoder: ResponseDecoder) throws {
                 switch statusCode {
-                case 200: self = try .status200(decoder.decode(Allocations.self, from: data))
+                case 200: self = try .status200(decoder.decode(IBAllocations.self, from: data))
                 default: throw APIClientError.unexpectedStatusCode(statusCode: statusCode, data: data)
                 }
             }

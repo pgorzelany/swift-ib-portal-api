@@ -6,7 +6,7 @@
 import Foundation
 
 /** Production version of the Client Portal Web API */
-public struct API {
+public struct IBPortalApi {
 
     /// Whether to discard any errors when decoding optional properties
     public static var safeOptionalDecoding = false

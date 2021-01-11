@@ -5,7 +5,7 @@
 
 import Foundation
 
-extension API.Order {
+extension IBPortalApi.Order {
 
     /**
     Place Orders for Financial Advisor Groups
@@ -31,9 +31,9 @@ More information about groups can be found in the [TWS Users' Guide:](https://gu
 
             public var options: Options
 
-            public var body: OrderRequest
+            public var body: IBOrderRequest
 
-            public init(body: OrderRequest, options: Options, encoder: RequestEncoder? = nil) {
+            public init(body: IBOrderRequest, options: Options, encoder: RequestEncoder? = nil) {
                 self.body = body
                 self.options = options
                 super.init(service: PostIserverAccountOrdersByFaGroup.service) { defaultEncoder in
@@ -42,7 +42,7 @@ More information about groups can be found in the [TWS Users' Guide:](https://gu
             }
 
             /// convenience initialiser so an Option doesn't have to be created
-            public convenience init(faGroup: String, body: OrderRequest) {
+            public convenience init(faGroup: String, body: IBOrderRequest) {
                 let options = Options(faGroup: faGroup)
                 self.init(body: body, options: options)
             }
@@ -57,21 +57,21 @@ More information about groups can be found in the [TWS Users' Guide:](https://gu
             /** Financial Advisors can use this endpoint to place an order for a specified group. To place an order for a specified account use the endpoint /iserver/account/{accountId}/order.
             More information about groups can be found in the [TWS Users' Guide:](https://guides.interactivebrokers.com/twsguide/twsguide.htm#usersguidebook/financialadvisors/create_an_account_group_for_share_allocation.htm).
              */
-            public class Status200: APIModel {
+            public struct Status200: APIModel {
 
-                public var id: String?
+                public let id: String?
 
                 /** Please note here, if the message is a question, you have to reply to question in order to submit
             the order successfully. See more in the "/iserver/reply/{replyid}" endpoint.
              */
-                public var message: [String]?
+                public let message: [String]?
 
                 public init(id: String? = nil, message: [String]? = nil) {
                     self.id = id
                     self.message = message
                 }
 
-                public required init(from decoder: Decoder) throws {
+                public init(from decoder: Decoder) throws {
                     let container = try decoder.container(keyedBy: StringCodingKey.self)
 
                     id = try container.decodeIfPresent("id")
@@ -85,16 +85,6 @@ More information about groups can be found in the [TWS Users' Guide:](https://gu
                     try container.encodeIfPresent(message, forKey: "message")
                 }
 
-                public func isEqual(to object: Any?) -> Bool {
-                  guard let object = object as? Status200 else { return false }
-                  guard self.id == object.id else { return false }
-                  guard self.message == object.message else { return false }
-                  return true
-                }
-
-                public static func == (lhs: Status200, rhs: Status200) -> Bool {
-                    return lhs.isEqual(to: rhs)
-                }
             }
             public typealias SuccessType = [Status200]
 

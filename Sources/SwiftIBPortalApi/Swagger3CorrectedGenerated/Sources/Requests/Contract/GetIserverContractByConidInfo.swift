@@ -5,7 +5,7 @@
 
 import Foundation
 
-extension API.Contract {
+extension IBPortalApi.Contract {
 
     /**
     Contract Details
@@ -47,12 +47,12 @@ extension API.Contract {
         }
 
         public enum Response: APIResponseValue, CustomStringConvertible, CustomDebugStringConvertible {
-            public typealias SuccessType = Contract
+            public typealias SuccessType = IBContract
 
             /** returns an object */
-            case status200(Contract)
+            case status200(IBContract)
 
-            public var success: Contract? {
+            public var success: IBContract? {
                 switch self {
                 case .status200(let response): return response
                 }
@@ -78,7 +78,7 @@ extension API.Contract {
 
             public init(statusCode: Int, data: Data, decoder: ResponseDecoder) throws {
                 switch statusCode {
-                case 200: self = try .status200(decoder.decode(Contract.self, from: data))
+                case 200: self = try .status200(decoder.decode(IBContract.self, from: data))
                 default: throw APIClientError.unexpectedStatusCode(statusCode: statusCode, data: data)
                 }
             }

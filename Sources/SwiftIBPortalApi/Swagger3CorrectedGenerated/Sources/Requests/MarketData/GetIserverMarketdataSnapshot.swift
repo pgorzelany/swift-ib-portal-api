@@ -5,7 +5,7 @@
 
 import Foundation
 
-extension API.MarketData {
+extension IBPortalApi.MarketData {
 
     /**
     Market Data
@@ -78,177 +78,177 @@ To receive streaming market data the endpoint /ws can be used. Refer to [Streami
             To receive all available fields the /snapshot endpoint will need to be called several times.
             To receive streaming market data the endpoint /ws can be used. Refer to [Streaming WebSocket Data](https://interactivebrokers.github.io/cpwebapi/RealtimeSubscription.html) for details.
              */
-            public class Status200: APIModel {
+            public struct Status200: APIModel {
 
                 /** Last Price */
-                public var _31: String?
+                public let _31: String?
 
                 /** Symbol */
-                public var _55: String?
+                public let _55: String?
 
                 /** Text */
-                public var _58: String?
+                public let _58: String?
 
                 /** Exchange */
-                public var _6004: String?
+                public let _6004: String?
 
                 /** Conid */
-                public var _6008: String?
+                public let _6008: String?
 
                 /** Security Type */
-                public var _6070: String?
+                public let _6070: String?
 
                 /** Months */
-                public var _6072: String?
+                public let _6072: String?
 
                 /** Regular Expiry */
-                public var _6073: String?
+                public let _6073: String?
 
                 /** Marker for market data delivery method (similar to request id) */
-                public var _6119: String?
+                public let _6119: String?
 
                 /** Underlying Conid. Use /trsrv/secdef to get more information about the security */
-                public var _6457: String?
+                public let _6457: String?
 
                 /** Market Data Availability. The field may contain two chars. The first char is the primary code: R = Realtime, D = Delayed,
             Z = Frozen, Y = Frozen Delayed. The second char is the secondary code: P = Snapshot Available, p = Consolidated.
              */
-                public var _6509: String?
+                public let _6509: String?
 
                 /** High */
-                public var _70: String?
+                public let _70: String?
 
                 /** Company name */
-                public var _7051: String?
+                public let _7051: String?
 
                 /** Last Size */
-                public var _7059: String?
+                public let _7059: String?
 
                 /** Conid + Exchange */
-                public var _7094: String?
+                public let _7094: String?
 
                 /** Low */
-                public var _71: String?
+                public let _71: String?
 
                 /** Position */
-                public var _72: String?
+                public let _72: String?
 
                 /** Contract Description */
-                public var _7219: String?
+                public let _7219: String?
 
                 /** Contract Description */
-                public var _7220: String?
+                public let _7220: String?
 
                 /** Listing Exchange */
-                public var _7221: String?
+                public let _7221: String?
 
                 /** Industry */
-                public var _7280: String?
+                public let _7280: String?
 
                 /** Category */
-                public var _7281: String?
+                public let _7281: String?
 
                 /** Average Daily Volume */
-                public var _7282: String?
+                public let _7282: String?
 
                 /** Historic Volume (30d) */
-                public var _7284: String?
+                public let _7284: String?
 
                 /** Put/Call Ratio */
-                public var _7285: String?
+                public let _7285: String?
 
                 /** Dividend Amount */
-                public var _7286: String?
+                public let _7286: String?
 
                 /** Dividend Yield % */
-                public var _7287: String?
+                public let _7287: String?
 
                 /** Ex-date of the dividend */
-                public var _7288: String?
+                public let _7288: String?
 
                 /** Market Cap */
-                public var _7289: String?
+                public let _7289: String?
 
                 /** P/E */
-                public var _7290: String?
+                public let _7290: String?
 
                 /** EPS */
-                public var _7291: String?
+                public let _7291: String?
 
                 /** Cost Basis */
-                public var _7292: String?
+                public let _7292: String?
 
                 /** 52 Week High */
-                public var _7293: String?
+                public let _7293: String?
 
                 /** 52 Week Low */
-                public var _7294: String?
+                public let _7294: String?
 
                 /** Open Price */
-                public var _7295: String?
+                public let _7295: String?
 
                 /** Close Price */
-                public var _7296: String?
+                public let _7296: String?
 
                 /** Market Value */
-                public var _73: String?
+                public let _73: String?
 
                 /** Delta */
-                public var _7308: String?
+                public let _7308: String?
 
                 /** Gamma */
-                public var _7309: String?
+                public let _7309: String?
 
                 /** Theta */
-                public var _7310: String?
+                public let _7310: String?
 
                 /** Vega */
-                public var _7311: String?
+                public let _7311: String?
 
                 /** Average Price */
-                public var _74: String?
+                public let _74: String?
 
                 /** Unrealized PnL */
-                public var _75: String?
+                public let _75: String?
 
                 /** Formatted position */
-                public var _76: String?
+                public let _76: String?
 
                 /** Implied volatility of the option */
-                public var _7633: String?
+                public let _7633: String?
 
                 /** Formatted Unrealized PnL */
-                public var _77: String?
+                public let _77: String?
 
                 /** Daily PnL */
-                public var _78: String?
+                public let _78: String?
 
                 /** Change Price */
-                public var _82: String?
+                public let _82: String?
 
                 /** Change Percent */
-                public var _83: String?
+                public let _83: String?
 
                 /** Bid Price */
-                public var _84: String?
+                public let _84: String?
 
                 /** Ask Size */
-                public var _85: String?
+                public let _85: String?
 
                 /** Ask Price */
-                public var _86: String?
+                public let _86: String?
 
                 /** Volume */
-                public var _87: String?
+                public let _87: String?
 
                 /** Bid Size */
-                public var _88: String?
+                public let _88: String?
 
-                public var updated: Int?
+                public let updated: Int?
 
-                public var conid: Int?
+                public let conid: Int?
 
-                public var serverId: String?
+                public let serverId: String?
 
                 public init(_31: String? = nil, _55: String? = nil, _58: String? = nil, _6004: String? = nil, _6008: String? = nil, _6070: String? = nil, _6072: String? = nil, _6073: String? = nil, _6119: String? = nil, _6457: String? = nil, _6509: String? = nil, _70: String? = nil, _7051: String? = nil, _7059: String? = nil, _7094: String? = nil, _71: String? = nil, _72: String? = nil, _7219: String? = nil, _7220: String? = nil, _7221: String? = nil, _7280: String? = nil, _7281: String? = nil, _7282: String? = nil, _7284: String? = nil, _7285: String? = nil, _7286: String? = nil, _7287: String? = nil, _7288: String? = nil, _7289: String? = nil, _7290: String? = nil, _7291: String? = nil, _7292: String? = nil, _7293: String? = nil, _7294: String? = nil, _7295: String? = nil, _7296: String? = nil, _73: String? = nil, _7308: String? = nil, _7309: String? = nil, _7310: String? = nil, _7311: String? = nil, _74: String? = nil, _75: String? = nil, _76: String? = nil, _7633: String? = nil, _77: String? = nil, _78: String? = nil, _82: String? = nil, _83: String? = nil, _84: String? = nil, _85: String? = nil, _86: String? = nil, _87: String? = nil, _88: String? = nil, updated: Int? = nil, conid: Int? = nil, serverId: String? = nil) {
                     self._31 = _31
@@ -310,7 +310,7 @@ To receive streaming market data the endpoint /ws can be used. Refer to [Streami
                     self.serverId = serverId
                 }
 
-                public required init(from decoder: Decoder) throws {
+                public init(from decoder: Decoder) throws {
                     let container = try decoder.container(keyedBy: StringCodingKey.self)
 
                     _31 = try container.decodeIfPresent("31")
@@ -434,71 +434,6 @@ To receive streaming market data the endpoint /ws can be used. Refer to [Streami
                     try container.encodeIfPresent(serverId, forKey: "server_id")
                 }
 
-                public func isEqual(to object: Any?) -> Bool {
-                  guard let object = object as? Status200 else { return false }
-                  guard self._31 == object._31 else { return false }
-                  guard self._55 == object._55 else { return false }
-                  guard self._58 == object._58 else { return false }
-                  guard self._6004 == object._6004 else { return false }
-                  guard self._6008 == object._6008 else { return false }
-                  guard self._6070 == object._6070 else { return false }
-                  guard self._6072 == object._6072 else { return false }
-                  guard self._6073 == object._6073 else { return false }
-                  guard self._6119 == object._6119 else { return false }
-                  guard self._6457 == object._6457 else { return false }
-                  guard self._6509 == object._6509 else { return false }
-                  guard self._70 == object._70 else { return false }
-                  guard self._7051 == object._7051 else { return false }
-                  guard self._7059 == object._7059 else { return false }
-                  guard self._7094 == object._7094 else { return false }
-                  guard self._71 == object._71 else { return false }
-                  guard self._72 == object._72 else { return false }
-                  guard self._7219 == object._7219 else { return false }
-                  guard self._7220 == object._7220 else { return false }
-                  guard self._7221 == object._7221 else { return false }
-                  guard self._7280 == object._7280 else { return false }
-                  guard self._7281 == object._7281 else { return false }
-                  guard self._7282 == object._7282 else { return false }
-                  guard self._7284 == object._7284 else { return false }
-                  guard self._7285 == object._7285 else { return false }
-                  guard self._7286 == object._7286 else { return false }
-                  guard self._7287 == object._7287 else { return false }
-                  guard self._7288 == object._7288 else { return false }
-                  guard self._7289 == object._7289 else { return false }
-                  guard self._7290 == object._7290 else { return false }
-                  guard self._7291 == object._7291 else { return false }
-                  guard self._7292 == object._7292 else { return false }
-                  guard self._7293 == object._7293 else { return false }
-                  guard self._7294 == object._7294 else { return false }
-                  guard self._7295 == object._7295 else { return false }
-                  guard self._7296 == object._7296 else { return false }
-                  guard self._73 == object._73 else { return false }
-                  guard self._7308 == object._7308 else { return false }
-                  guard self._7309 == object._7309 else { return false }
-                  guard self._7310 == object._7310 else { return false }
-                  guard self._7311 == object._7311 else { return false }
-                  guard self._74 == object._74 else { return false }
-                  guard self._75 == object._75 else { return false }
-                  guard self._76 == object._76 else { return false }
-                  guard self._7633 == object._7633 else { return false }
-                  guard self._77 == object._77 else { return false }
-                  guard self._78 == object._78 else { return false }
-                  guard self._82 == object._82 else { return false }
-                  guard self._83 == object._83 else { return false }
-                  guard self._84 == object._84 else { return false }
-                  guard self._85 == object._85 else { return false }
-                  guard self._86 == object._86 else { return false }
-                  guard self._87 == object._87 else { return false }
-                  guard self._88 == object._88 else { return false }
-                  guard self.updated == object.updated else { return false }
-                  guard self.conid == object.conid else { return false }
-                  guard self.serverId == object.serverId else { return false }
-                  return true
-                }
-
-                public static func == (lhs: Status200, rhs: Status200) -> Bool {
-                    return lhs.isEqual(to: rhs)
-                }
             }
 
             /** Get Market Data for the given conid(s). The endpoint will return by default bid, ask, last, change, change pct, close, listing exchange.
@@ -509,18 +444,18 @@ To receive streaming market data the endpoint /ws can be used. Refer to [Streami
             To receive all available fields the /snapshot endpoint will need to be called several times.
             To receive streaming market data the endpoint /ws can be used. Refer to [Streaming WebSocket Data](https://interactivebrokers.github.io/cpwebapi/RealtimeSubscription.html) for details.
              */
-            public class Status400: APIModel {
+            public struct Status400: APIModel {
 
-                public var error: String?
+                public let error: String?
 
-                public var statusCode: Int?
+                public let statusCode: Int?
 
                 public init(error: String? = nil, statusCode: Int? = nil) {
                     self.error = error
                     self.statusCode = statusCode
                 }
 
-                public required init(from decoder: Decoder) throws {
+                public init(from decoder: Decoder) throws {
                     let container = try decoder.container(keyedBy: StringCodingKey.self)
 
                     error = try container.decodeIfPresent("error")
@@ -534,16 +469,6 @@ To receive streaming market data the endpoint /ws can be used. Refer to [Streami
                     try container.encodeIfPresent(statusCode, forKey: "statusCode")
                 }
 
-                public func isEqual(to object: Any?) -> Bool {
-                  guard let object = object as? Status400 else { return false }
-                  guard self.error == object.error else { return false }
-                  guard self.statusCode == object.statusCode else { return false }
-                  return true
-                }
-
-                public static func == (lhs: Status400, rhs: Status400) -> Bool {
-                    return lhs.isEqual(to: rhs)
-                }
             }
             public typealias SuccessType = [Status200]
 

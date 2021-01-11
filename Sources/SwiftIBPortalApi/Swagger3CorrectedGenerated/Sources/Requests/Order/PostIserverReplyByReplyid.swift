@@ -5,7 +5,7 @@
 
 import Foundation
 
-extension API.Order {
+extension IBPortalApi.Order {
 
     /**
     Place Order Reply
@@ -19,16 +19,16 @@ extension API.Order {
         public final class Request: APIRequest<Response> {
 
             /** Reply to questions when placing orders and submit orders */
-            public class Body: APIModel {
+            public struct Body: APIModel {
 
                 /** answer to question, true means yes, false means no */
-                public var confirmed: Bool?
+                public let confirmed: Bool?
 
                 public init(confirmed: Bool? = nil) {
                     self.confirmed = confirmed
                 }
 
-                public required init(from decoder: Decoder) throws {
+                public init(from decoder: Decoder) throws {
                     let container = try decoder.container(keyedBy: StringCodingKey.self)
 
                     confirmed = try container.decodeIfPresent("confirmed")
@@ -40,15 +40,6 @@ extension API.Order {
                     try container.encodeIfPresent(confirmed, forKey: "confirmed")
                 }
 
-                public func isEqual(to object: Any?) -> Bool {
-                  guard let object = object as? Body else { return false }
-                  guard self.confirmed == object.confirmed else { return false }
-                  return true
-                }
-
-                public static func == (lhs: Body, rhs: Body) -> Bool {
-                    return lhs.isEqual(to: rhs)
-                }
             }
 
             public struct Options {
@@ -99,13 +90,13 @@ extension API.Order {
         public enum Response: APIResponseValue, CustomStringConvertible, CustomDebugStringConvertible {
 
             /** Reply to questions when placing orders and submit orders */
-            public class Status200: APIModel {
+            public struct Status200: APIModel {
 
-                public var localOrderId: String?
+                public let localOrderId: String?
 
-                public var orderId: String?
+                public let orderId: String?
 
-                public var orderStatus: String?
+                public let orderStatus: String?
 
                 public init(localOrderId: String? = nil, orderId: String? = nil, orderStatus: String? = nil) {
                     self.localOrderId = localOrderId
@@ -113,7 +104,7 @@ extension API.Order {
                     self.orderStatus = orderStatus
                 }
 
-                public required init(from decoder: Decoder) throws {
+                public init(from decoder: Decoder) throws {
                     let container = try decoder.container(keyedBy: StringCodingKey.self)
 
                     localOrderId = try container.decodeIfPresent("local_order_id")
@@ -129,33 +120,22 @@ extension API.Order {
                     try container.encodeIfPresent(orderStatus, forKey: "order_status")
                 }
 
-                public func isEqual(to object: Any?) -> Bool {
-                  guard let object = object as? Status200 else { return false }
-                  guard self.localOrderId == object.localOrderId else { return false }
-                  guard self.orderId == object.orderId else { return false }
-                  guard self.orderStatus == object.orderStatus else { return false }
-                  return true
-                }
-
-                public static func == (lhs: Status200, rhs: Status200) -> Bool {
-                    return lhs.isEqual(to: rhs)
-                }
             }
 
             /** Reply to questions when placing orders and submit orders */
-            public class Status400: APIModel {
+            public struct Status400: APIModel {
 
                 /** for example-order not confirmed */
-                public var error: String?
+                public let error: String?
 
-                public var statusCode: Int?
+                public let statusCode: Int?
 
                 public init(error: String? = nil, statusCode: Int? = nil) {
                     self.error = error
                     self.statusCode = statusCode
                 }
 
-                public required init(from decoder: Decoder) throws {
+                public init(from decoder: Decoder) throws {
                     let container = try decoder.container(keyedBy: StringCodingKey.self)
 
                     error = try container.decodeIfPresent("error")
@@ -169,16 +149,6 @@ extension API.Order {
                     try container.encodeIfPresent(statusCode, forKey: "statusCode")
                 }
 
-                public func isEqual(to object: Any?) -> Bool {
-                  guard let object = object as? Status400 else { return false }
-                  guard self.error == object.error else { return false }
-                  guard self.statusCode == object.statusCode else { return false }
-                  return true
-                }
-
-                public static func == (lhs: Status400, rhs: Status400) -> Bool {
-                    return lhs.isEqual(to: rhs)
-                }
             }
             public typealias SuccessType = [Status200]
 

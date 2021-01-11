@@ -5,7 +5,7 @@
 
 import Foundation
 
-extension API.FYI {
+extension IBPortalApi.FYI {
 
     /**
     Enable/Disable certain subscription
@@ -20,15 +20,15 @@ extension API.FYI {
 
             /** Configure which typecode you would like to enable/disable.
              */
-            public class Body: APIModel {
+            public struct Body: APIModel {
 
-                public var enabled: Bool?
+                public let enabled: Bool?
 
                 public init(enabled: Bool? = nil) {
                     self.enabled = enabled
                 }
 
-                public required init(from decoder: Decoder) throws {
+                public init(from decoder: Decoder) throws {
                     let container = try decoder.container(keyedBy: StringCodingKey.self)
 
                     enabled = try container.decodeIfPresent("enabled")
@@ -40,15 +40,6 @@ extension API.FYI {
                     try container.encodeIfPresent(enabled, forKey: "enabled")
                 }
 
-                public func isEqual(to object: Any?) -> Bool {
-                  guard let object = object as? Body else { return false }
-                  guard self.enabled == object.enabled else { return false }
-                  return true
-                }
-
-                public static func == (lhs: Body, rhs: Body) -> Bool {
-                    return lhs.isEqual(to: rhs)
-                }
             }
 
             public struct Options {

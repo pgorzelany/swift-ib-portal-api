@@ -5,7 +5,7 @@
 
 import Foundation
 
-extension API.Session {
+extension IBPortalApi.Session {
 
     /**
     Authentication Status
@@ -24,12 +24,12 @@ extension API.Session {
         }
 
         public enum Response: APIResponseValue, CustomStringConvertible, CustomDebugStringConvertible {
-            public typealias SuccessType = AuthStatus
+            public typealias SuccessType = IBAuthStatus
 
             /** Authentication Status */
-            case status200(AuthStatus)
+            case status200(IBAuthStatus)
 
-            public var success: AuthStatus? {
+            public var success: IBAuthStatus? {
                 switch self {
                 case .status200(let response): return response
                 }
@@ -55,7 +55,7 @@ extension API.Session {
 
             public init(statusCode: Int, data: Data, decoder: ResponseDecoder) throws {
                 switch statusCode {
-                case 200: self = try .status200(decoder.decode(AuthStatus.self, from: data))
+                case 200: self = try .status200(decoder.decode(IBAuthStatus.self, from: data))
                 default: throw APIClientError.unexpectedStatusCode(statusCode: statusCode, data: data)
                 }
             }

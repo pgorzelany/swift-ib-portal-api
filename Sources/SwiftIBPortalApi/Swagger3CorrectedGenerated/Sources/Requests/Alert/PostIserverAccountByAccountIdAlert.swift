@@ -5,7 +5,7 @@
 
 import Foundation
 
-extension API.Alert {
+extension IBPortalApi.Alert {
 
     /**
     Create or modify alert
@@ -30,9 +30,9 @@ extension API.Alert {
 
             public var options: Options
 
-            public var body: AlertRequest
+            public var body: IBAlertRequest
 
-            public init(body: AlertRequest, options: Options, encoder: RequestEncoder? = nil) {
+            public init(body: IBAlertRequest, options: Options, encoder: RequestEncoder? = nil) {
                 self.body = body
                 self.options = options
                 super.init(service: PostIserverAccountByAccountIdAlert.service) { defaultEncoder in
@@ -41,7 +41,7 @@ extension API.Alert {
             }
 
             /// convenience initialiser so an Option doesn't have to be created
-            public convenience init(accountId: String, body: AlertRequest) {
+            public convenience init(accountId: String, body: IBAlertRequest) {
                 let options = Options(accountId: accountId)
                 self.init(body: body, options: options)
             }
@@ -55,19 +55,19 @@ extension API.Alert {
 
             /** Please note here, DO NOT pass orderId when creating a new alert, toolId is only required for MTA alert
              */
-            public class Status200: APIModel {
+            public struct Status200: APIModel {
 
-                public var orderId: Int?
+                public let orderId: Int?
 
-                public var orderStatus: String?
+                public let orderStatus: String?
 
-                public var requestId: Int?
+                public let requestId: Int?
 
-                public var success: Bool?
+                public let success: Bool?
 
-                public var text: String?
+                public let text: String?
 
-                public var warningMessage: String?
+                public let warningMessage: String?
 
                 public init(orderId: Int? = nil, orderStatus: String? = nil, requestId: Int? = nil, success: Bool? = nil, text: String? = nil, warningMessage: String? = nil) {
                     self.orderId = orderId
@@ -78,7 +78,7 @@ extension API.Alert {
                     self.warningMessage = warningMessage
                 }
 
-                public required init(from decoder: Decoder) throws {
+                public init(from decoder: Decoder) throws {
                     let container = try decoder.container(keyedBy: StringCodingKey.self)
 
                     orderId = try container.decodeIfPresent("order_id")
@@ -100,20 +100,6 @@ extension API.Alert {
                     try container.encodeIfPresent(warningMessage, forKey: "warning_message")
                 }
 
-                public func isEqual(to object: Any?) -> Bool {
-                  guard let object = object as? Status200 else { return false }
-                  guard self.orderId == object.orderId else { return false }
-                  guard self.orderStatus == object.orderStatus else { return false }
-                  guard self.requestId == object.requestId else { return false }
-                  guard self.success == object.success else { return false }
-                  guard self.text == object.text else { return false }
-                  guard self.warningMessage == object.warningMessage else { return false }
-                  return true
-                }
-
-                public static func == (lhs: Status200, rhs: Status200) -> Bool {
-                    return lhs.isEqual(to: rhs)
-                }
             }
             public typealias SuccessType = Status200
 

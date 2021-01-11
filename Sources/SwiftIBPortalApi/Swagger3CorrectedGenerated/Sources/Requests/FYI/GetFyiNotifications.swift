@@ -5,7 +5,7 @@
 
 import Foundation
 
-extension API.FYI {
+extension IBPortalApi.FYI {
 
     /** Get a list of notifications */
     public enum GetFyiNotifications {
@@ -59,12 +59,12 @@ extension API.FYI {
         }
 
         public enum Response: APIResponseValue, CustomStringConvertible, CustomDebugStringConvertible {
-            public typealias SuccessType = Notifications
+            public typealias SuccessType = IBNotifications
 
             /** An array */
-            case status200(Notifications)
+            case status200(IBNotifications)
 
-            public var success: Notifications? {
+            public var success: IBNotifications? {
                 switch self {
                 case .status200(let response): return response
                 }
@@ -90,7 +90,7 @@ extension API.FYI {
 
             public init(statusCode: Int, data: Data, decoder: ResponseDecoder) throws {
                 switch statusCode {
-                case 200: self = try .status200(decoder.decode(Notifications.self, from: data))
+                case 200: self = try .status200(decoder.decode(IBNotifications.self, from: data))
                 default: throw APIClientError.unexpectedStatusCode(statusCode: statusCode, data: data)
                 }
             }

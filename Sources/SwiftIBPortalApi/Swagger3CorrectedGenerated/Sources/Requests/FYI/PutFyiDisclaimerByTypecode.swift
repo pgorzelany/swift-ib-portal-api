@@ -5,7 +5,7 @@
 
 import Foundation
 
-extension API.FYI {
+extension IBPortalApi.FYI {
 
     /** Mark disclaimer read */
     public enum PutFyiDisclaimerByTypecode {
@@ -44,18 +44,18 @@ extension API.FYI {
 
         public enum Response: APIResponseValue, CustomStringConvertible, CustomDebugStringConvertible {
 
-            public class Status200: APIModel {
+            public struct Status200: APIModel {
 
-                public var t: Int?
+                public let t: Int?
 
-                public var v: Int?
+                public let v: Int?
 
                 public init(t: Int? = nil, v: Int? = nil) {
                     self.t = t
                     self.v = v
                 }
 
-                public required init(from decoder: Decoder) throws {
+                public init(from decoder: Decoder) throws {
                     let container = try decoder.container(keyedBy: StringCodingKey.self)
 
                     t = try container.decodeIfPresent("T")
@@ -69,16 +69,6 @@ extension API.FYI {
                     try container.encodeIfPresent(v, forKey: "V")
                 }
 
-                public func isEqual(to object: Any?) -> Bool {
-                  guard let object = object as? Status200 else { return false }
-                  guard self.t == object.t else { return false }
-                  guard self.v == object.v else { return false }
-                  return true
-                }
-
-                public static func == (lhs: Status200, rhs: Status200) -> Bool {
-                    return lhs.isEqual(to: rhs)
-                }
             }
             public typealias SuccessType = Status200
 

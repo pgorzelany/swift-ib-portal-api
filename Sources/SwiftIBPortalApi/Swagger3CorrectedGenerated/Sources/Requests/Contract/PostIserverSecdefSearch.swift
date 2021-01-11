@@ -5,7 +5,7 @@
 
 import Foundation
 
-extension API.Contract {
+extension IBPortalApi.Contract {
 
     /**
     Search by symbol or name
@@ -19,16 +19,16 @@ extension API.Contract {
         public final class Request: APIRequest<Response> {
 
             /** Specify an underlying to search what derivative contract(s) it has. This endpoint must be called before using /secdef/info */
-            public class Body: APIModel {
+            public struct Body: APIModel {
 
                 /** symbol or name to be searched */
-                public var symbol: String
+                public let symbol: String
 
                 /** should be true if the search is to be performed by name. false by default. */
-                public var name: Bool?
+                public let name: Bool?
 
                 /** If search is done by name, only the assets provided in this field will be returned. Currently, only STK is supported. */
-                public var secType: String?
+                public let secType: String?
 
                 public init(symbol: String, name: Bool? = nil, secType: String? = nil) {
                     self.symbol = symbol
@@ -36,7 +36,7 @@ extension API.Contract {
                     self.secType = secType
                 }
 
-                public required init(from decoder: Decoder) throws {
+                public init(from decoder: Decoder) throws {
                     let container = try decoder.container(keyedBy: StringCodingKey.self)
 
                     symbol = try container.decode("symbol")
@@ -52,17 +52,6 @@ extension API.Contract {
                     try container.encodeIfPresent(secType, forKey: "secType")
                 }
 
-                public func isEqual(to object: Any?) -> Bool {
-                  guard let object = object as? Body else { return false }
-                  guard self.symbol == object.symbol else { return false }
-                  guard self.name == object.name else { return false }
-                  guard self.secType == object.secType else { return false }
-                  return true
-                }
-
-                public static func == (lhs: Body, rhs: Body) -> Bool {
-                    return lhs.isEqual(to: rhs)
-                }
             }
 
             public struct Options {
@@ -117,47 +106,47 @@ extension API.Contract {
         public enum Response: APIResponseValue, CustomStringConvertible, CustomDebugStringConvertible {
 
             /** Specify an underlying to search what derivative contract(s) it has. This endpoint must be called before using /secdef/info */
-            public class Status200: APIModel {
+            public struct Status200: APIModel {
 
                 /** Company Name - Exchange */
-                public var companyHeader: String?
+                public let companyHeader: String?
 
-                public var companyName: String?
+                public let companyName: String?
 
                 /** Contract Identifier */
-                public var conid: Int?
+                public let conid: Int?
 
                 /** Exchange */
-                public var description: String?
+                public let description: String?
 
-                public var fop: String?
+                public let fop: String?
 
-                public var opt: String?
+                public let opt: String?
 
-                public var restricted: String?
+                public let restricted: String?
 
-                public var sections: [Sections]?
+                public let sections: [Sections]?
 
-                public var symbol: String?
+                public let symbol: String?
 
-                public var war: String?
+                public let war: String?
 
                 /** Specify an underlying to search what derivative contract(s) it has. This endpoint must be called before using /secdef/info */
-                public class Sections: APIModel {
+                public struct Sections: APIModel {
 
                     /** Listing Exchange */
-                    public var exchange: String?
+                    public let exchange: String?
 
                     /** For combo's defines the asset class for each leg */
-                    public var legSecType: String?
+                    public let legSecType: String?
 
                     /** List of expiration month(s) and year(s) in MMMYY format separated by semicolon */
-                    public var months: String?
+                    public let months: String?
 
                     /** Asset Class */
-                    public var secType: String?
+                    public let secType: String?
 
-                    public var symbol: String?
+                    public let symbol: String?
 
                     public init(exchange: String? = nil, legSecType: String? = nil, months: String? = nil, secType: String? = nil, symbol: String? = nil) {
                         self.exchange = exchange
@@ -167,7 +156,7 @@ extension API.Contract {
                         self.symbol = symbol
                     }
 
-                    public required init(from decoder: Decoder) throws {
+                    public init(from decoder: Decoder) throws {
                         let container = try decoder.container(keyedBy: StringCodingKey.self)
 
                         exchange = try container.decodeIfPresent("exchange")
@@ -187,19 +176,6 @@ extension API.Contract {
                         try container.encodeIfPresent(symbol, forKey: "symbol")
                     }
 
-                    public func isEqual(to object: Any?) -> Bool {
-                      guard let object = object as? Sections else { return false }
-                      guard self.exchange == object.exchange else { return false }
-                      guard self.legSecType == object.legSecType else { return false }
-                      guard self.months == object.months else { return false }
-                      guard self.secType == object.secType else { return false }
-                      guard self.symbol == object.symbol else { return false }
-                      return true
-                    }
-
-                    public static func == (lhs: Sections, rhs: Sections) -> Bool {
-                        return lhs.isEqual(to: rhs)
-                    }
                 }
 
                 public init(companyHeader: String? = nil, companyName: String? = nil, conid: Int? = nil, description: String? = nil, fop: String? = nil, opt: String? = nil, restricted: String? = nil, sections: [Sections]? = nil, symbol: String? = nil, war: String? = nil) {
@@ -215,7 +191,7 @@ extension API.Contract {
                     self.war = war
                 }
 
-                public required init(from decoder: Decoder) throws {
+                public init(from decoder: Decoder) throws {
                     let container = try decoder.container(keyedBy: StringCodingKey.self)
 
                     companyHeader = try container.decodeIfPresent("companyHeader")
@@ -245,36 +221,18 @@ extension API.Contract {
                     try container.encodeIfPresent(war, forKey: "war")
                 }
 
-                public func isEqual(to object: Any?) -> Bool {
-                  guard let object = object as? Status200 else { return false }
-                  guard self.companyHeader == object.companyHeader else { return false }
-                  guard self.companyName == object.companyName else { return false }
-                  guard self.conid == object.conid else { return false }
-                  guard self.description == object.description else { return false }
-                  guard self.fop == object.fop else { return false }
-                  guard self.opt == object.opt else { return false }
-                  guard self.restricted == object.restricted else { return false }
-                  guard self.sections == object.sections else { return false }
-                  guard self.symbol == object.symbol else { return false }
-                  guard self.war == object.war else { return false }
-                  return true
-                }
-
-                public static func == (lhs: Status200, rhs: Status200) -> Bool {
-                    return lhs.isEqual(to: rhs)
-                }
             }
 
             /** Specify an underlying to search what derivative contract(s) it has. This endpoint must be called before using /secdef/info */
-            public class Status500: APIModel {
+            public struct Status500: APIModel {
 
-                public var error: String?
+                public let error: String?
 
                 public init(error: String? = nil) {
                     self.error = error
                 }
 
-                public required init(from decoder: Decoder) throws {
+                public init(from decoder: Decoder) throws {
                     let container = try decoder.container(keyedBy: StringCodingKey.self)
 
                     error = try container.decodeIfPresent("error")
@@ -286,15 +244,6 @@ extension API.Contract {
                     try container.encodeIfPresent(error, forKey: "error")
                 }
 
-                public func isEqual(to object: Any?) -> Bool {
-                  guard let object = object as? Status500 else { return false }
-                  guard self.error == object.error else { return false }
-                  return true
-                }
-
-                public static func == (lhs: Status500, rhs: Status500) -> Bool {
-                    return lhs.isEqual(to: rhs)
-                }
             }
             public typealias SuccessType = [Status200]
 

@@ -5,7 +5,7 @@
 
 import Foundation
 
-extension API.Contract {
+extension IBPortalApi.Contract {
 
     /**
     Get trading schedule for symbol
@@ -65,39 +65,39 @@ Available values-- Stock: STK, Option: OPT, Future: FUT, Contract For Difference
         public enum Response: APIResponseValue, CustomStringConvertible, CustomDebugStringConvertible {
 
             /** Returns the trading schedule up to a month for the requested contract */
-            public class Status200: APIModel {
+            public struct Status200: APIModel {
 
-                public var id: String?
+                public let id: String?
 
                 /** Always contains at least one 'tradingTime'  and zero or more 'sessionTime' tags */
-                public var schedules: [Schedules]?
+                public let schedules: [Schedules]?
 
                 /** null is returned. */
-                public var tradeVenueId: String?
+                public let tradeVenueId: String?
 
                 /** Returns the trading schedule up to a month for the requested contract */
-                public class Schedules: APIModel {
+                public struct Schedules: APIModel {
 
-                    public var clearingCycleEndTime: Int?
+                    public let clearingCycleEndTime: Int?
 
                     /** If the LIQUID hours differs from the total trading day then a separate 'session' tag is returned. */
-                    public var sessions: Sessions?
+                    public let sessions: Sessions?
 
                     /** 20000101 stands for any Sat, 20000102 stands for any Sun, ... 20000107 stands for any Fri. Any other date stands for itself. */
-                    public var tradingScheduleDate: Int?
+                    public let tradingScheduleDate: Int?
 
                     /** Returns tradingTime in exchange time zone. */
-                    public var tradingTimes: TradingTimes?
+                    public let tradingTimes: TradingTimes?
 
                     /** If the LIQUID hours differs from the total trading day then a separate 'session' tag is returned. */
-                    public class Sessions: APIModel {
+                    public struct Sessions: APIModel {
 
-                        public var closingTime: Int?
+                        public let closingTime: Int?
 
-                        public var openingTime: Int?
+                        public let openingTime: Int?
 
                         /** If the whole trading day is considered LIQUID then the value 'LIQUID' is returned. */
-                        public var prop: String?
+                        public let prop: String?
 
                         public init(closingTime: Int? = nil, openingTime: Int? = nil, prop: String? = nil) {
                             self.closingTime = closingTime
@@ -105,7 +105,7 @@ Available values-- Stock: STK, Option: OPT, Future: FUT, Contract For Difference
                             self.prop = prop
                         }
 
-                        public required init(from decoder: Decoder) throws {
+                        public init(from decoder: Decoder) throws {
                             let container = try decoder.container(keyedBy: StringCodingKey.self)
 
                             closingTime = try container.decodeIfPresent("closingTime")
@@ -121,27 +121,16 @@ Available values-- Stock: STK, Option: OPT, Future: FUT, Contract For Difference
                             try container.encodeIfPresent(prop, forKey: "prop")
                         }
 
-                        public func isEqual(to object: Any?) -> Bool {
-                          guard let object = object as? Sessions else { return false }
-                          guard self.closingTime == object.closingTime else { return false }
-                          guard self.openingTime == object.openingTime else { return false }
-                          guard self.prop == object.prop else { return false }
-                          return true
-                        }
-
-                        public static func == (lhs: Sessions, rhs: Sessions) -> Bool {
-                            return lhs.isEqual(to: rhs)
-                        }
                     }
 
                     /** Returns tradingTime in exchange time zone. */
-                    public class TradingTimes: APIModel {
+                    public struct TradingTimes: APIModel {
 
-                        public var cancelDayOrders: String?
+                        public let cancelDayOrders: String?
 
-                        public var closingTime: Int?
+                        public let closingTime: Int?
 
-                        public var openingTime: Int?
+                        public let openingTime: Int?
 
                         public init(cancelDayOrders: String? = nil, closingTime: Int? = nil, openingTime: Int? = nil) {
                             self.cancelDayOrders = cancelDayOrders
@@ -149,7 +138,7 @@ Available values-- Stock: STK, Option: OPT, Future: FUT, Contract For Difference
                             self.openingTime = openingTime
                         }
 
-                        public required init(from decoder: Decoder) throws {
+                        public init(from decoder: Decoder) throws {
                             let container = try decoder.container(keyedBy: StringCodingKey.self)
 
                             cancelDayOrders = try container.decodeIfPresent("cancelDayOrders")
@@ -165,17 +154,6 @@ Available values-- Stock: STK, Option: OPT, Future: FUT, Contract For Difference
                             try container.encodeIfPresent(openingTime, forKey: "openingTime")
                         }
 
-                        public func isEqual(to object: Any?) -> Bool {
-                          guard let object = object as? TradingTimes else { return false }
-                          guard self.cancelDayOrders == object.cancelDayOrders else { return false }
-                          guard self.closingTime == object.closingTime else { return false }
-                          guard self.openingTime == object.openingTime else { return false }
-                          return true
-                        }
-
-                        public static func == (lhs: TradingTimes, rhs: TradingTimes) -> Bool {
-                            return lhs.isEqual(to: rhs)
-                        }
                     }
 
                     public init(clearingCycleEndTime: Int? = nil, sessions: Sessions? = nil, tradingScheduleDate: Int? = nil, tradingTimes: TradingTimes? = nil) {
@@ -185,7 +163,7 @@ Available values-- Stock: STK, Option: OPT, Future: FUT, Contract For Difference
                         self.tradingTimes = tradingTimes
                     }
 
-                    public required init(from decoder: Decoder) throws {
+                    public init(from decoder: Decoder) throws {
                         let container = try decoder.container(keyedBy: StringCodingKey.self)
 
                         clearingCycleEndTime = try container.decodeIfPresent("clearingCycleEndTime")
@@ -203,18 +181,6 @@ Available values-- Stock: STK, Option: OPT, Future: FUT, Contract For Difference
                         try container.encodeIfPresent(tradingTimes, forKey: "tradingTimes")
                     }
 
-                    public func isEqual(to object: Any?) -> Bool {
-                      guard let object = object as? Schedules else { return false }
-                      guard self.clearingCycleEndTime == object.clearingCycleEndTime else { return false }
-                      guard self.sessions == object.sessions else { return false }
-                      guard self.tradingScheduleDate == object.tradingScheduleDate else { return false }
-                      guard self.tradingTimes == object.tradingTimes else { return false }
-                      return true
-                    }
-
-                    public static func == (lhs: Schedules, rhs: Schedules) -> Bool {
-                        return lhs.isEqual(to: rhs)
-                    }
                 }
 
                 public init(id: String? = nil, schedules: [Schedules]? = nil, tradeVenueId: String? = nil) {
@@ -223,7 +189,7 @@ Available values-- Stock: STK, Option: OPT, Future: FUT, Contract For Difference
                     self.tradeVenueId = tradeVenueId
                 }
 
-                public required init(from decoder: Decoder) throws {
+                public init(from decoder: Decoder) throws {
                     let container = try decoder.container(keyedBy: StringCodingKey.self)
 
                     id = try container.decodeIfPresent("id")
@@ -239,17 +205,6 @@ Available values-- Stock: STK, Option: OPT, Future: FUT, Contract For Difference
                     try container.encodeIfPresent(tradeVenueId, forKey: "tradeVenueId")
                 }
 
-                public func isEqual(to object: Any?) -> Bool {
-                  guard let object = object as? Status200 else { return false }
-                  guard self.id == object.id else { return false }
-                  guard self.schedules == object.schedules else { return false }
-                  guard self.tradeVenueId == object.tradeVenueId else { return false }
-                  return true
-                }
-
-                public static func == (lhs: Status200, rhs: Status200) -> Bool {
-                    return lhs.isEqual(to: rhs)
-                }
             }
             public typealias SuccessType = Status200
 

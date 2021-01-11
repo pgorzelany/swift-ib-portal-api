@@ -5,7 +5,7 @@
 
 import Foundation
 
-extension API.Session {
+extension IBPortalApi.Session {
 
     /**
     Ends the current session
@@ -26,16 +26,16 @@ extension API.Session {
         public enum Response: APIResponseValue, CustomStringConvertible, CustomDebugStringConvertible {
 
             /** Logs the user out of the gateway session. Any further activity requires re-authentication. */
-            public class Status200: APIModel {
+            public struct Status200: APIModel {
 
                 /** true means username is still logged in, false means it is not */
-                public var confirmed: Bool?
+                public let confirmed: Bool?
 
                 public init(confirmed: Bool? = nil) {
                     self.confirmed = confirmed
                 }
 
-                public required init(from decoder: Decoder) throws {
+                public init(from decoder: Decoder) throws {
                     let container = try decoder.container(keyedBy: StringCodingKey.self)
 
                     confirmed = try container.decodeIfPresent("confirmed")
@@ -47,15 +47,6 @@ extension API.Session {
                     try container.encodeIfPresent(confirmed, forKey: "confirmed")
                 }
 
-                public func isEqual(to object: Any?) -> Bool {
-                  guard let object = object as? Status200 else { return false }
-                  guard self.confirmed == object.confirmed else { return false }
-                  return true
-                }
-
-                public static func == (lhs: Status200, rhs: Status200) -> Bool {
-                    return lhs.isEqual(to: rhs)
-                }
             }
             public typealias SuccessType = Status200
 

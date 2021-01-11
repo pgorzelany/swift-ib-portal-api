@@ -5,7 +5,7 @@
 
 import Foundation
 
-extension API.FYI {
+extension IBPortalApi.FYI {
 
     /** Delete a device */
     public enum DeleteFyiDeliveryoptionsByDeviceId {

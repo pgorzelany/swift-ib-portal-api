@@ -1,10 +1,10 @@
-# API
+# IBPortalApi
 
 This is an api generated from a OpenAPI 3.0 spec with [SwagGen](https://github.com/yonaskolb/SwagGen)
 
 ## Operation
 
-Each operation lives under the `API` namespace and within an optional tag: `API(.tagName).operationId`. If an operation doesn't have an operationId one will be generated from the path and method.
+Each operation lives under the `IBPortalApi` namespace and within an optional tag: `IBPortalApi(.tagName).operationId`. If an operation doesn't have an operationId one will be generated from the path and method.
 
 Each operation has a nested `Request` and a `Response`, as well as a static `service` property
 
@@ -23,7 +23,7 @@ The `options` and `body` structs are both mutable so they can be modified before
 The response is an enum of all the possible responses the request can return. it also contains getters for the `statusCode`, whether it was `successful`, and the actual decoded optional `success` response. If the operation only has one type of failure type there is also an optional `failure` type.
 
 ## Model
-Models that are sent and returned from the API are mutable classes. Each model is `Equatable` and `Codable`.
+Models that are sent and returned from the API are immutable classes. Each model is `Equatable` and `Codable`.
 
 `Required` properties are non optional and non-required are optional
 
@@ -57,7 +57,7 @@ Example request (that is not neccessarily in this api):
 
 ```swift
 
-let getUserRequest = API.User.GetUser.Request(id: 123)
+let getUserRequest = IBPortalApi.User.GetUser.Request(id: 123)
 let apiClient = APIClient.default
 
 apiClient.makeRequest(getUserRequest) { apiResponse in
@@ -74,7 +74,7 @@ apiClient.makeRequest(getUserRequest) { apiResponse in
 }
 ```
 
-Each [Request](#request) also has a `makeRequest` convenience function that uses `API.shared`.
+Each [Request](#request) also has a `makeRequest` convenience function that uses `IBPortalApi.shared`.
 
 #### APIResponse
 The `APIResponse` that gets passed to the completion closure contains the following properties:
@@ -88,7 +88,7 @@ The `APIResponse` that gets passed to the completion closure contains the follow
 
 #### Encoding and Decoding
 Only JSON requests and responses are supported. These are encoded and decoded by `JSONEncoder` and `JSONDecoder` respectively, using Swift's `Codable` apis.
-There are some options to control how invalid JSON is handled when decoding and these are available as static properties on `API`:
+There are some options to control how invalid JSON is handled when decoding and these are available as static properties on `IBPortalApi`:
 
 - `safeOptionalDecoding`: Whether to discard any errors when decoding optional properties. Defaults to `true`.
 - `safeArrayDecoding`: Whether to remove invalid elements instead of throwing when decoding arrays. Defaults to `true`.
@@ -150,53 +150,53 @@ To add support for a specific asynchronous library, just add an extension on `AP
 
 ## Models
 
-- **Account**
-- **Accounts**
-- **AlertRequest**
-- **AlertResponse**
-- **Allocation**
-- **Allocations**
-- **AuthStatus**
-- **CalendarRequest**
-- **Contract**
-- **Event**
-- **Events**
-- **Future**
-- **Futures**
-- **HistoryData**
-- **HistoryResult**
-- **Ind**
-- **Inds**
-- **Ledger**
-- **MarketData**
-- **ModifyOrder**
-- **Notification**
-- **Notifications**
-- **Order**
-- **OrderRequest**
-- **Performance**
-- **Position**
-- **Positions**
-- **ScannerParams**
-- **ScannerResult**
-- **Secdef**
-- **SecdefInfo**
-- **Secdefs**
-- **SetAccount**
-- **StatsData**
-- **Stock**
-- **Stocks**
-- **Summary**
-- **SystemError**
-- **Trade**
-- **Transaction**
-- **Transactions**
-- **Wager**
-- **Wagers**
+- **IBAccount**
+- **IBAccounts**
+- **IBAlertRequest**
+- **IBAlertResponse**
+- **IBAllocation**
+- **IBAllocations**
+- **IBAuthStatus**
+- **IBCalendarRequest**
+- **IBContract**
+- **IBEvent**
+- **IBEvents**
+- **IBFuture**
+- **IBFutures**
+- **IBHistoryData**
+- **IBHistoryResult**
+- **IBInd**
+- **IBInds**
+- **IBLedger**
+- **IBMarketData**
+- **IBModifyOrder**
+- **IBNotification**
+- **IBNotifications**
+- **IBOrder**
+- **IBOrderRequest**
+- **IBPerformance**
+- **IBPosition**
+- **IBPositions**
+- **IBScannerParams**
+- **IBScannerResult**
+- **IBSecdef**
+- **IBSecdefInfo**
+- **IBSecdefs**
+- **IBSetAccount**
+- **IBStatsData**
+- **IBStock**
+- **IBStocks**
+- **IBSummary**
+- **IBSystemError**
+- **IBTrade**
+- **IBTransaction**
+- **IBTransactions**
+- **IBWager**
+- **IBWagers**
 
 ## Requests
 
-- **API.Account**
+- **IBPortalApi.Account**
 	- **GetIserverAccountPnlPartitioned**: GET `/iserver/account/pnl/partitioned`
 	- **GetIserverAccounts**: GET `/iserver/accounts`
 	- **GetPortfolioAccounts**: GET `/portfolio/accounts`
@@ -205,14 +205,14 @@ To add support for a specific asynchronous library, just add an extension on `AP
 	- **GetPortfolioByAccountIdMeta**: GET `/portfolio/{accountid}/meta`
 	- **GetPortfolioByAccountIdSummary**: GET `/portfolio/{accountid}/summary`
 	- **PostIserverAccount**: POST `/iserver/account`
-- **API.Alert**
+- **IBPortalApi.Alert**
 	- **DeleteIserverAccountByAccountIdAlertByAlertId**: DELETE `/iserver/account/{accountid}/alert/{alertid}`
 	- **GetIserverAccountAlertById**: GET `/iserver/account/alert/{id}`
 	- **GetIserverAccountMta**: GET `/iserver/account/mta`
 	- **GetIserverAccountByAccountIdAlerts**: GET `/iserver/account/{accountid}/alerts`
 	- **PostIserverAccountByAccountIdAlert**: POST `/iserver/account/{accountid}/alert`
 	- **PostIserverAccountByAccountIdAlertActivate**: POST `/iserver/account/{accountid}/alert/activate`
-- **API.Contract**
+- **IBPortalApi.Contract**
 	- **GetIserverContractByConidInfo**: GET `/iserver/contract/{conid}/info`
 	- **GetIserverSecdefInfo**: GET `/iserver/secdef/info`
 	- **GetIserverSecdefStrikes**: GET `/iserver/secdef/strikes`
@@ -221,7 +221,7 @@ To add support for a specific asynchronous library, just add an extension on `AP
 	- **GetTrsrvStocks**: GET `/trsrv/stocks`
 	- **PostIserverSecdefSearch**: POST `/iserver/secdef/search`
 	- **PostTrsrvSecdef**: POST `/trsrv/secdef`
-- **API.FYI**
+- **IBPortalApi.FYI**
 	- **DeleteFyiDeliveryoptionsByDeviceId**: DELETE `/fyi/deliveryoptions/{deviceid}`
 	- **GetFyiDeliveryoptions**: GET `/fyi/deliveryoptions`
 	- **GetFyiDisclaimerByTypecode**: GET `/fyi/disclaimer/{typecode}`
@@ -234,14 +234,14 @@ To add support for a specific asynchronous library, just add an extension on `AP
 	- **PutFyiDeliveryoptionsEmail**: PUT `/fyi/deliveryoptions/email`
 	- **PutFyiDisclaimerByTypecode**: PUT `/fyi/disclaimer/{typecode}`
 	- **PutFyiNotificationsByNotificationId**: PUT `/fyi/notifications/{notificationid}`
-- **API.IBCust**
+- **IBPortalApi.IBCust**
 	- **GetIbcustEntityInfo**: GET `/ibcust/entity/info`
-- **API.MarketData**
+- **IBPortalApi.MarketData**
 	- **GetIserverMarketdataHistory**: GET `/iserver/marketdata/history`
 	- **GetIserverMarketdataSnapshot**: GET `/iserver/marketdata/snapshot`
 	- **GetIserverMarketdataUnsubscribeall**: GET `/iserver/marketdata/unsubscribeall`
 	- **GetIserverMarketdataByConidUnsubscribe**: GET `/iserver/marketdata/{conid}/unsubscribe`
-- **API.Order**
+- **IBPortalApi.Order**
 	- **DeleteIserverAccountByAccountIdOrderByOrderId**: DELETE `/iserver/account/{accountid}/order/{orderid}`
 	- **GetIserverAccountOrders**: GET `/iserver/account/orders`
 	- **PostIserverAccountOrdersByFaGroup**: POST `/iserver/account/orders/{fagroup}`
@@ -250,9 +250,9 @@ To add support for a specific asynchronous library, just add an extension on `AP
 	- **PostIserverAccountByAccountIdOrderByOrderId**: POST `/iserver/account/{accountid}/order/{orderid}`
 	- **PostIserverAccountByAccountIdOrders**: POST `/iserver/account/{accountid}/orders`
 	- **PostIserverReplyByReplyid**: POST `/iserver/reply/{replyid}`
-- **API.PnL**
+- **IBPortalApi.PnL**
 	- **GetIserverAccountPnlPartitioned**: GET `/iserver/account/pnl/partitioned`
-- **API.Portfolio**
+- **IBPortalApi.Portfolio**
 	- **GetPortfolioAccounts**: GET `/portfolio/accounts`
 	- **GetPortfolioPositionsByConid**: GET `/portfolio/positions/{conid}`
 	- **GetPortfolioSubaccounts**: GET `/portfolio/subaccounts`
@@ -264,20 +264,20 @@ To add support for a specific asynchronous library, just add an extension on `AP
 	- **GetPortfolioByAccountIdSummary**: GET `/portfolio/{accountid}/summary`
 	- **PostPortfolioAllocation**: POST `/portfolio/allocation`
 	- **PostPortfolioByAccountIdPositionsInvalidate**: POST `/portfolio/{accountid}/positions/invalidate`
-- **API.PortfolioAnalyst**
+- **IBPortalApi.PortfolioAnalyst**
 	- **PostPaPerformance**: POST `/pa/performance`
 	- **PostPaSummary**: POST `/pa/summary`
 	- **PostPaTransactions**: POST `/pa/transactions`
-- **API.Scanner**
+- **IBPortalApi.Scanner**
 	- **GetIserverScannerParams**: GET `/iserver/scanner/params`
 	- **PostIserverScannerRun**: POST `/iserver/scanner/run`
-- **API.Session**
+- **IBPortalApi.Session**
 	- **GetSsoValidate**: GET `/sso/validate`
 	- **PostIserverAuthStatus**: POST `/iserver/auth/status`
 	- **PostIserverReauthenticate**: POST `/iserver/reauthenticate`
 	- **PostLogout**: POST `/logout`
 	- **PostTickle**: POST `/tickle`
-- **API.Streaming**
+- **IBPortalApi.Streaming**
 	- **PostWs**: POST `/ws`
-- **API.Trades**
+- **IBPortalApi.Trades**
 	- **GetIserverAccountTrades**: GET `/iserver/account/trades`

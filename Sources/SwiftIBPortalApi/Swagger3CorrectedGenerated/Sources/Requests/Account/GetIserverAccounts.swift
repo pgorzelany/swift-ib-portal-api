@@ -5,7 +5,7 @@
 
 import Foundation
 
-extension API.Account {
+extension IBPortalApi.Account {
 
     /**
     Brokerage Accounts
@@ -26,15 +26,15 @@ extension API.Account {
         public enum Response: APIResponseValue, CustomStringConvertible, CustomDebugStringConvertible {
 
             /** Returns a list of accounts the user has trading access to, their respective aliases and the currently selected account. Note this endpoint must be called before modifying an order or querying open orders. */
-            public class Status200: APIModel {
+            public struct Status200: APIModel {
 
                 /** Unique account id */
-                public var accounts: [String]?
+                public let accounts: [String]?
 
                 /** Account Id and its alias */
-                public var aliases: [String: Any]?
+                public let aliases: [String: Any]?
 
-                public var selectedAccount: String?
+                public let selectedAccount: String?
 
                 public init(accounts: [String]? = nil, aliases: [String: Any]? = nil, selectedAccount: String? = nil) {
                     self.accounts = accounts
@@ -42,7 +42,7 @@ extension API.Account {
                     self.selectedAccount = selectedAccount
                 }
 
-                public required init(from decoder: Decoder) throws {
+                public init(from decoder: Decoder) throws {
                     let container = try decoder.container(keyedBy: StringCodingKey.self)
 
                     accounts = try container.decodeArrayIfPresent("accounts")
@@ -58,17 +58,6 @@ extension API.Account {
                     try container.encodeIfPresent(selectedAccount, forKey: "selectedAccount")
                 }
 
-                public func isEqual(to object: Any?) -> Bool {
-                  guard let object = object as? Status200 else { return false }
-                  guard self.accounts == object.accounts else { return false }
-                  guard NSDictionary(dictionary: self.aliases ?? [:]).isEqual(to: object.aliases ?? [:]) else { return false }
-                  guard self.selectedAccount == object.selectedAccount else { return false }
-                  return true
-                }
-
-                public static func == (lhs: Status200, rhs: Status200) -> Bool {
-                    return lhs.isEqual(to: rhs)
-                }
             }
             public typealias SuccessType = Status200
 

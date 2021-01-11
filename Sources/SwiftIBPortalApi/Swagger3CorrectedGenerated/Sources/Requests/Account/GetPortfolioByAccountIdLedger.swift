@@ -5,7 +5,7 @@
 
 import Foundation
 
-extension API.Account {
+extension IBPortalApi.Account {
 
     /**
     Account Ledger
@@ -49,15 +49,15 @@ extension API.Account {
         public enum Response: APIResponseValue, CustomStringConvertible, CustomDebugStringConvertible {
 
             /** Information regarding settled cash, cash balances, etc. in the account's base currency and any other cash balances hold in other currencies.  /portfolio/accounts or /portfolio/subaccounts must be called prior to this endpoint. The list of supported currencies is available at https://www.interactivebrokers.com/en/index.php?f=3185. */
-            public class Status200: APIModel {
+            public struct Status200: APIModel {
 
-                public var base: Ledger?
+                public let base: IBLedger?
 
-                public init(base: Ledger? = nil) {
+                public init(base: IBLedger? = nil) {
                     self.base = base
                 }
 
-                public required init(from decoder: Decoder) throws {
+                public init(from decoder: Decoder) throws {
                     let container = try decoder.container(keyedBy: StringCodingKey.self)
 
                     base = try container.decodeIfPresent("BASE")
@@ -69,15 +69,6 @@ extension API.Account {
                     try container.encodeIfPresent(base, forKey: "BASE")
                 }
 
-                public func isEqual(to object: Any?) -> Bool {
-                  guard let object = object as? Status200 else { return false }
-                  guard self.base == object.base else { return false }
-                  return true
-                }
-
-                public static func == (lhs: Status200, rhs: Status200) -> Bool {
-                    return lhs.isEqual(to: rhs)
-                }
             }
             public typealias SuccessType = Status200
 

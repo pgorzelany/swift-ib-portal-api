@@ -5,7 +5,7 @@
 
 import Foundation
 
-extension API.MarketData {
+extension IBPortalApi.MarketData {
 
     /**
     Market Data Cancel (Single)
@@ -50,16 +50,16 @@ extension API.MarketData {
 
             /** Cancel market data for given conid. To cancel all market data request(s), see /iserver/marketdata/unsubscribeall.
              */
-            public class Status200: APIModel {
+            public struct Status200: APIModel {
 
                 /** success means market data was canceled. */
-                public var confirmed: String?
+                public let confirmed: String?
 
                 public init(confirmed: String? = nil) {
                     self.confirmed = confirmed
                 }
 
-                public required init(from decoder: Decoder) throws {
+                public init(from decoder: Decoder) throws {
                     let container = try decoder.container(keyedBy: StringCodingKey.self)
 
                     confirmed = try container.decodeIfPresent("confirmed")
@@ -71,15 +71,6 @@ extension API.MarketData {
                     try container.encodeIfPresent(confirmed, forKey: "confirmed")
                 }
 
-                public func isEqual(to object: Any?) -> Bool {
-                  guard let object = object as? Status200 else { return false }
-                  guard self.confirmed == object.confirmed else { return false }
-                  return true
-                }
-
-                public static func == (lhs: Status200, rhs: Status200) -> Bool {
-                    return lhs.isEqual(to: rhs)
-                }
             }
             public typealias SuccessType = Status200
 

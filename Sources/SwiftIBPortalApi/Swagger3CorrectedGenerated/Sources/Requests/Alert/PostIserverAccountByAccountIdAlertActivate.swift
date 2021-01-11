@@ -5,7 +5,7 @@
 
 import Foundation
 
-extension API.Alert {
+extension IBPortalApi.Alert {
 
     /**
     Activate or deactivate an alert
@@ -19,20 +19,20 @@ extension API.Alert {
         public final class Request: APIRequest<Response> {
 
             /** Please note, if alertId is 0, it will activate/deactivate all alerts */
-            public class Body: APIModel {
+            public struct Body: APIModel {
 
                 /** 1 to activate, 0 to deactivate */
-                public var alertActive: Int?
+                public let alertActive: Int?
 
                 /** alert id(order id) */
-                public var alertId: Int?
+                public let alertId: Int?
 
                 public init(alertActive: Int? = nil, alertId: Int? = nil) {
                     self.alertActive = alertActive
                     self.alertId = alertId
                 }
 
-                public required init(from decoder: Decoder) throws {
+                public init(from decoder: Decoder) throws {
                     let container = try decoder.container(keyedBy: StringCodingKey.self)
 
                     alertActive = try container.decodeIfPresent("alertActive")
@@ -46,16 +46,6 @@ extension API.Alert {
                     try container.encodeIfPresent(alertId, forKey: "alertId")
                 }
 
-                public func isEqual(to object: Any?) -> Bool {
-                  guard let object = object as? Body else { return false }
-                  guard self.alertActive == object.alertActive else { return false }
-                  guard self.alertId == object.alertId else { return false }
-                  return true
-                }
-
-                public static func == (lhs: Body, rhs: Body) -> Bool {
-                    return lhs.isEqual(to: rhs)
-                }
             }
 
             public struct Options {
@@ -113,19 +103,19 @@ extension API.Alert {
         public enum Response: APIResponseValue, CustomStringConvertible, CustomDebugStringConvertible {
 
             /** Please note, if alertId is 0, it will activate/deactivate all alerts */
-            public class Status200: APIModel {
+            public struct Status200: APIModel {
 
-                public var failureList: String?
+                public let failureList: String?
 
-                public var orderId: Int?
+                public let orderId: Int?
 
-                public var orderStatus: String?
+                public let orderStatus: String?
 
-                public var requestId: Int?
+                public let requestId: Int?
 
-                public var success: Bool?
+                public let success: Bool?
 
-                public var text: String?
+                public let text: String?
 
                 public init(failureList: String? = nil, orderId: Int? = nil, orderStatus: String? = nil, requestId: Int? = nil, success: Bool? = nil, text: String? = nil) {
                     self.failureList = failureList
@@ -136,7 +126,7 @@ extension API.Alert {
                     self.text = text
                 }
 
-                public required init(from decoder: Decoder) throws {
+                public init(from decoder: Decoder) throws {
                     let container = try decoder.container(keyedBy: StringCodingKey.self)
 
                     failureList = try container.decodeIfPresent("failure_list")
@@ -158,20 +148,6 @@ extension API.Alert {
                     try container.encodeIfPresent(text, forKey: "text")
                 }
 
-                public func isEqual(to object: Any?) -> Bool {
-                  guard let object = object as? Status200 else { return false }
-                  guard self.failureList == object.failureList else { return false }
-                  guard self.orderId == object.orderId else { return false }
-                  guard self.orderStatus == object.orderStatus else { return false }
-                  guard self.requestId == object.requestId else { return false }
-                  guard self.success == object.success else { return false }
-                  guard self.text == object.text else { return false }
-                  return true
-                }
-
-                public static func == (lhs: Status200, rhs: Status200) -> Bool {
-                    return lhs.isEqual(to: rhs)
-                }
             }
             public typealias SuccessType = Status200
 

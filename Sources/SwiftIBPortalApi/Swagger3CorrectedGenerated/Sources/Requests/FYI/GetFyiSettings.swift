@@ -5,7 +5,7 @@
 
 import Foundation
 
-extension API.FYI {
+extension IBPortalApi.FYI {
 
     /**
     Get a list of subscriptions
@@ -27,22 +27,22 @@ extension API.FYI {
 
             /** Return the current choices of subscriptions, we can toggle the option
              */
-            public class Status200: APIModel {
+            public struct Status200: APIModel {
 
                 /** optional, if A doesn't exist, it means user can't toggle this option. 0-off, 1-on. */
-                public var a: Int?
+                public let a: Int?
 
                 /** fyi code */
-                public var fc: String?
+                public let fc: String?
 
                 /** detailed description */
-                public var fd: String?
+                public let fd: String?
 
                 /** title */
-                public var fn: String?
+                public let fn: String?
 
                 /** disclaimer read, 1 = yes, = 0 no. */
-                public var h: Int?
+                public let h: Int?
 
                 public init(a: Int? = nil, fc: String? = nil, fd: String? = nil, fn: String? = nil, h: Int? = nil) {
                     self.a = a
@@ -52,7 +52,7 @@ extension API.FYI {
                     self.h = h
                 }
 
-                public required init(from decoder: Decoder) throws {
+                public init(from decoder: Decoder) throws {
                     let container = try decoder.container(keyedBy: StringCodingKey.self)
 
                     a = try container.decodeIfPresent("A")
@@ -72,19 +72,6 @@ extension API.FYI {
                     try container.encodeIfPresent(h, forKey: "H")
                 }
 
-                public func isEqual(to object: Any?) -> Bool {
-                  guard let object = object as? Status200 else { return false }
-                  guard self.a == object.a else { return false }
-                  guard self.fc == object.fc else { return false }
-                  guard self.fd == object.fd else { return false }
-                  guard self.fn == object.fn else { return false }
-                  guard self.h == object.h else { return false }
-                  return true
-                }
-
-                public static func == (lhs: Status200, rhs: Status200) -> Bool {
-                    return lhs.isEqual(to: rhs)
-                }
             }
             public typealias SuccessType = [Status200]
 

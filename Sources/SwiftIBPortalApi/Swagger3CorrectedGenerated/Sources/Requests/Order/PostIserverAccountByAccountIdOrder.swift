@@ -5,7 +5,7 @@
 
 import Foundation
 
-extension API.Order {
+extension IBPortalApi.Order {
 
     /**
     Place Order
@@ -32,9 +32,9 @@ successfully. You can use "/iserver/reply/{replyid}" endpoint to answer question
 
             public var options: Options
 
-            public var body: OrderRequest
+            public var body: IBOrderRequest
 
-            public init(body: OrderRequest, options: Options, encoder: RequestEncoder? = nil) {
+            public init(body: IBOrderRequest, options: Options, encoder: RequestEncoder? = nil) {
                 self.body = body
                 self.options = options
                 super.init(service: PostIserverAccountByAccountIdOrder.service) { defaultEncoder in
@@ -43,7 +43,7 @@ successfully. You can use "/iserver/reply/{replyid}" endpoint to answer question
             }
 
             /// convenience initialiser so an Option doesn't have to be created
-            public convenience init(accountId: String, body: OrderRequest) {
+            public convenience init(accountId: String, body: IBOrderRequest) {
                 let options = Options(accountId: accountId)
                 self.init(body: body, options: options)
             }
@@ -59,21 +59,21 @@ successfully. You can use "/iserver/reply/{replyid}" endpoint to answer question
             you could receive some questions in the response, you have to to answer them in order to submit the order
             successfully. You can use "/iserver/reply/{replyid}" endpoint to answer questions
              */
-            public class Status200: APIModel {
+            public struct Status200: APIModel {
 
-                public var id: String?
+                public let id: String?
 
                 /** Please note here, if the message is a question, you have to reply to question in order to submit
             the order successfully. See more in the "/iserver/reply/{replyid}" endpoint.
              */
-                public var message: [String]?
+                public let message: [String]?
 
                 public init(id: String? = nil, message: [String]? = nil) {
                     self.id = id
                     self.message = message
                 }
 
-                public required init(from decoder: Decoder) throws {
+                public init(from decoder: Decoder) throws {
                     let container = try decoder.container(keyedBy: StringCodingKey.self)
 
                     id = try container.decodeIfPresent("id")
@@ -87,16 +87,6 @@ successfully. You can use "/iserver/reply/{replyid}" endpoint to answer question
                     try container.encodeIfPresent(message, forKey: "message")
                 }
 
-                public func isEqual(to object: Any?) -> Bool {
-                  guard let object = object as? Status200 else { return false }
-                  guard self.id == object.id else { return false }
-                  guard self.message == object.message else { return false }
-                  return true
-                }
-
-                public static func == (lhs: Status200, rhs: Status200) -> Bool {
-                    return lhs.isEqual(to: rhs)
-                }
             }
             public typealias SuccessType = [Status200]
 

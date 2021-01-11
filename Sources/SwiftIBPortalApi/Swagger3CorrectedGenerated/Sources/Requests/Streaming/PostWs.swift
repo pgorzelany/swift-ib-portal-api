@@ -5,7 +5,7 @@
 
 import Foundation
 
-extension API.Streaming {
+extension IBPortalApi.Streaming {
 
     /**
     Websocket Endpoint

@@ -5,7 +5,7 @@
 
 import Foundation
 
-extension API.Session {
+extension IBPortalApi.Session {
 
     /**
     Validate SSO
@@ -26,25 +26,25 @@ extension API.Session {
         public enum Response: APIResponseValue, CustomStringConvertible, CustomDebugStringConvertible {
 
             /** Validates the current session for the SSO user */
-            public class Status200: APIModel {
+            public struct Status200: APIModel {
 
                 /** Time of session validation */
-                public var authTime: Double?
+                public let authTime: Double?
 
                 /** 1 for Live, 2 for Paper */
-                public var loginType: Double?
+                public let loginType: Double?
 
                 /** true if session was validated; false if not. */
-                public var result: Bool?
+                public let result: Bool?
 
                 /** User ID */
-                public var userId: Double?
+                public let userId: Double?
 
                 /** Username */
-                public var userName: String?
+                public let userName: String?
 
                 /** Time in milliseconds until session expires. Caller needs to call the again to re-validate session */
-                public var expire: Double?
+                public let expire: Double?
 
                 public init(authTime: Double? = nil, loginType: Double? = nil, result: Bool? = nil, userId: Double? = nil, userName: String? = nil, expire: Double? = nil) {
                     self.authTime = authTime
@@ -55,7 +55,7 @@ extension API.Session {
                     self.expire = expire
                 }
 
-                public required init(from decoder: Decoder) throws {
+                public init(from decoder: Decoder) throws {
                     let container = try decoder.container(keyedBy: StringCodingKey.self)
 
                     authTime = try container.decodeIfPresent("AUTH_TIME")
@@ -77,20 +77,6 @@ extension API.Session {
                     try container.encodeIfPresent(expire, forKey: "expire")
                 }
 
-                public func isEqual(to object: Any?) -> Bool {
-                  guard let object = object as? Status200 else { return false }
-                  guard self.authTime == object.authTime else { return false }
-                  guard self.loginType == object.loginType else { return false }
-                  guard self.result == object.result else { return false }
-                  guard self.userId == object.userId else { return false }
-                  guard self.userName == object.userName else { return false }
-                  guard self.expire == object.expire else { return false }
-                  return true
-                }
-
-                public static func == (lhs: Status200, rhs: Status200) -> Bool {
-                    return lhs.isEqual(to: rhs)
-                }
             }
             public typealias SuccessType = Status200
 

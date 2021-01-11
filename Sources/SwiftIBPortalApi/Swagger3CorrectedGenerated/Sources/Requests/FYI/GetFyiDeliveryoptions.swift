@@ -5,7 +5,7 @@
 
 import Foundation
 
-extension API.FYI {
+extension IBPortalApi.FYI {
 
     /**
     Get delivery options
@@ -27,27 +27,27 @@ extension API.FYI {
 
             /** options for sending fyis to email and other devices
              */
-            public class Status200: APIModel {
+            public struct Status200: APIModel {
 
-                public var e: [E]?
+                public let e: [E]?
 
                 /** Email option is enabled or not 0-off, 1-on. */
-                public var m: Int?
+                public let m: Int?
 
                 /** device */
-                public class E: APIModel {
+                public struct E: APIModel {
 
                     /** device is enabled or not 0-true, 1-false. */
-                    public var a: String?
+                    public let a: String?
 
                     /** device id */
-                    public var i: String?
+                    public let i: String?
 
                     /** device name */
-                    public var nm: String?
+                    public let nm: String?
 
                     /** unique device id */
-                    public var ui: String?
+                    public let ui: String?
 
                     public init(a: String? = nil, i: String? = nil, nm: String? = nil, ui: String? = nil) {
                         self.a = a
@@ -56,7 +56,7 @@ extension API.FYI {
                         self.ui = ui
                     }
 
-                    public required init(from decoder: Decoder) throws {
+                    public init(from decoder: Decoder) throws {
                         let container = try decoder.container(keyedBy: StringCodingKey.self)
 
                         a = try container.decodeIfPresent("A")
@@ -74,18 +74,6 @@ extension API.FYI {
                         try container.encodeIfPresent(ui, forKey: "UI")
                     }
 
-                    public func isEqual(to object: Any?) -> Bool {
-                      guard let object = object as? E else { return false }
-                      guard self.a == object.a else { return false }
-                      guard self.i == object.i else { return false }
-                      guard self.nm == object.nm else { return false }
-                      guard self.ui == object.ui else { return false }
-                      return true
-                    }
-
-                    public static func == (lhs: E, rhs: E) -> Bool {
-                        return lhs.isEqual(to: rhs)
-                    }
                 }
 
                 public init(e: [E]? = nil, m: Int? = nil) {
@@ -93,7 +81,7 @@ extension API.FYI {
                     self.m = m
                 }
 
-                public required init(from decoder: Decoder) throws {
+                public init(from decoder: Decoder) throws {
                     let container = try decoder.container(keyedBy: StringCodingKey.self)
 
                     e = try container.decodeArrayIfPresent("E")
@@ -107,16 +95,6 @@ extension API.FYI {
                     try container.encodeIfPresent(m, forKey: "M")
                 }
 
-                public func isEqual(to object: Any?) -> Bool {
-                  guard let object = object as? Status200 else { return false }
-                  guard self.e == object.e else { return false }
-                  guard self.m == object.m else { return false }
-                  return true
-                }
-
-                public static func == (lhs: Status200, rhs: Status200) -> Bool {
-                    return lhs.isEqual(to: rhs)
-                }
             }
             public typealias SuccessType = Status200
 

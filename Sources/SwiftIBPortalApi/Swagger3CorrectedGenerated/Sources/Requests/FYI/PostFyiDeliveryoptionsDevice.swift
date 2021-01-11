@@ -5,7 +5,7 @@
 
 import Foundation
 
-extension API.FYI {
+extension IBPortalApi.FYI {
 
     /** Enable/Disable device option */
     public enum PostFyiDeliveryoptionsDevice {
@@ -14,15 +14,15 @@ extension API.FYI {
 
         public final class Request: APIRequest<Response> {
 
-            public class Body: APIModel {
+            public struct Body: APIModel {
 
-                public var deviceId: String?
+                public let deviceId: String?
 
-                public var devicename: String?
+                public let devicename: String?
 
-                public var enabled: Bool?
+                public let enabled: Bool?
 
-                public var uiName: String?
+                public let uiName: String?
 
                 public init(deviceId: String? = nil, devicename: String? = nil, enabled: Bool? = nil, uiName: String? = nil) {
                     self.deviceId = deviceId
@@ -31,7 +31,7 @@ extension API.FYI {
                     self.uiName = uiName
                 }
 
-                public required init(from decoder: Decoder) throws {
+                public init(from decoder: Decoder) throws {
                     let container = try decoder.container(keyedBy: StringCodingKey.self)
 
                     deviceId = try container.decodeIfPresent("deviceId")
@@ -49,18 +49,6 @@ extension API.FYI {
                     try container.encodeIfPresent(uiName, forKey: "uiName")
                 }
 
-                public func isEqual(to object: Any?) -> Bool {
-                  guard let object = object as? Body else { return false }
-                  guard self.deviceId == object.deviceId else { return false }
-                  guard self.devicename == object.devicename else { return false }
-                  guard self.enabled == object.enabled else { return false }
-                  guard self.uiName == object.uiName else { return false }
-                  return true
-                }
-
-                public static func == (lhs: Body, rhs: Body) -> Bool {
-                    return lhs.isEqual(to: rhs)
-                }
             }
 
             public struct Options {
@@ -119,18 +107,18 @@ extension API.FYI {
 
         public enum Response: APIResponseValue, CustomStringConvertible, CustomDebugStringConvertible {
 
-            public class Status200: APIModel {
+            public struct Status200: APIModel {
 
-                public var t: Int?
+                public let t: Int?
 
-                public var v: Int?
+                public let v: Int?
 
                 public init(t: Int? = nil, v: Int? = nil) {
                     self.t = t
                     self.v = v
                 }
 
-                public required init(from decoder: Decoder) throws {
+                public init(from decoder: Decoder) throws {
                     let container = try decoder.container(keyedBy: StringCodingKey.self)
 
                     t = try container.decodeIfPresent("T")
@@ -144,16 +132,6 @@ extension API.FYI {
                     try container.encodeIfPresent(v, forKey: "V")
                 }
 
-                public func isEqual(to object: Any?) -> Bool {
-                  guard let object = object as? Status200 else { return false }
-                  guard self.t == object.t else { return false }
-                  guard self.v == object.v else { return false }
-                  return true
-                }
-
-                public static func == (lhs: Status200, rhs: Status200) -> Bool {
-                    return lhs.isEqual(to: rhs)
-                }
             }
             public typealias SuccessType = Status200
 

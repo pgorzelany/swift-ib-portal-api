@@ -5,7 +5,7 @@
 
 import Foundation
 
-extension API.Account {
+extension IBPortalApi.Account {
 
     /**
     Account Information
@@ -47,12 +47,12 @@ extension API.Account {
         }
 
         public enum Response: APIResponseValue, CustomStringConvertible, CustomDebugStringConvertible {
-            public typealias SuccessType = Accounts
+            public typealias SuccessType = IBAccounts
 
             /** An object */
-            case status200(Accounts)
+            case status200(IBAccounts)
 
-            public var success: Accounts? {
+            public var success: IBAccounts? {
                 switch self {
                 case .status200(let response): return response
                 }
@@ -78,7 +78,7 @@ extension API.Account {
 
             public init(statusCode: Int, data: Data, decoder: ResponseDecoder) throws {
                 switch statusCode {
-                case 200: self = try .status200(decoder.decode(Accounts.self, from: data))
+                case 200: self = try .status200(decoder.decode(IBAccounts.self, from: data))
                 default: throw APIClientError.unexpectedStatusCode(statusCode: statusCode, data: data)
                 }
             }

@@ -5,7 +5,7 @@
 
 import Foundation
 
-extension API.Contract {
+extension IBPortalApi.Contract {
 
     /**
     Get available conids of future/option/warrant/cash/CFD
@@ -84,15 +84,15 @@ extension API.Contract {
         public enum Response: APIResponseValue, CustomStringConvertible, CustomDebugStringConvertible {
 
             /** For option and warrant, you can get strike price from "/iserver/secdef/strikes" endpoint. Must call /secdef/search for the underlying contract first. */
-            public class Status500: APIModel {
+            public struct Status500: APIModel {
 
-                public var error: String?
+                public let error: String?
 
                 public init(error: String? = nil) {
                     self.error = error
                 }
 
-                public required init(from decoder: Decoder) throws {
+                public init(from decoder: Decoder) throws {
                     let container = try decoder.container(keyedBy: StringCodingKey.self)
 
                     error = try container.decodeIfPresent("error")
@@ -104,15 +104,6 @@ extension API.Contract {
                     try container.encodeIfPresent(error, forKey: "error")
                 }
 
-                public func isEqual(to object: Any?) -> Bool {
-                  guard let object = object as? Status500 else { return false }
-                  guard self.error == object.error else { return false }
-                  return true
-                }
-
-                public static func == (lhs: Status500, rhs: Status500) -> Bool {
-                    return lhs.isEqual(to: rhs)
-                }
             }
             public typealias SuccessType = [String: Any]
 

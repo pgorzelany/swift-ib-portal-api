@@ -5,7 +5,7 @@
 
 import Foundation
 
-extension API.Alert {
+extension IBPortalApi.Alert {
 
     /**
     Get MTA alert
@@ -27,12 +27,12 @@ it will reset MTA to default. See [here](https://www.interactivebrokers.com/en/s
         }
 
         public enum Response: APIResponseValue, CustomStringConvertible, CustomDebugStringConvertible {
-            public typealias SuccessType = AlertResponse
+            public typealias SuccessType = IBAlertResponse
 
             /** returns an object */
-            case status200(AlertResponse)
+            case status200(IBAlertResponse)
 
-            public var success: AlertResponse? {
+            public var success: IBAlertResponse? {
                 switch self {
                 case .status200(let response): return response
                 }
@@ -58,7 +58,7 @@ it will reset MTA to default. See [here](https://www.interactivebrokers.com/en/s
 
             public init(statusCode: Int, data: Data, decoder: ResponseDecoder) throws {
                 switch statusCode {
-                case 200: self = try .status200(decoder.decode(AlertResponse.self, from: data))
+                case 200: self = try .status200(decoder.decode(IBAlertResponse.self, from: data))
                 default: throw APIClientError.unexpectedStatusCode(statusCode: statusCode, data: data)
                 }
             }

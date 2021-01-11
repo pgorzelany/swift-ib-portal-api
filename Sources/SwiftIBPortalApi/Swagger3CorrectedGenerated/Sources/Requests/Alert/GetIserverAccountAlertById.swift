@@ -5,7 +5,7 @@
 
 import Foundation
 
-extension API.Alert {
+extension IBPortalApi.Alert {
 
     /**
     Get details of an alert
@@ -48,12 +48,12 @@ The order_id in the response is the alert id.
         }
 
         public enum Response: APIResponseValue, CustomStringConvertible, CustomDebugStringConvertible {
-            public typealias SuccessType = AlertResponse
+            public typealias SuccessType = IBAlertResponse
 
             /** returns an object */
-            case status200(AlertResponse)
+            case status200(IBAlertResponse)
 
-            public var success: AlertResponse? {
+            public var success: IBAlertResponse? {
                 switch self {
                 case .status200(let response): return response
                 }
@@ -79,7 +79,7 @@ The order_id in the response is the alert id.
 
             public init(statusCode: Int, data: Data, decoder: ResponseDecoder) throws {
                 switch statusCode {
-                case 200: self = try .status200(decoder.decode(AlertResponse.self, from: data))
+                case 200: self = try .status200(decoder.decode(IBAlertResponse.self, from: data))
                 default: throw APIClientError.unexpectedStatusCode(statusCode: statusCode, data: data)
                 }
             }

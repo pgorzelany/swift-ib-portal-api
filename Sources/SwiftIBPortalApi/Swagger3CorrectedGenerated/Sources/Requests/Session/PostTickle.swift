@@ -5,7 +5,7 @@
 
 import Foundation
 
-extension API.Session {
+extension IBPortalApi.Session {
 
     /**
     Ping the server to keep the session open

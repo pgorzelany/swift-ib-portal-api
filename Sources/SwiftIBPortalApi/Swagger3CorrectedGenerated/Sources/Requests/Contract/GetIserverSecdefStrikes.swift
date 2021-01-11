@@ -5,7 +5,7 @@
 
 import Foundation
 
-extension API.Contract {
+extension IBPortalApi.Contract {
 
     /**
     Get strikes for Options/Warrant
@@ -68,18 +68,18 @@ extension API.Contract {
         public enum Response: APIResponseValue, CustomStringConvertible, CustomDebugStringConvertible {
 
             /** You can get available contract months and exchanges from "/iserver/secdef/search" */
-            public class Status200: APIModel {
+            public struct Status200: APIModel {
 
-                public var call: [String]?
+                public let call: [String]?
 
-                public var put: [String]?
+                public let put: [String]?
 
                 public init(call: [String]? = nil, put: [String]? = nil) {
                     self.call = call
                     self.put = put
                 }
 
-                public required init(from decoder: Decoder) throws {
+                public init(from decoder: Decoder) throws {
                     let container = try decoder.container(keyedBy: StringCodingKey.self)
 
                     call = try container.decodeArrayIfPresent("call")
@@ -93,28 +93,18 @@ extension API.Contract {
                     try container.encodeIfPresent(put, forKey: "put")
                 }
 
-                public func isEqual(to object: Any?) -> Bool {
-                  guard let object = object as? Status200 else { return false }
-                  guard self.call == object.call else { return false }
-                  guard self.put == object.put else { return false }
-                  return true
-                }
-
-                public static func == (lhs: Status200, rhs: Status200) -> Bool {
-                    return lhs.isEqual(to: rhs)
-                }
             }
 
             /** You can get available contract months and exchanges from "/iserver/secdef/search" */
-            public class Status500: APIModel {
+            public struct Status500: APIModel {
 
-                public var error: String?
+                public let error: String?
 
                 public init(error: String? = nil) {
                     self.error = error
                 }
 
-                public required init(from decoder: Decoder) throws {
+                public init(from decoder: Decoder) throws {
                     let container = try decoder.container(keyedBy: StringCodingKey.self)
 
                     error = try container.decodeIfPresent("error")
@@ -126,15 +116,6 @@ extension API.Contract {
                     try container.encodeIfPresent(error, forKey: "error")
                 }
 
-                public func isEqual(to object: Any?) -> Bool {
-                  guard let object = object as? Status500 else { return false }
-                  guard self.error == object.error else { return false }
-                  return true
-                }
-
-                public static func == (lhs: Status500, rhs: Status500) -> Bool {
-                    return lhs.isEqual(to: rhs)
-                }
             }
             public typealias SuccessType = Status200
 

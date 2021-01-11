@@ -5,7 +5,7 @@
 
 import Foundation
 
-extension API.Account {
+extension IBPortalApi.Account {
 
     /**
     Updates currently selected account to the provided account
@@ -18,9 +18,9 @@ extension API.Account {
 
         public final class Request: APIRequest<Response> {
 
-            public var body: SetAccount
+            public var body: IBSetAccount
 
-            public init(body: SetAccount, encoder: RequestEncoder? = nil) {
+            public init(body: IBSetAccount, encoder: RequestEncoder? = nil) {
                 self.body = body
                 super.init(service: PostIserverAccount.service) { defaultEncoder in
                     return try (encoder ?? defaultEncoder).encode(body)
@@ -31,18 +31,18 @@ extension API.Account {
         public enum Response: APIResponseValue, CustomStringConvertible, CustomDebugStringConvertible {
 
             /** If an user has multiple accounts, and user wants to get orders, trades, etc. of an account other than currently selected account, then user can update the currently selected account using this API and then can fetch required information for the newly updated account. */
-            public class Status200: APIModel {
+            public struct Status200: APIModel {
 
-                public var acctId: String?
+                public let acctId: String?
 
-                public var set: Bool?
+                public let set: Bool?
 
                 public init(acctId: String? = nil, set: Bool? = nil) {
                     self.acctId = acctId
                     self.set = set
                 }
 
-                public required init(from decoder: Decoder) throws {
+                public init(from decoder: Decoder) throws {
                     let container = try decoder.container(keyedBy: StringCodingKey.self)
 
                     acctId = try container.decodeIfPresent("acctId")
@@ -56,16 +56,6 @@ extension API.Account {
                     try container.encodeIfPresent(set, forKey: "set")
                 }
 
-                public func isEqual(to object: Any?) -> Bool {
-                  guard let object = object as? Status200 else { return false }
-                  guard self.acctId == object.acctId else { return false }
-                  guard self.set == object.set else { return false }
-                  return true
-                }
-
-                public static func == (lhs: Status200, rhs: Status200) -> Bool {
-                    return lhs.isEqual(to: rhs)
-                }
             }
             public typealias SuccessType = Status200
 

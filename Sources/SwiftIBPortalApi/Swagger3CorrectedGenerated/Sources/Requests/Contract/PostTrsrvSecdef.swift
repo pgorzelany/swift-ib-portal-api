@@ -5,7 +5,7 @@
 
 import Foundation
 
-extension API.Contract {
+extension IBPortalApi.Contract {
 
     /**
     Secdef by Conid
@@ -19,15 +19,15 @@ extension API.Contract {
         public final class Request: APIRequest<Response> {
 
             /** Returns a list of security definitions for the given conids */
-            public class Body: APIModel {
+            public struct Body: APIModel {
 
-                public var conids: [Int]?
+                public let conids: [Int]?
 
                 public init(conids: [Int]? = nil) {
                     self.conids = conids
                 }
 
-                public required init(from decoder: Decoder) throws {
+                public init(from decoder: Decoder) throws {
                     let container = try decoder.container(keyedBy: StringCodingKey.self)
 
                     conids = try container.decodeArrayIfPresent("conids")
@@ -39,15 +39,6 @@ extension API.Contract {
                     try container.encodeIfPresent(conids, forKey: "conids")
                 }
 
-                public func isEqual(to object: Any?) -> Bool {
-                  guard let object = object as? Body else { return false }
-                  guard self.conids == object.conids else { return false }
-                  return true
-                }
-
-                public static func == (lhs: Body, rhs: Body) -> Bool {
-                    return lhs.isEqual(to: rhs)
-                }
             }
 
             public struct Options {
@@ -87,12 +78,12 @@ extension API.Contract {
         }
 
         public enum Response: APIResponseValue, CustomStringConvertible, CustomDebugStringConvertible {
-            public typealias SuccessType = Secdefs
+            public typealias SuccessType = IBSecdefs
 
             /** returns an array of secdef info */
-            case status200(Secdefs)
+            case status200(IBSecdefs)
 
-            public var success: Secdefs? {
+            public var success: IBSecdefs? {
                 switch self {
                 case .status200(let response): return response
                 }
@@ -118,7 +109,7 @@ extension API.Contract {
 
             public init(statusCode: Int, data: Data, decoder: ResponseDecoder) throws {
                 switch statusCode {
-                case 200: self = try .status200(decoder.decode(Secdefs.self, from: data))
+                case 200: self = try .status200(decoder.decode(IBSecdefs.self, from: data))
                 default: throw APIClientError.unexpectedStatusCode(statusCode: statusCode, data: data)
                 }
             }

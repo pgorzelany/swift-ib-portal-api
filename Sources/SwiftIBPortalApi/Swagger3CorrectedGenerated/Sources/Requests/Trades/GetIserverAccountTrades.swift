@@ -5,7 +5,7 @@
 
 import Foundation
 
-extension API.Trades {
+extension IBPortalApi.Trades {
 
     /**
     List of Trades for the selected account
@@ -24,12 +24,12 @@ extension API.Trades {
         }
 
         public enum Response: APIResponseValue, CustomStringConvertible, CustomDebugStringConvertible {
-            public typealias SuccessType = [Trade]
+            public typealias SuccessType = [IBTrade]
 
             /** An array of trades */
-            case status200([Trade])
+            case status200([IBTrade])
 
-            public var success: [Trade]? {
+            public var success: [IBTrade]? {
                 switch self {
                 case .status200(let response): return response
                 }
@@ -55,7 +55,7 @@ extension API.Trades {
 
             public init(statusCode: Int, data: Data, decoder: ResponseDecoder) throws {
                 switch statusCode {
-                case 200: self = try .status200(decoder.decode([Trade].self, from: data))
+                case 200: self = try .status200(decoder.decode([IBTrade].self, from: data))
                 default: throw APIClientError.unexpectedStatusCode(statusCode: statusCode, data: data)
                 }
             }

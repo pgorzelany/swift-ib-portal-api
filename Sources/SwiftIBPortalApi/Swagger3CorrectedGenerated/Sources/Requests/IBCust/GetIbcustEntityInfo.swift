@@ -5,7 +5,7 @@
 
 import Foundation
 
-extension API.IBCust {
+extension IBPortalApi.IBCust {
 
     /**
     IBCust Entity Info
@@ -26,45 +26,45 @@ extension API.IBCust {
         public enum Response: APIResponseValue, CustomStringConvertible, CustomDebugStringConvertible {
 
             /** Returns Applicant Id with all owner related entities */
-            public class Status200: APIModel {
+            public struct Status200: APIModel {
 
-                public var applicantId: Double?
+                public let applicantId: Double?
 
-                public var entities: [Entities]?
+                public let entities: [Entities]?
 
                 /** Returns Applicant Id with all owner related entities */
-                public class Entities: APIModel {
+                public struct Entities: APIModel {
 
-                    public var address: Address?
+                    public let address: Address?
 
-                    public var canSign: Bool?
+                    public let canSign: Bool?
 
-                    public var canTrade: Bool?
+                    public let canTrade: Bool?
 
-                    public var identDocs: [[String: Any]]?
+                    public let identDocs: [[String: Any]]?
 
-                    public var name: Name?
+                    public let name: Name?
 
-                    public var type: String?
+                    public let type: String?
 
                     /** Returns Applicant Id with all owner related entities */
-                    public class Address: APIModel {
+                    public struct Address: APIModel {
 
-                        public var city: String?
+                        public let city: String?
 
-                        public var compact: String?
+                        public let compact: String?
 
-                        public var country: String?
+                        public let country: String?
 
-                        public var countryCode: String?
+                        public let countryCode: String?
 
-                        public var postalCode: String?
+                        public let postalCode: String?
 
-                        public var state: String?
+                        public let state: String?
 
-                        public var street: String?
+                        public let street: String?
 
-                        public var street2: String?
+                        public let street2: String?
 
                         public init(city: String? = nil, compact: String? = nil, country: String? = nil, countryCode: String? = nil, postalCode: String? = nil, state: String? = nil, street: String? = nil, street2: String? = nil) {
                             self.city = city
@@ -77,7 +77,7 @@ extension API.IBCust {
                             self.street2 = street2
                         }
 
-                        public required init(from decoder: Decoder) throws {
+                        public init(from decoder: Decoder) throws {
                             let container = try decoder.container(keyedBy: StringCodingKey.self)
 
                             city = try container.decodeIfPresent("city")
@@ -103,32 +103,16 @@ extension API.IBCust {
                             try container.encodeIfPresent(street2, forKey: "street2")
                         }
 
-                        public func isEqual(to object: Any?) -> Bool {
-                          guard let object = object as? Address else { return false }
-                          guard self.city == object.city else { return false }
-                          guard self.compact == object.compact else { return false }
-                          guard self.country == object.country else { return false }
-                          guard self.countryCode == object.countryCode else { return false }
-                          guard self.postalCode == object.postalCode else { return false }
-                          guard self.state == object.state else { return false }
-                          guard self.street == object.street else { return false }
-                          guard self.street2 == object.street2 else { return false }
-                          return true
-                        }
-
-                        public static func == (lhs: Address, rhs: Address) -> Bool {
-                            return lhs.isEqual(to: rhs)
-                        }
                     }
 
                     /** Returns Applicant Id with all owner related entities */
-                    public class Name: APIModel {
+                    public struct Name: APIModel {
 
-                        public var firstName: String?
+                        public let firstName: String?
 
-                        public var lastName: String?
+                        public let lastName: String?
 
-                        public var salutation: String?
+                        public let salutation: String?
 
                         public init(firstName: String? = nil, lastName: String? = nil, salutation: String? = nil) {
                             self.firstName = firstName
@@ -136,7 +120,7 @@ extension API.IBCust {
                             self.salutation = salutation
                         }
 
-                        public required init(from decoder: Decoder) throws {
+                        public init(from decoder: Decoder) throws {
                             let container = try decoder.container(keyedBy: StringCodingKey.self)
 
                             firstName = try container.decodeIfPresent("firstName")
@@ -152,17 +136,6 @@ extension API.IBCust {
                             try container.encodeIfPresent(salutation, forKey: "salutation")
                         }
 
-                        public func isEqual(to object: Any?) -> Bool {
-                          guard let object = object as? Name else { return false }
-                          guard self.firstName == object.firstName else { return false }
-                          guard self.lastName == object.lastName else { return false }
-                          guard self.salutation == object.salutation else { return false }
-                          return true
-                        }
-
-                        public static func == (lhs: Name, rhs: Name) -> Bool {
-                            return lhs.isEqual(to: rhs)
-                        }
                     }
 
                     public init(address: Address? = nil, canSign: Bool? = nil, canTrade: Bool? = nil, identDocs: [[String: Any]]? = nil, name: Name? = nil, type: String? = nil) {
@@ -174,7 +147,7 @@ extension API.IBCust {
                         self.type = type
                     }
 
-                    public required init(from decoder: Decoder) throws {
+                    public init(from decoder: Decoder) throws {
                         let container = try decoder.container(keyedBy: StringCodingKey.self)
 
                         address = try container.decodeIfPresent("address")
@@ -196,20 +169,6 @@ extension API.IBCust {
                         try container.encodeIfPresent(type, forKey: "type")
                     }
 
-                    public func isEqual(to object: Any?) -> Bool {
-                      guard let object = object as? Entities else { return false }
-                      guard self.address == object.address else { return false }
-                      guard self.canSign == object.canSign else { return false }
-                      guard self.canTrade == object.canTrade else { return false }
-                      guard self.identDocs == object.identDocs else { return false }
-                      guard self.name == object.name else { return false }
-                      guard self.type == object.type else { return false }
-                      return true
-                    }
-
-                    public static func == (lhs: Entities, rhs: Entities) -> Bool {
-                        return lhs.isEqual(to: rhs)
-                    }
                 }
 
                 public init(applicantId: Double? = nil, entities: [Entities]? = nil) {
@@ -217,7 +176,7 @@ extension API.IBCust {
                     self.entities = entities
                 }
 
-                public required init(from decoder: Decoder) throws {
+                public init(from decoder: Decoder) throws {
                     let container = try decoder.container(keyedBy: StringCodingKey.self)
 
                     applicantId = try container.decodeIfPresent("applicantId")
@@ -231,16 +190,6 @@ extension API.IBCust {
                     try container.encodeIfPresent(entities, forKey: "entities")
                 }
 
-                public func isEqual(to object: Any?) -> Bool {
-                  guard let object = object as? Status200 else { return false }
-                  guard self.applicantId == object.applicantId else { return false }
-                  guard self.entities == object.entities else { return false }
-                  return true
-                }
-
-                public static func == (lhs: Status200, rhs: Status200) -> Bool {
-                    return lhs.isEqual(to: rhs)
-                }
             }
             public typealias SuccessType = [Status200]
 

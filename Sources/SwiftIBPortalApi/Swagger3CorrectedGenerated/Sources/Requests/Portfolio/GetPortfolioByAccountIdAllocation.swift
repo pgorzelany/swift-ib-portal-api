@@ -5,7 +5,7 @@
 
 import Foundation
 
-extension API.Portfolio {
+extension IBPortalApi.Portfolio {
 
     /**
     Account Allocation
@@ -47,12 +47,12 @@ extension API.Portfolio {
         }
 
         public enum Response: APIResponseValue, CustomStringConvertible, CustomDebugStringConvertible {
-            public typealias SuccessType = Allocations
+            public typealias SuccessType = IBAllocations
 
             /** returns an object of three different allocations */
-            case status200(Allocations)
+            case status200(IBAllocations)
 
-            public var success: Allocations? {
+            public var success: IBAllocations? {
                 switch self {
                 case .status200(let response): return response
                 }
@@ -78,7 +78,7 @@ extension API.Portfolio {
 
             public init(statusCode: Int, data: Data, decoder: ResponseDecoder) throws {
                 switch statusCode {
-                case 200: self = try .status200(decoder.decode(Allocations.self, from: data))
+                case 200: self = try .status200(decoder.decode(IBAllocations.self, from: data))
                 default: throw APIClientError.unexpectedStatusCode(statusCode: statusCode, data: data)
                 }
             }

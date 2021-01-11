@@ -5,7 +5,7 @@
 
 import Foundation
 
-extension API.PortfolioAnalyst {
+extension IBPortalApi.PortfolioAnalyst {
 
     /**
     Account Balance's Summary
@@ -19,15 +19,15 @@ extension API.PortfolioAnalyst {
         public final class Request: APIRequest<Response> {
 
             /** Returns a summary of all account balances for the given accounts, if more than one account is passed, the result is consolidated. */
-            public class Body: APIModel {
+            public struct Body: APIModel {
 
-                public var acctIds: [String]?
+                public let acctIds: [String]?
 
                 public init(acctIds: [String]? = nil) {
                     self.acctIds = acctIds
                 }
 
-                public required init(from decoder: Decoder) throws {
+                public init(from decoder: Decoder) throws {
                     let container = try decoder.container(keyedBy: StringCodingKey.self)
 
                     acctIds = try container.decodeArrayIfPresent("acctIds")
@@ -39,15 +39,6 @@ extension API.PortfolioAnalyst {
                     try container.encodeIfPresent(acctIds, forKey: "acctIds")
                 }
 
-                public func isEqual(to object: Any?) -> Bool {
-                  guard let object = object as? Body else { return false }
-                  guard self.acctIds == object.acctIds else { return false }
-                  return true
-                }
-
-                public static func == (lhs: Body, rhs: Body) -> Bool {
-                    return lhs.isEqual(to: rhs)
-                }
             }
 
             public struct Options {
@@ -87,12 +78,12 @@ extension API.PortfolioAnalyst {
         }
 
         public enum Response: APIResponseValue, CustomStringConvertible, CustomDebugStringConvertible {
-            public typealias SuccessType = Summary
+            public typealias SuccessType = IBSummary
 
             /** returns an object */
-            case status200(Summary)
+            case status200(IBSummary)
 
-            public var success: Summary? {
+            public var success: IBSummary? {
                 switch self {
                 case .status200(let response): return response
                 }
@@ -118,7 +109,7 @@ extension API.PortfolioAnalyst {
 
             public init(statusCode: Int, data: Data, decoder: ResponseDecoder) throws {
                 switch statusCode {
-                case 200: self = try .status200(decoder.decode(Summary.self, from: data))
+                case 200: self = try .status200(decoder.decode(IBSummary.self, from: data))
                 default: throw APIClientError.unexpectedStatusCode(statusCode: statusCode, data: data)
                 }
             }

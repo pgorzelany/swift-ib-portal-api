@@ -7,4 +7,4 @@ import Foundation
 
 /** This is an array of object(s), there could be multiple results under same symbol
  */
-public typealias Stocks = [Stocks]
+public typealias Stocks = [Stock]

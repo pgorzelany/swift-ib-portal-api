@@ -2675,7 +2675,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/secdef"
+                $ref: "#/components/schemas/secdefs"
       x-codegen-request-body-name: body
   /trsrv/secdef/schedule:
     get:
@@ -4251,11 +4251,13 @@ components:
       properties:
         conid:
           type: number
-    secdef:
+    secdefs:
       type: array
       items:
-        type: object
-        properties:
+        $ref: "#/components/schemas/secdef"
+    secdef:
+      type: object
+      properties:
           conid:
             type: integer
           name:
@@ -4284,7 +4286,7 @@ components:
             type: string
           pageSize:
             type: integer
-        description: security definition information
+      description: security definition information
     futures:
       type: array
       items:
@@ -4310,8 +4312,10 @@ components:
       description: |
         This is an array of object(s), there could be multiple results under same symbol
       items:
-        type: object
-        properties:
+        $ref: "#/components/schemas/stock"
+    stock:
+      type: object
+      properties:
           name:
             type: string
             description: company name
@@ -4333,4 +4337,4 @@ components:
                 exchange:
                   type: string
                   example: NYSE
-        description: future contract information
+      description: future contract information

@@ -5,4 +5,112 @@
 
 import Foundation
 
-public typealias Secdef = [Secdef]
+/** security definition information */
+public class Secdef: APIModel {
+
+    public var assetClass: String?
+
+    public var conid: Int?
+
+    public var expiry: String?
+
+    public var fullName: String?
+
+    public var group: String?
+
+    public var lastTradingDay: String?
+
+    public var name: String?
+
+    public var pageSize: Int?
+
+    public var putOrCall: String?
+
+    public var sector: String?
+
+    public var sectorGroup: String?
+
+    public var strike: Double?
+
+    public var ticker: String?
+
+    public var undConid: Int?
+
+    public init(assetClass: String? = nil, conid: Int? = nil, expiry: String? = nil, fullName: String? = nil, group: String? = nil, lastTradingDay: String? = nil, name: String? = nil, pageSize: Int? = nil, putOrCall: String? = nil, sector: String? = nil, sectorGroup: String? = nil, strike: Double? = nil, ticker: String? = nil, undConid: Int? = nil) {
+        self.assetClass = assetClass
+        self.conid = conid
+        self.expiry = expiry
+        self.fullName = fullName
+        self.group = group
+        self.lastTradingDay = lastTradingDay
+        self.name = name
+        self.pageSize = pageSize
+        self.putOrCall = putOrCall
+        self.sector = sector
+        self.sectorGroup = sectorGroup
+        self.strike = strike
+        self.ticker = ticker
+        self.undConid = undConid
+    }
+
+    public required init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: StringCodingKey.self)
+
+        assetClass = try container.decodeIfPresent("assetClass")
+        conid = try container.decodeIfPresent("conid")
+        expiry = try container.decodeIfPresent("expiry")
+        fullName = try container.decodeIfPresent("fullName")
+        group = try container.decodeIfPresent("group")
+        lastTradingDay = try container.decodeIfPresent("lastTradingDay")
+        name = try container.decodeIfPresent("name")
+        pageSize = try container.decodeIfPresent("pageSize")
+        putOrCall = try container.decodeIfPresent("putOrCall")
+        sector = try container.decodeIfPresent("sector")
+        sectorGroup = try container.decodeIfPresent("sectorGroup")
+        strike = try container.decodeIfPresent("strike")
+        ticker = try container.decodeIfPresent("ticker")
+        undConid = try container.decodeIfPresent("undConid")
+    }
+
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: StringCodingKey.self)
+
+        try container.encodeIfPresent(assetClass, forKey: "assetClass")
+        try container.encodeIfPresent(conid, forKey: "conid")
+        try container.encodeIfPresent(expiry, forKey: "expiry")
+        try container.encodeIfPresent(fullName, forKey: "fullName")
+        try container.encodeIfPresent(group, forKey: "group")
+        try container.encodeIfPresent(lastTradingDay, forKey: "lastTradingDay")
+        try container.encodeIfPresent(name, forKey: "name")
+        try container.encodeIfPresent(pageSize, forKey: "pageSize")
+        try container.encodeIfPresent(putOrCall, forKey: "putOrCall")
+        try container.encodeIfPresent(sector, forKey: "sector")
+        try container.encodeIfPresent(sectorGroup, forKey: "sectorGroup")
+        try container.encodeIfPresent(strike, forKey: "strike")
+        try container.encodeIfPresent(ticker, forKey: "ticker")
+        try container.encodeIfPresent(undConid, forKey: "undConid")
+    }
+
+    public func isEqual(to object: Any?) -> Bool {
+      guard let object = object as? Secdef else { return false }
+      guard self.assetClass == object.assetClass else { return false }
+      guard self.conid == object.conid else { return false }
+      guard self.expiry == object.expiry else { return false }
+      guard self.fullName == object.fullName else { return false }
+      guard self.group == object.group else { return false }
+      guard self.lastTradingDay == object.lastTradingDay else { return false }
+      guard self.name == object.name else { return false }
+      guard self.pageSize == object.pageSize else { return false }
+      guard self.putOrCall == object.putOrCall else { return false }
+      guard self.sector == object.sector else { return false }
+      guard self.sectorGroup == object.sectorGroup else { return false }
+      guard self.strike == object.strike else { return false }
+      guard self.ticker == object.ticker else { return false }
+      guard self.undConid == object.undConid else { return false }
+      return true
+    }
+
+    public static func == (lhs: Secdef, rhs: Secdef) -> Bool {
+        return lhs.isEqual(to: rhs)
+    }
+}

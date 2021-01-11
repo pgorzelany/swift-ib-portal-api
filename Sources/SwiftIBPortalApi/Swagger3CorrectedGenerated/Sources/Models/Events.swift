@@ -6,4 +6,4 @@
 import Foundation
 
 /** events */
-public typealias Events = [Events]
+public typealias Events = [Event]

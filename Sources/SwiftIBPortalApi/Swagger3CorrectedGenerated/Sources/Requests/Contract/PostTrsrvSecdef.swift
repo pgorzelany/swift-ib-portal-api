@@ -87,12 +87,12 @@ extension API.Contract {
         }
 
         public enum Response: APIResponseValue, CustomStringConvertible, CustomDebugStringConvertible {
-            public typealias SuccessType = Secdef
+            public typealias SuccessType = Secdefs
 
             /** returns an array of secdef info */
-            case status200(Secdef)
+            case status200(Secdefs)
 
-            public var success: Secdef? {
+            public var success: Secdefs? {
                 switch self {
                 case .status200(let response): return response
                 }
@@ -118,7 +118,7 @@ extension API.Contract {
 
             public init(statusCode: Int, data: Data, decoder: ResponseDecoder) throws {
                 switch statusCode {
-                case 200: self = try .status200(decoder.decode(Secdef.self, from: data))
+                case 200: self = try .status200(decoder.decode(Secdefs.self, from: data))
                 default: throw APIClientError.unexpectedStatusCode(statusCode: statusCode, data: data)
                 }
             }

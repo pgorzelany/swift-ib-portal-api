@@ -5,4 +5,4 @@
 
 import Foundation
 
-public typealias Futures = [Futures]
+public typealias Futures = [Future]

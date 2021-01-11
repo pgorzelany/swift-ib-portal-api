@@ -5,4 +5,4 @@
 
 import Foundation
 
-public typealias Inds = [Inds]
+public typealias Inds = [Ind]

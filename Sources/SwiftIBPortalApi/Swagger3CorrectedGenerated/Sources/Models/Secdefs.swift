@@ -5,4 +5,4 @@
 
 import Foundation
 
-public typealias Wagers = [Wager]
+public typealias Secdefs = [Secdef]

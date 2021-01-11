@@ -159,10 +159,13 @@ To add support for a specific asynchronous library, just add an extension on `AP
 - **AuthStatus**
 - **CalendarRequest**
 - **Contract**
+- **Event**
 - **Events**
+- **Future**
 - **Futures**
 - **HistoryData**
 - **HistoryResult**
+- **Ind**
 - **Inds**
 - **Ledger**
 - **MarketData**
@@ -178,14 +181,17 @@ To add support for a specific asynchronous library, just add an extension on `AP
 - **ScannerResult**
 - **Secdef**
 - **SecdefInfo**
+- **Secdefs**
 - **SetAccount**
 - **StatsData**
+- **Stock**
 - **Stocks**
 - **Summary**
 - **SystemError**
 - **Trade**
 - **Transaction**
 - **Transactions**
+- **Wager**
 - **Wagers**
 
 ## Requests

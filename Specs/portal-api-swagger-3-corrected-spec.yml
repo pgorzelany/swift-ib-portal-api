@@ -4,12 +4,12 @@ info:
   description: Production version of the Client Portal Web API
   version: 1.0.0
 servers:
-- url: /v1/portal
+  - url: /v1/portal
 paths:
   /fyi/unreadnumber:
     get:
       tags:
-      - FYI
+        - FYI
       summary: Get unread number of fyis. The HTTP method POST is also supported.
       description: |
         Returns the total number of unread fyis
@@ -27,7 +27,7 @@ paths:
   /fyi/settings:
     get:
       tags:
-      - FYI
+        - FYI
       summary: Get a list of subscriptions
       description: |
         Return the current choices of subscriptions, we can toggle the option
@@ -43,7 +43,8 @@ paths:
                   properties:
                     A:
                       type: integer
-                      description: optional, if A doesn't exist, it means user can't
+                      description:
+                        optional, if A doesn't exist, it means user can't
                         toggle this option. 0-off, 1-on.
                     FC:
                       type: string
@@ -60,20 +61,20 @@ paths:
   /fyi/settings/{typecode}:
     post:
       tags:
-      - FYI
+        - FYI
       summary: Enable/Disable certain subscription
       description: |
         Configure which typecode you would like to enable/disable.
       parameters:
-      - name: typecode
-        in: path
-        description: fyi code
-        required: true
-        schema:
-          type: string
+        - name: typecode
+          in: path
+          description: fyi code
+          required: true
+          schema:
+            type: string
       requestBody:
         content:
-          '*/*':
+          "*/*":
             schema:
               type: object
               properties:
@@ -91,15 +92,15 @@ paths:
   /fyi/disclaimer/{typecode}:
     get:
       tags:
-      - FYI
+        - FYI
       summary: Get disclaimer for a certain kind of fyi
       parameters:
-      - name: typecode
-        in: path
-        description: fyi code, for example --M8, EA
-        required: true
-        schema:
-          type: string
+        - name: typecode
+          in: path
+          description: fyi code, for example --M8, EA
+          required: true
+          schema:
+            type: string
       responses:
         200:
           description: receives the disclaimer message
@@ -116,15 +117,15 @@ paths:
                     description: fyi code
     put:
       tags:
-      - FYI
+        - FYI
       summary: Mark disclaimer read
       parameters:
-      - name: typecode
-        in: path
-        description: fyi code, for example --M8, EA
-        required: true
-        schema:
-          type: string
+        - name: typecode
+          in: path
+          description: fyi code, for example --M8, EA
+          required: true
+          schema:
+            type: string
       responses:
         200:
           description: 200 means successful
@@ -140,7 +141,7 @@ paths:
   /fyi/deliveryoptions:
     get:
       tags:
-      - FYI
+        - FYI
       summary: Get delivery options
       description: |
         options for sending fyis to email and other devices
@@ -176,15 +177,15 @@ paths:
   /fyi/deliveryoptions/email:
     put:
       tags:
-      - FYI
+        - FYI
       summary: Enable/Disable email option
       parameters:
-      - name: enabled
-        in: query
-        description: true/false
-        required: true
-        schema:
-          type: string
+        - name: enabled
+          in: query
+          description: true/false
+          required: true
+          schema:
+            type: string
       responses:
         200:
           description: 200 means successful
@@ -200,12 +201,12 @@ paths:
   /fyi/deliveryoptions/device:
     post:
       tags:
-      - FYI
+        - FYI
       summary: Enable/Disable device option
       requestBody:
         description: device info
         content:
-          '*/*':
+          "*/*":
             schema:
               type: object
               properties:
@@ -234,15 +235,15 @@ paths:
   /fyi/deliveryoptions/{deviceId}:
     delete:
       tags:
-      - FYI
+        - FYI
       summary: Delete a device
       parameters:
-      - name: deviceId
-        in: path
-        description: device ID
-        required: true
-        schema:
-          type: string
+        - name: deviceId
+          in: path
+          description: device ID
+          required: true
+          schema:
+            type: string
       responses:
         200:
           description: 200 means successful
@@ -253,63 +254,63 @@ paths:
   /fyi/notifications:
     get:
       tags:
-      - FYI
+        - FYI
       summary: Get a list of notifications
       parameters:
-      - name: exclude
-        in: query
-        description: if set, don't set include
-        schema:
-          type: string
-      - name: include
-        in: query
-        description: if set, don't set exclude
-        schema:
-          type: string
-      - name: max
-        in: query
-        description: max number of fyis in response
-        required: true
-        schema:
-          type: string
+        - name: exclude
+          in: query
+          description: if set, don't set include
+          schema:
+            type: string
+        - name: include
+          in: query
+          description: if set, don't set exclude
+          schema:
+            type: string
+        - name: max
+          in: query
+          description: max number of fyis in response
+          required: true
+          schema:
+            type: string
       responses:
         200:
           description: An array
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/notifications'
+                $ref: "#/components/schemas/notifications"
   /fyi/notifications/more:
     get:
       tags:
-      - FYI
+        - FYI
       summary: Get more notifications based on a certain one
       parameters:
-      - name: id
-        in: query
-        description: id of last notification in the list
-        required: true
-        schema:
-          type: string
+        - name: id
+          in: query
+          description: id of last notification in the list
+          required: true
+          schema:
+            type: string
       responses:
         200:
           description: An array
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/notifications'
+                $ref: "#/components/schemas/notifications"
   /fyi/notifications/{notificationId}:
     put:
       tags:
-      - FYI
+        - FYI
       summary: Get a list of notifications
       parameters:
-      - name: notificationId
-        in: path
-        description: mark a notification read
-        required: true
-        schema:
-          type: string
+        - name: notificationId
+          in: path
+          description: mark a notification read
+          required: true
+          schema:
+            type: string
       responses:
         200:
           description: when 200 receives, it means successful
@@ -320,9 +321,10 @@ paths:
   /ws:
     post:
       tags:
-      - Streaming
+        - Streaming
       summary: Websocket Endpoint
-      description: The streaming API is documented under [Streaming WebSocket Data](https://interactivebrokers.github.io/cpwebapi/RealtimeSubscription.html)
+      description:
+        The streaming API is documented under [Streaming WebSocket Data](https://interactivebrokers.github.io/cpwebapi/RealtimeSubscription.html)
         for details.
       responses:
         200:
@@ -331,9 +333,10 @@ paths:
   /tickle:
     post:
       tags:
-      - Session
+        - Session
       summary: Ping the server to keep the session open
-      description: If the gateway has not received any requests for several minutes
+      description:
+        If the gateway has not received any requests for several minutes
         an open session will automatically timeout. The tickle endpoint pings the
         server to prevent the session from ending.
       responses:
@@ -343,9 +346,10 @@ paths:
   /logout:
     post:
       tags:
-      - Session
+        - Session
       summary: Ends the current session
-      description: Logs the user out of the gateway session. Any further activity
+      description:
+        Logs the user out of the gateway session. Any further activity
         requires re-authentication.
       responses:
         200:
@@ -357,12 +361,13 @@ paths:
                 properties:
                   confirmed:
                     type: boolean
-                    description: true means username is still logged in, false means
+                    description:
+                      true means username is still logged in, false means
                       it is not
   /ibcust/entity/info:
     get:
       tags:
-      - IBCust
+        - IBCust
       summary: IBCust Entity Info
       description: Returns Applicant Id with all owner related entities
       responses:
@@ -424,14 +429,15 @@ paths:
   /pa/performance:
     post:
       tags:
-      - PortfolioAnalyst
+        - PortfolioAnalyst
       summary: Account Performance
-      description: Returns the performance (MTM) for the given accounts, if more than
+      description:
+        Returns the performance (MTM) for the given accounts, if more than
         one account is passed, the result is consolidated.
       requestBody:
         description: an array of account ids
         content:
-          '*/*':
+          "*/*":
             schema:
               type: object
               properties:
@@ -445,9 +451,9 @@ paths:
                   description: |
                     Frequency of cumulative performance data points: 'D'aily, 'M'onthly,'Q'uarterly.
                   enum:
-                  - D
-                  - M
-                  - Q
+                    - D
+                    - M
+                    - Q
         required: true
       responses:
         200:
@@ -455,19 +461,20 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/performance'
+                $ref: "#/components/schemas/performance"
       x-codegen-request-body-name: body
   /pa/summary:
     post:
       tags:
-      - PortfolioAnalyst
+        - PortfolioAnalyst
       summary: Account Balance's Summary
-      description: Returns a summary of all account balances for the given accounts,
+      description:
+        Returns a summary of all account balances for the given accounts,
         if more than one account is passed, the result is consolidated.
       requestBody:
         description: an array of account ids
         content:
-          '*/*':
+          "*/*":
             schema:
               type: object
               properties:
@@ -483,19 +490,19 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/summary'
+                $ref: "#/components/schemas/summary"
       x-codegen-request-body-name: body
   /pa/transactions:
     post:
       tags:
-      - PortfolioAnalyst
+        - PortfolioAnalyst
       summary: Position's Transaction History
       description: |
         transaction history for a given number of conids and accounts.
         Types of transactions include dividend payments, buy and sell transactions, transfers.
       requestBody:
         content:
-          '*/*':
+          "*/*":
             schema:
               type: object
               properties:
@@ -524,12 +531,12 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/transactions'
+                $ref: "#/components/schemas/transactions"
       x-codegen-request-body-name: body
   /sso/validate:
     get:
       tags:
-      - Session
+        - Session
       summary: Validate SSO
       description: Validates the current session for the SSO user
       responses:
@@ -551,7 +558,8 @@ paths:
                     description: User ID
                   expire:
                     type: number
-                    description: Time in milliseconds until session expires. Caller
+                    description:
+                      Time in milliseconds until session expires. Caller
                       needs to call the again to re-validate session
                   RESULT:
                     type: boolean
@@ -568,10 +576,11 @@ paths:
   /portfolio/accounts:
     get:
       tags:
-      - Account
-      - Portfolio
+        - Account
+        - Portfolio
       summary: Portfolio Accounts
-      description: In non-tiered account structures, returns a list of accounts for
+      description:
+        In non-tiered account structures, returns a list of accounts for
         which the user can view position and account information. This endpoint must
         be called prior  to calling other /portfolio endpoints for those accounts.
         For querying a list of accounts  which the user can trade, see /iserver/accounts.
@@ -583,14 +592,15 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/accounts'
+                $ref: "#/components/schemas/accounts"
   /portfolio/subaccounts:
     get:
       tags:
-      - Account
-      - Portfolio
+        - Account
+        - Portfolio
       summary: List of Sub-Accounts
-      description: Used in tiered account structures (such as financial advisor and
+      description:
+        Used in tiered account structures (such as financial advisor and
         ibroker accounts)  to return a list of sub-accounts for which the user can
         view position and  account-related information. This endpoint must be called
         prior to calling other  /portfolio endpoints for those subaccounts.  To query
@@ -601,63 +611,66 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/account'
+                $ref: "#/components/schemas/account"
   /portfolio/{accountId}/meta:
     get:
       tags:
-      - Account
-      - Portfolio
+        - Account
+        - Portfolio
       summary: Account Information
-      description: Account information related to account Id /portfolio/accounts or
+      description:
+        Account information related to account Id /portfolio/accounts or
         /portfolio/subaccounts must be called prior to this endpoint.
       parameters:
-      - name: accountId
-        in: path
-        description: account id
-        required: true
-        schema:
-          type: string
+        - name: accountId
+          in: path
+          description: account id
+          required: true
+          schema:
+            type: string
       responses:
         200:
           description: An object
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/accounts'
+                $ref: "#/components/schemas/accounts"
   /portfolio/{accountId}/allocation:
     get:
       tags:
-      - Portfolio
+        - Portfolio
       summary: Account Allocation
-      description: Information about the account's portfolio allocation by Asset Class,
+      description:
+        Information about the account's portfolio allocation by Asset Class,
         Industry and Category.  /portfolio/accounts or /portfolio/subaccounts must
         be called prior to this endpoint.
       parameters:
-      - name: accountId
-        in: path
-        description: account id
-        required: true
-        schema:
-          type: string
+        - name: accountId
+          in: path
+          description: account id
+          required: true
+          schema:
+            type: string
       responses:
         200:
           description: returns an object of three different allocations
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/allocations'
+                $ref: "#/components/schemas/allocations"
   /portfolio/allocation:
     post:
       tags:
-      - Portfolio
+        - Portfolio
       summary: Account Alloction (All Accounts)
-      description: Similar to /portfolio/{accountId}/allocation but returns a consolidated
+      description:
+        Similar to /portfolio/{accountId}/allocation but returns a consolidated
         view of of all the accounts returned by /portfolio/accounts. /portfolio/accounts
         or /portfolio/subaccounts must be called prior to this endpoint.
       requestBody:
         description: accounts info
         content:
-          '*/*':
+          "*/*":
             schema:
               type: object
               properties:
@@ -673,98 +686,100 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/allocations'
+                $ref: "#/components/schemas/allocations"
       x-codegen-request-body-name: body
   /portfolio/{accountId}/positions/{pageId}:
     get:
       tags:
-      - Portfolio
+        - Portfolio
       summary: Portfolio Positions
-      description: Returns a list of positions for the given account. The endpoint
+      description:
+        Returns a list of positions for the given account. The endpoint
         supports paging, page's default size is 30 positions. /portfolio/accounts
         or /portfolio/subaccounts must be called prior to this endpoint.
       parameters:
-      - name: accountId
-        in: path
-        description: account id
-        required: true
-        schema:
-          type: string
-      - name: pageId
-        in: path
-        description: page id
-        required: true
-        schema:
-          type: string
-          default: "0"
-      - name: model
-        in: query
-        description: optional
-        schema:
-          type: string
-      - name: sort
-        in: query
-        description: declare the table to be sorted by which column
-        schema:
-          type: string
-      - name: direction
-        in: query
-        description: in which order, a means ascending - d means descending
-        schema:
-          type: string
-      - name: period
-        in: query
-        description: period for pnl column, can be 1D, 7D, 1M...
-        schema:
-          type: string
+        - name: accountId
+          in: path
+          description: account id
+          required: true
+          schema:
+            type: string
+        - name: pageId
+          in: path
+          description: page id
+          required: true
+          schema:
+            type: string
+            default: "0"
+        - name: model
+          in: query
+          description: optional
+          schema:
+            type: string
+        - name: sort
+          in: query
+          description: declare the table to be sorted by which column
+          schema:
+            type: string
+        - name: direction
+          in: query
+          description: in which order, a means ascending - d means descending
+          schema:
+            type: string
+        - name: period
+          in: query
+          description: period for pnl column, can be 1D, 7D, 1M...
+          schema:
+            type: string
       responses:
         200:
           description: returns a list of positions in the portfolio
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/positions'
+                $ref: "#/components/schemas/positions"
   /portfolio/{accountId}/position/{conid}:
     get:
       tags:
-      - Portfolio
+        - Portfolio
       summary: Position by Conid
-      description: Returns a list of all positions matching the conid. For portfolio
+      description:
+        Returns a list of all positions matching the conid. For portfolio
         models the conid could be in more than one model, returning an array with
         the name of the model it belongs to.  /portfolio/accounts or /portfolio/subaccounts
         must be called prior to this endpoint.
       parameters:
-      - name: accountId
-        in: path
-        description: account id
-        required: true
-        schema:
-          type: string
-      - name: conid
-        in: path
-        description: contract id
-        required: true
-        schema:
-          type: integer
+        - name: accountId
+          in: path
+          description: account id
+          required: true
+          schema:
+            type: string
+        - name: conid
+          in: path
+          description: contract id
+          required: true
+          schema:
+            type: integer
       responses:
         200:
           description: returns a list containing only one position for the conid
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/positions'
+                $ref: "#/components/schemas/positions"
   /portfolio/{accountId}/positions/invalidate:
     post:
       tags:
-      - Portfolio
+        - Portfolio
       summary: Invalidates the backend cache of the Portfolio
       parameters:
-      - name: accountId
-        in: path
-        description: account id
-        required: true
-        schema:
-          type: string
+        - name: accountId
+          in: path
+          description: account id
+          required: true
+          schema:
+            type: string
       responses:
         200:
           description: Means successful
@@ -775,22 +790,24 @@ paths:
   /portfolio/{accountId}/summary:
     get:
       tags:
-      - Account
-      - Portfolio
+        - Account
+        - Portfolio
       summary: Account Summary
-      description: Returns information about margin, cash balances and other information
+      description:
+        Returns information about margin, cash balances and other information
         related to specified account. See also /portfolio/{accountId}/ledger. /portfolio/accounts
         or /portfolio/subaccounts must be called prior to this endpoint.
       parameters:
-      - name: accountId
-        in: path
-        description: account id
-        required: true
-        schema:
-          type: string
+        - name: accountId
+          in: path
+          description: account id
+          required: true
+          schema:
+            type: string
       responses:
         200:
-          description: returns an object containing account summary. The object contains
+          description:
+            returns an object containing account summary. The object contains
             multiple properties. A property is sufficed with -c if its provides commodity
             value, -s if it provides security value and -c if its UKL segment value
           content:
@@ -799,280 +816,281 @@ paths:
                 type: object
                 properties:
                   accountready:
-                    $ref: '#/components/schemas/summary'
+                    $ref: "#/components/schemas/summary"
                   accounttype:
-                    $ref: '#/components/schemas/summary'
+                    $ref: "#/components/schemas/summary"
                   accruedcash:
-                    $ref: '#/components/schemas/summary'
+                    $ref: "#/components/schemas/summary"
                   accruedcash-c:
-                    $ref: '#/components/schemas/summary'
+                    $ref: "#/components/schemas/summary"
                   accruedcash-f:
-                    $ref: '#/components/schemas/summary'
+                    $ref: "#/components/schemas/summary"
                   accruedcash-s:
-                    $ref: '#/components/schemas/summary'
+                    $ref: "#/components/schemas/summary"
                   accrueddividend:
-                    $ref: '#/components/schemas/summary'
+                    $ref: "#/components/schemas/summary"
                   accrueddividend-c:
-                    $ref: '#/components/schemas/summary'
+                    $ref: "#/components/schemas/summary"
                   accrueddividend-f:
-                    $ref: '#/components/schemas/summary'
+                    $ref: "#/components/schemas/summary"
                   accrueddividend-s:
-                    $ref: '#/components/schemas/summary'
+                    $ref: "#/components/schemas/summary"
                   availablefunds:
-                    $ref: '#/components/schemas/summary'
+                    $ref: "#/components/schemas/summary"
                   availablefunds-c:
-                    $ref: '#/components/schemas/summary'
+                    $ref: "#/components/schemas/summary"
                   availablefunds-f:
-                    $ref: '#/components/schemas/summary'
+                    $ref: "#/components/schemas/summary"
                   availablefunds-s:
-                    $ref: '#/components/schemas/summary'
+                    $ref: "#/components/schemas/summary"
                   billable:
-                    $ref: '#/components/schemas/summary'
+                    $ref: "#/components/schemas/summary"
                   billable-c:
-                    $ref: '#/components/schemas/summary'
+                    $ref: "#/components/schemas/summary"
                   billable-f:
-                    $ref: '#/components/schemas/summary'
+                    $ref: "#/components/schemas/summary"
                   billable-s:
-                    $ref: '#/components/schemas/summary'
+                    $ref: "#/components/schemas/summary"
                   buyingpower:
-                    $ref: '#/components/schemas/summary'
+                    $ref: "#/components/schemas/summary"
                   cushion:
-                    $ref: '#/components/schemas/summary'
+                    $ref: "#/components/schemas/summary"
                   daytradesremaining:
-                    $ref: '#/components/schemas/summary'
+                    $ref: "#/components/schemas/summary"
                   daytradesremainingt+1:
-                    $ref: '#/components/schemas/summary'
+                    $ref: "#/components/schemas/summary"
                   daytradesremainingt+2:
-                    $ref: '#/components/schemas/summary'
+                    $ref: "#/components/schemas/summary"
                   daytradesremainingt+3:
-                    $ref: '#/components/schemas/summary'
+                    $ref: "#/components/schemas/summary"
                   daytradesremainingt+4:
-                    $ref: '#/components/schemas/summary'
+                    $ref: "#/components/schemas/summary"
                   equitywithloanvalue:
-                    $ref: '#/components/schemas/summary'
+                    $ref: "#/components/schemas/summary"
                   equitywithloanvalue-c:
-                    $ref: '#/components/schemas/summary'
+                    $ref: "#/components/schemas/summary"
                   equitywithloanvalue-f:
-                    $ref: '#/components/schemas/summary'
+                    $ref: "#/components/schemas/summary"
                   equitywithloanvalue-s:
-                    $ref: '#/components/schemas/summary'
+                    $ref: "#/components/schemas/summary"
                   excessliquidity:
-                    $ref: '#/components/schemas/summary'
+                    $ref: "#/components/schemas/summary"
                   excessliquidity-c:
-                    $ref: '#/components/schemas/summary'
+                    $ref: "#/components/schemas/summary"
                   excessliquidity-f:
-                    $ref: '#/components/schemas/summary'
+                    $ref: "#/components/schemas/summary"
                   excessliquidity-s:
-                    $ref: '#/components/schemas/summary'
+                    $ref: "#/components/schemas/summary"
                   fullavailablefunds:
-                    $ref: '#/components/schemas/summary'
+                    $ref: "#/components/schemas/summary"
                   fullavailablefunds-c:
-                    $ref: '#/components/schemas/summary'
+                    $ref: "#/components/schemas/summary"
                   fullavailablefunds-f:
-                    $ref: '#/components/schemas/summary'
+                    $ref: "#/components/schemas/summary"
                   fullavailablefunds-s:
-                    $ref: '#/components/schemas/summary'
+                    $ref: "#/components/schemas/summary"
                   fullexcessliquidity:
-                    $ref: '#/components/schemas/summary'
+                    $ref: "#/components/schemas/summary"
                   fullexcessliquidity-c:
-                    $ref: '#/components/schemas/summary'
+                    $ref: "#/components/schemas/summary"
                   fullexcessliquidity-f:
-                    $ref: '#/components/schemas/summary'
+                    $ref: "#/components/schemas/summary"
                   fullexcessliquidity-s:
-                    $ref: '#/components/schemas/summary'
+                    $ref: "#/components/schemas/summary"
                   fullinitmarginreq:
-                    $ref: '#/components/schemas/summary'
+                    $ref: "#/components/schemas/summary"
                   fullinitmarginreq-c:
-                    $ref: '#/components/schemas/summary'
+                    $ref: "#/components/schemas/summary"
                   fullinitmarginreq-f:
-                    $ref: '#/components/schemas/summary'
+                    $ref: "#/components/schemas/summary"
                   fullinitmarginreq-s:
-                    $ref: '#/components/schemas/summary'
+                    $ref: "#/components/schemas/summary"
                   fullmaintmarginreq:
-                    $ref: '#/components/schemas/summary'
+                    $ref: "#/components/schemas/summary"
                   fullmaintmarginreq-c:
-                    $ref: '#/components/schemas/summary'
+                    $ref: "#/components/schemas/summary"
                   fullmaintmarginreq-f:
-                    $ref: '#/components/schemas/summary'
+                    $ref: "#/components/schemas/summary"
                   fullmaintmarginreq-s:
-                    $ref: '#/components/schemas/summary'
+                    $ref: "#/components/schemas/summary"
                   grosspositionvalue:
-                    $ref: '#/components/schemas/summary'
+                    $ref: "#/components/schemas/summary"
                   grosspositionvalue-c:
-                    $ref: '#/components/schemas/summary'
+                    $ref: "#/components/schemas/summary"
                   grosspositionvalue-f:
-                    $ref: '#/components/schemas/summary'
+                    $ref: "#/components/schemas/summary"
                   grosspositionvalue-s:
-                    $ref: '#/components/schemas/summary'
+                    $ref: "#/components/schemas/summary"
                   guarantee:
-                    $ref: '#/components/schemas/summary'
+                    $ref: "#/components/schemas/summary"
                   guarantee-c:
-                    $ref: '#/components/schemas/summary'
+                    $ref: "#/components/schemas/summary"
                   guarantee-f:
-                    $ref: '#/components/schemas/summary'
+                    $ref: "#/components/schemas/summary"
                   guarantee-s:
-                    $ref: '#/components/schemas/summary'
+                    $ref: "#/components/schemas/summary"
                   highestseverity:
-                    $ref: '#/components/schemas/summary'
+                    $ref: "#/components/schemas/summary"
                   highestseverity-c:
-                    $ref: '#/components/schemas/summary'
+                    $ref: "#/components/schemas/summary"
                   highestseverity-f:
-                    $ref: '#/components/schemas/summary'
+                    $ref: "#/components/schemas/summary"
                   highestseverity-s:
-                    $ref: '#/components/schemas/summary'
+                    $ref: "#/components/schemas/summary"
                   indianstockhaircut:
-                    $ref: '#/components/schemas/summary'
+                    $ref: "#/components/schemas/summary"
                   indianstockhaircut-c:
-                    $ref: '#/components/schemas/summary'
+                    $ref: "#/components/schemas/summary"
                   indianstockhaircut-f:
-                    $ref: '#/components/schemas/summary'
+                    $ref: "#/components/schemas/summary"
                   indianstockhaircut-s:
-                    $ref: '#/components/schemas/summary'
+                    $ref: "#/components/schemas/summary"
                   initmarginreq:
-                    $ref: '#/components/schemas/summary'
+                    $ref: "#/components/schemas/summary"
                   initmarginreq-c:
-                    $ref: '#/components/schemas/summary'
+                    $ref: "#/components/schemas/summary"
                   initmarginreq-f:
-                    $ref: '#/components/schemas/summary'
+                    $ref: "#/components/schemas/summary"
                   initmarginreq-s:
-                    $ref: '#/components/schemas/summary'
+                    $ref: "#/components/schemas/summary"
                   leverage:
-                    $ref: '#/components/schemas/summary'
+                    $ref: "#/components/schemas/summary"
                   leverage-c:
-                    $ref: '#/components/schemas/summary'
+                    $ref: "#/components/schemas/summary"
                   leverage-f:
-                    $ref: '#/components/schemas/summary'
+                    $ref: "#/components/schemas/summary"
                   leverage-s:
-                    $ref: '#/components/schemas/summary'
+                    $ref: "#/components/schemas/summary"
                   lookaheadavailablefunds:
-                    $ref: '#/components/schemas/summary'
+                    $ref: "#/components/schemas/summary"
                   lookaheadavailablefunds-c:
-                    $ref: '#/components/schemas/summary'
+                    $ref: "#/components/schemas/summary"
                   lookaheadavailablefunds-f:
-                    $ref: '#/components/schemas/summary'
+                    $ref: "#/components/schemas/summary"
                   lookaheadavailablefunds-s:
-                    $ref: '#/components/schemas/summary'
+                    $ref: "#/components/schemas/summary"
                   lookaheadexcessliquidity:
-                    $ref: '#/components/schemas/summary'
+                    $ref: "#/components/schemas/summary"
                   lookaheadexcessliquidity-c:
-                    $ref: '#/components/schemas/summary'
+                    $ref: "#/components/schemas/summary"
                   lookaheadexcessliquidity-f:
-                    $ref: '#/components/schemas/summary'
+                    $ref: "#/components/schemas/summary"
                   lookaheadexcessliquidity-s:
-                    $ref: '#/components/schemas/summary'
+                    $ref: "#/components/schemas/summary"
                   lookaheadinitmarginreq:
-                    $ref: '#/components/schemas/summary'
+                    $ref: "#/components/schemas/summary"
                   lookaheadinitmarginreq-c:
-                    $ref: '#/components/schemas/summary'
+                    $ref: "#/components/schemas/summary"
                   lookaheadinitmarginreq-f:
-                    $ref: '#/components/schemas/summary'
+                    $ref: "#/components/schemas/summary"
                   lookaheadinitmarginreq-s:
-                    $ref: '#/components/schemas/summary'
+                    $ref: "#/components/schemas/summary"
                   lookaheadmaintmarginreq:
-                    $ref: '#/components/schemas/summary'
+                    $ref: "#/components/schemas/summary"
                   lookaheadmaintmarginreq-c:
-                    $ref: '#/components/schemas/summary'
+                    $ref: "#/components/schemas/summary"
                   lookaheadmaintmarginreq-f:
-                    $ref: '#/components/schemas/summary'
+                    $ref: "#/components/schemas/summary"
                   lookaheadmaintmarginreq-s:
-                    $ref: '#/components/schemas/summary'
+                    $ref: "#/components/schemas/summary"
                   lookaheadnextchange:
-                    $ref: '#/components/schemas/summary'
+                    $ref: "#/components/schemas/summary"
                   maintmarginreq:
-                    $ref: '#/components/schemas/summary'
+                    $ref: "#/components/schemas/summary"
                   maintmarginreq-c:
-                    $ref: '#/components/schemas/summary'
+                    $ref: "#/components/schemas/summary"
                   maintmarginreq-f:
-                    $ref: '#/components/schemas/summary'
+                    $ref: "#/components/schemas/summary"
                   maintmarginreq-s:
-                    $ref: '#/components/schemas/summary'
+                    $ref: "#/components/schemas/summary"
                   netliquidation:
-                    $ref: '#/components/schemas/summary'
+                    $ref: "#/components/schemas/summary"
                   netliquidation-c:
-                    $ref: '#/components/schemas/summary'
+                    $ref: "#/components/schemas/summary"
                   netliquidation-f:
-                    $ref: '#/components/schemas/summary'
+                    $ref: "#/components/schemas/summary"
                   netliquidation-s:
-                    $ref: '#/components/schemas/summary'
+                    $ref: "#/components/schemas/summary"
                   netliquidationuncertainty:
-                    $ref: '#/components/schemas/summary'
+                    $ref: "#/components/schemas/summary"
                   nlvandmargininreview:
-                    $ref: '#/components/schemas/summary'
+                    $ref: "#/components/schemas/summary"
                   pasharesvalue:
-                    $ref: '#/components/schemas/summary'
+                    $ref: "#/components/schemas/summary"
                   pasharesvalue-c:
-                    $ref: '#/components/schemas/summary'
+                    $ref: "#/components/schemas/summary"
                   pasharesvalue-f:
-                    $ref: '#/components/schemas/summary'
+                    $ref: "#/components/schemas/summary"
                   pasharesvalue-s:
-                    $ref: '#/components/schemas/summary'
+                    $ref: "#/components/schemas/summary"
                   postexpirationexcess:
-                    $ref: '#/components/schemas/summary'
+                    $ref: "#/components/schemas/summary"
                   postexpirationexcess-c:
-                    $ref: '#/components/schemas/summary'
+                    $ref: "#/components/schemas/summary"
                   postexpirationexcess-f:
-                    $ref: '#/components/schemas/summary'
+                    $ref: "#/components/schemas/summary"
                   postexpirationexcess-s:
-                    $ref: '#/components/schemas/summary'
+                    $ref: "#/components/schemas/summary"
                   postexpirationmargin:
-                    $ref: '#/components/schemas/summary'
+                    $ref: "#/components/schemas/summary"
                   postexpirationmargin-c:
-                    $ref: '#/components/schemas/summary'
+                    $ref: "#/components/schemas/summary"
                   postexpirationmargin-f:
-                    $ref: '#/components/schemas/summary'
+                    $ref: "#/components/schemas/summary"
                   postexpirationmargin-s:
-                    $ref: '#/components/schemas/summary'
+                    $ref: "#/components/schemas/summary"
                   previousdayequitywithloanvalue:
-                    $ref: '#/components/schemas/summary'
+                    $ref: "#/components/schemas/summary"
                   previousdayequitywithloanvalue-c:
-                    $ref: '#/components/schemas/summary'
+                    $ref: "#/components/schemas/summary"
                   previousdayequitywithloanvalue-f:
-                    $ref: '#/components/schemas/summary'
+                    $ref: "#/components/schemas/summary"
                   previousdayequitywithloanvalue-s:
-                    $ref: '#/components/schemas/summary'
+                    $ref: "#/components/schemas/summary"
                   segmenttitle-c:
-                    $ref: '#/components/schemas/summary'
+                    $ref: "#/components/schemas/summary"
                   segmenttitle-f:
-                    $ref: '#/components/schemas/summary'
+                    $ref: "#/components/schemas/summary"
                   segmenttitle-s:
-                    $ref: '#/components/schemas/summary'
+                    $ref: "#/components/schemas/summary"
                   totalcashvalue:
-                    $ref: '#/components/schemas/summary'
+                    $ref: "#/components/schemas/summary"
                   totalcashvalue-c:
-                    $ref: '#/components/schemas/summary'
+                    $ref: "#/components/schemas/summary"
                   totalcashvalue-f:
-                    $ref: '#/components/schemas/summary'
+                    $ref: "#/components/schemas/summary"
                   totalcashvalue-s:
-                    $ref: '#/components/schemas/summary'
+                    $ref: "#/components/schemas/summary"
                   totaldebitcardpendingcharges:
-                    $ref: '#/components/schemas/summary'
+                    $ref: "#/components/schemas/summary"
                   totaldebitcardpendingcharges-c:
-                    $ref: '#/components/schemas/summary'
+                    $ref: "#/components/schemas/summary"
                   totaldebitcardpendingcharges-f:
-                    $ref: '#/components/schemas/summary'
+                    $ref: "#/components/schemas/summary"
                   totaldebitcardpendingcharges-s:
-                    $ref: '#/components/schemas/summary'
+                    $ref: "#/components/schemas/summary"
                   tradingtype-f:
-                    $ref: '#/components/schemas/summary'
+                    $ref: "#/components/schemas/summary"
                   tradingtype-s:
-                    $ref: '#/components/schemas/summary'
+                    $ref: "#/components/schemas/summary"
   /portfolio/{accountId}/ledger:
     get:
       tags:
-      - Account
-      - Portfolio
+        - Account
+        - Portfolio
       summary: Account Ledger
-      description: Information regarding settled cash, cash balances, etc. in the
+      description:
+        Information regarding settled cash, cash balances, etc. in the
         account's base currency and any other cash balances hold in other currencies.  /portfolio/accounts
         or /portfolio/subaccounts must be called prior to this endpoint. The list
         of supported currencies is available at https://www.interactivebrokers.com/en/index.php?f=3185.
       parameters:
-      - name: accountId
-        in: path
-        description: account id
-        required: true
-        schema:
-          type: string
+        - name: accountId
+          in: path
+          description: account id
+          required: true
+          schema:
+            type: string
       responses:
         200:
           description: 200 means successful
@@ -1082,23 +1100,24 @@ paths:
                 type: object
                 properties:
                   BASE:
-                    $ref: '#/components/schemas/ledger'
+                    $ref: "#/components/schemas/ledger"
   /portfolio/positions/{conid}:
     get:
       tags:
-      - Portfolio
+        - Portfolio
       summary: Positions by Conid
-      description: Returns an object of all positions matching the conid for all the
+      description:
+        Returns an object of all positions matching the conid for all the
         selected accounts. For portfolio models the conid could be in more than one
         model, returning an array with the name of the model it belongs to. /portfolio/accounts
         or /portfolio/subaccounts must be called prior to this endpoint.
       parameters:
-      - name: conid
-        in: path
-        description: contract id
-        required: true
-        schema:
-          type: integer
+        - name: conid
+          in: path
+          description: contract id
+          required: true
+          schema:
+            type: integer
       responses:
         200:
           description: returns an object containing account and its position information
@@ -1108,13 +1127,14 @@ paths:
                 type: object
                 properties:
                   ACCTID:
-                    $ref: '#/components/schemas/positions'
+                    $ref: "#/components/schemas/positions"
   /iserver/auth/status:
     post:
       tags:
-      - Session
+        - Session
       summary: Authentication Status
-      description: Current Authentication status to the Brokerage system. Market Data
+      description:
+        Current Authentication status to the Brokerage system. Market Data
         and Trading is not possible if not authenticated, e.g. authenticated shows
         false
       responses:
@@ -1123,11 +1143,11 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/authStatus'
+                $ref: "#/components/schemas/authStatus"
   /iserver/reauthenticate:
     post:
       tags:
-      - Session
+        - Session
       summary: Tries to re-authenticate to Brokerage
       description: |
         When using the CP Gateway, this endpoint provides a way to reauthenticate to the Brokerage system as long as there is a valid SSO session, see /sso/validate.
@@ -1137,11 +1157,11 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/authStatus'
+                $ref: "#/components/schemas/authStatus"
   /iserver/account/trades:
     get:
       tags:
-      - Trades
+        - Trades
       summary: List of Trades for the selected account
       description: |
         Returns a list of trades for the currently selected account for current day and six previous days. It is advised to call this endpoint once per session.
@@ -1153,13 +1173,14 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/trade'
+                  $ref: "#/components/schemas/trade"
   /iserver/accounts:
     get:
       tags:
-      - Account
+        - Account
       summary: Brokerage Accounts
-      description: Returns a list of accounts the user has trading access to, their
+      description:
+        Returns a list of accounts the user has trading access to, their
         respective aliases and the currently selected account. Note this endpoint
         must be called before modifying an order or querying open orders.
       responses:
@@ -1184,18 +1205,19 @@ paths:
   /iserver/account:
     post:
       tags:
-      - Account
+        - Account
       summary: Updates currently selected account to the provided account
-      description: If an user has multiple accounts, and user wants to get orders,
+      description:
+        If an user has multiple accounts, and user wants to get orders,
         trades, etc. of an account other than currently selected account, then user
         can update the currently selected account using this API and then can fetch
         required information for the newly updated account.
       requestBody:
         description: account id
         content:
-          '*/*':
+          "*/*":
             schema:
-              $ref: '#/components/schemas/set-account'
+              $ref: "#/components/schemas/set-account"
         required: true
       responses:
         200:
@@ -1213,23 +1235,23 @@ paths:
   /iserver/account/{accountId}/alert:
     post:
       tags:
-      - Alert
+        - Alert
       summary: Create or modify alert
       description: |
         Please note here, DO NOT pass orderId when creating a new alert, toolId is only required for MTA alert
       parameters:
-      - name: accountId
-        in: path
-        description: account id
-        required: true
-        schema:
-          type: string
+        - name: accountId
+          in: path
+          description: account id
+          required: true
+          schema:
+            type: string
       requestBody:
         description: alert info
         content:
-          '*/*':
+          "*/*":
             schema:
-              $ref: '#/components/schemas/alert-request'
+              $ref: "#/components/schemas/alert-request"
         required: true
       responses:
         200:
@@ -1255,17 +1277,18 @@ paths:
   /iserver/account/{accountId}/alerts:
     get:
       tags:
-      - Alert
+        - Alert
       summary: Get a list of available alerts
-      description: The response will contain both active and inactive alerts, but
+      description:
+        The response will contain both active and inactive alerts, but
         it won't have MTA alert
       parameters:
-      - name: accountId
-        in: path
-        description: account id
-        required: true
-        schema:
-          type: string
+        - name: accountId
+          in: path
+          description: account id
+          required: true
+          schema:
+            type: string
       responses:
         200:
           description: returns an array of objects
@@ -1295,25 +1318,26 @@ paths:
                       description: whether the alert has been triggered or not
                     alert_repeatable:
                       type: integer
-                      description: whether the alert can be repeatable or not, value
+                      description:
+                        whether the alert can be repeatable or not, value
                         can be 1 or 0. 1 means true
   /iserver/account/{accountId}/alert/activate:
     post:
       tags:
-      - Alert
+        - Alert
       summary: Activate or deactivate an alert
       description: Please note, if alertId is 0, it will activate/deactivate all alerts
       parameters:
-      - name: accountId
-        in: path
-        description: account id
-        required: true
-        schema:
-          type: string
+        - name: accountId
+          in: path
+          description: account id
+          required: true
+          schema:
+            type: string
       requestBody:
         description: order request info
         content:
-          '*/*':
+          "*/*":
             schema:
               type: object
               properties:
@@ -1348,22 +1372,22 @@ paths:
   /iserver/account/{accountId}/alert/{alertId}:
     delete:
       tags:
-      - Alert
+        - Alert
       summary: Delete an alert
       description: Please be careful, if alertId is 0, it will delete all alerts
       parameters:
-      - name: accountId
-        in: path
-        description: account id
-        required: true
-        schema:
-          type: string
-      - name: alertId
-        in: path
-        description: alert id
-        required: true
-        schema:
-          type: string
+        - name: accountId
+          in: path
+          description: account id
+          required: true
+          schema:
+            type: string
+        - name: alertId
+          in: path
+          description: alert id
+          required: true
+          schema:
+            type: string
       responses:
         200:
           description: returns an object
@@ -1387,29 +1411,29 @@ paths:
   /iserver/account/alert/{id}:
     get:
       tags:
-      - Alert
+        - Alert
       summary: Get details of an alert
       description: |
         Use the endpoint /iserver/account/{accountId}/alerts to receive the alert id.
         The order_id in the response is the alert id.
       parameters:
-      - name: id
-        in: path
-        description: alert id
-        required: true
-        schema:
-          type: string
+        - name: id
+          in: path
+          description: alert id
+          required: true
+          schema:
+            type: string
       responses:
         200:
           description: returns an object
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/alert-response'
+                $ref: "#/components/schemas/alert-response"
   /iserver/account/mta:
     get:
       tags:
-      - Alert
+        - Alert
       summary: Get MTA alert
       description: |
         Each login user only has one mobile trading assistant (MTA) alert with it's own unique tool id.
@@ -1422,13 +1446,14 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/alert-response'
+                $ref: "#/components/schemas/alert-response"
   /iserver/account/orders:
     get:
       tags:
-      - Order
+        - Order
       summary: Live Orders
-      description: "The endpoint is meant to be used in polling mode, e.g. requesting\
+      description:
+        "The endpoint is meant to be used in polling mode, e.g. requesting\
         \ every x seconds.\nThe response will contain two objects, one is notification,\
         \ the other is orders. \nOrders is the list of live orders (cancelled, filled,\
         \ submitted). \nNotifications contains information about execute orders as\
@@ -1438,7 +1463,7 @@ paths:
       requestBody:
         description: an array of filters
         content:
-          '*/*':
+          "*/*":
             schema:
               type: object
               properties:
@@ -1446,7 +1471,8 @@ paths:
                   type: array
                   items:
                     type: string
-                    description: "Only return list of orders for filter value. More\
+                    description:
+                      "Only return list of orders for filter value. More\
                       \ than one filter can be specified comma separated. \nAcceptable\
                       \ values are inactive,pending_submit,pre_submitted,submitted,filled,pending_cancel,cancelled,warn_state,sort_by_time.\n"
         required: false
@@ -1480,7 +1506,8 @@ paths:
                           description: Cash currency
                         sizeAndFills:
                           type: number
-                          description: Quantity outstanding and total quantity concatenated
+                          description:
+                            Quantity outstanding and total quantity concatenated
                             with forward slash separator
                         orderDesc:
                           type: string
@@ -1514,11 +1541,13 @@ paths:
                           description: Original order type
                         supportsTaxOpt:
                           type: number
-                          description: Supports Tax Optimization with 0 for no and
+                          description:
+                            Supports Tax Optimization with 0 for no and
                             1 for yes
                         lastExecutionTime:
                           type: number
-                          description: Last status update in format YYMMDDhhmms based
+                          description:
+                            Last status update in format YYMMDDhhmms based
                             in GMT
                         lastExecutionTime_r:
                           type: number
@@ -1551,25 +1580,25 @@ paths:
   /iserver/account/{accountId}/order:
     post:
       tags:
-      - Order
+        - Order
       summary: Place Order
       description: |
         Please note here, sometimes this endpoint alone can't make sure you submit the order successfully,
         you could receive some questions in the response, you have to to answer them in order to submit the order
         successfully. You can use "/iserver/reply/{replyid}" endpoint to answer questions
       parameters:
-      - name: accountId
-        in: path
-        description: account id
-        required: true
-        schema:
-          type: string
+        - name: accountId
+          in: path
+          description: account id
+          required: true
+          schema:
+            type: string
       requestBody:
         description: order request info
         content:
-          '*/*':
+          "*/*":
             schema:
-              $ref: '#/components/schemas/order-request'
+              $ref: "#/components/schemas/order-request"
         required: true
       responses:
         200:
@@ -1594,21 +1623,21 @@ paths:
   /iserver/account/{accountId}/orders:
     post:
       tags:
-      - Order
+        - Order
       summary: Place Orders (Support bracket orders)
       description: |
         You can pass a list of orders here
       parameters:
-      - name: accountId
-        in: path
-        description: account id
-        required: true
-        schema:
-          type: string
+        - name: accountId
+          in: path
+          description: account id
+          required: true
+          schema:
+            type: string
       requestBody:
         description: order request info
         content:
-          '*/*':
+          "*/*":
             schema:
               type: object
               properties:
@@ -1620,7 +1649,7 @@ paths:
                     2. When you cancel a parent order, it will cancel all bracket orders, when you cancel one child order,
                     it will also cancel its sibling order.
                   items:
-                    $ref: '#/components/schemas/order-request'
+                    $ref: "#/components/schemas/order-request"
         required: true
       responses:
         200:
@@ -1645,24 +1674,24 @@ paths:
   /iserver/account/orders/{faGroup}:
     post:
       tags:
-      - Order
+        - Order
       summary: Place Orders for Financial Advisor Groups
       description: |
         Financial Advisors can use this endpoint to place an order for a specified group. To place an order for a specified account use the endpoint /iserver/account/{accountId}/order.
         More information about groups can be found in the [TWS Users' Guide:](https://guides.interactivebrokers.com/twsguide/twsguide.htm#usersguidebook/financialadvisors/create_an_account_group_for_share_allocation.htm).
       parameters:
-      - name: faGroup
-        in: path
-        description: financial advisor group
-        required: true
-        schema:
-          type: string
+        - name: faGroup
+          in: path
+          description: financial advisor group
+          required: true
+          schema:
+            type: string
       requestBody:
         description: order request info
         content:
-          '*/*':
+          "*/*":
             schema:
-              $ref: '#/components/schemas/order-request'
+              $ref: "#/components/schemas/order-request"
         required: true
       responses:
         200:
@@ -1687,20 +1716,20 @@ paths:
   /iserver/reply/{replyid}:
     post:
       tags:
-      - Order
+        - Order
       summary: Place Order Reply
       description: Reply to questions when placing orders and submit orders
       parameters:
-      - name: replyid
-        in: path
-        description: Please use the "id" from the response of "Place Order" endpoint
-        required: true
-        schema:
-          type: string
+        - name: replyid
+          in: path
+          description: Please use the "id" from the response of "Place Order" endpoint
+          required: true
+          schema:
+            type: string
       requestBody:
         description: Answer to question
         content:
-          '*/*':
+          "*/*":
             schema:
               type: object
               properties:
@@ -1710,7 +1739,8 @@ paths:
         required: true
       responses:
         200:
-          description: Order is submitted successfully, returns an array contains
+          description:
+            Order is submitted successfully, returns an array contains
             one object
           content:
             application/json:
@@ -1726,7 +1756,8 @@ paths:
                     local_order_id:
                       type: string
         400:
-          description: When you send "confirmed-false" in the request, you will receive
+          description:
+            When you send "confirmed-false" in the request, you will receive
             this
           content:
             application/json:
@@ -1742,24 +1773,24 @@ paths:
   /iserver/account/{accountId}/order/whatif:
     post:
       tags:
-      - Order
+        - Order
       summary: Preview Order
       description: |
         This endpoint allows you to preview order without actually submitting the order and you can get
         commission information in the response.
       parameters:
-      - name: accountId
-        in: path
-        description: account id
-        required: true
-        schema:
-          type: string
+        - name: accountId
+          in: path
+          description: account id
+          required: true
+          schema:
+            type: string
       requestBody:
         description: order info
         content:
-          '*/*':
+          "*/*":
             schema:
-              $ref: '#/components/schemas/order-request'
+              $ref: "#/components/schemas/order-request"
         required: true
       responses:
         200:
@@ -1815,30 +1846,32 @@ paths:
   /iserver/account/{accountId}/order/{orderId}:
     post:
       tags:
-      - Order
+        - Order
       summary: Modify Order
-      description: Modifies an open order. Must call /iserver/accounts endpoint prior
+      description:
+        Modifies an open order. Must call /iserver/accounts endpoint prior
         to modifying an order. Use /iservers/account/orders endpoint to review open-order(s).
       parameters:
-      - name: accountId
-        in: path
-        description: account id, or fa group if modifying a group order
-        required: true
-        schema:
-          type: string
-      - name: orderId
-        in: path
-        description: Customer order id, use /iservers/account/orders endpoint to query
-          orderId.
-        required: true
-        schema:
-          type: string
+        - name: accountId
+          in: path
+          description: account id, or fa group if modifying a group order
+          required: true
+          schema:
+            type: string
+        - name: orderId
+          in: path
+          description:
+            Customer order id, use /iservers/account/orders endpoint to query
+            orderId.
+          required: true
+          schema:
+            type: string
       requestBody:
         description: modify-order request
         content:
-          '*/*':
+          "*/*":
             schema:
-              $ref: '#/components/schemas/modify-order'
+              $ref: "#/components/schemas/modify-order"
         required: true
       responses:
         200:
@@ -1859,28 +1892,31 @@ paths:
       x-codegen-request-body-name: body
     delete:
       tags:
-      - Order
+        - Order
       summary: Cancel Order
-      description: Cancels an open order. Must call /iserver/accounts endpoint prior
+      description:
+        Cancels an open order. Must call /iserver/accounts endpoint prior
         to cancelling an order. Use /iservers/account/orders endpoint to review open-order(s)
         and get latest order status.
       parameters:
-      - name: accountId
-        in: path
-        description: account id, or fa group if deleting a group order
-        required: true
-        schema:
-          type: string
-      - name: orderId
-        in: path
-        description: Customer order id, use /iservers/account/orders endpoint to query
-          orderId.
-        required: true
-        schema:
-          type: string
+        - name: accountId
+          in: path
+          description: account id, or fa group if deleting a group order
+          required: true
+          schema:
+            type: string
+        - name: orderId
+          in: path
+          description:
+            Customer order id, use /iservers/account/orders endpoint to query
+            orderId.
+          required: true
+          schema:
+            type: string
       responses:
         200:
-          description: returns an object with order id, message, conid and account
+          description:
+            returns an object with order id, message, conid and account
             id
           content:
             application/json:
@@ -1898,9 +1934,10 @@ paths:
   /iserver/marketdata/snapshot:
     get:
       tags:
-      - Market Data
+        - Market Data
       summary: Market Data
-      description: "Get Market Data for the given conid(s). The endpoint will return\
+      description:
+        "Get Market Data for the given conid(s). The endpoint will return\
         \ by default bid, ask, last, change, change pct, close, listing exchange.\n\
         See response fields for a list of available fields that can be request via\
         \ fields argument.\nThe endpoint /iserver/accounts must be called prior to\
@@ -1912,23 +1949,24 @@ paths:
         \ Data](https://interactivebrokers.github.io/cpwebapi/RealtimeSubscription.html)\
         \ for details.\n"
       parameters:
-      - name: conids
-        in: query
-        description: list of conids separated by comma
-        required: true
-        schema:
-          type: string
-      - name: since
-        in: query
-        description: time period since which updates are required. uses epoch time
-          with milliseconds.
-        schema:
-          type: integer
-      - name: fields
-        in: query
-        description: list of fields separated by comma
-        schema:
-          type: string
+        - name: conids
+          in: query
+          description: list of conids separated by comma
+          required: true
+          schema:
+            type: string
+        - name: since
+          in: query
+          description:
+            time period since which updates are required. uses epoch time
+            with milliseconds.
+          schema:
+            type: integer
+        - name: fields
+          in: query
+          description: list of fields separated by comma
+          schema:
+            type: string
       responses:
         200:
           description: Returns an array of objects
@@ -2019,11 +2057,13 @@ paths:
                       description: Regular Expiry
                     6119:
                       type: string
-                      description: Marker for market data delivery method (similar
+                      description:
+                        Marker for market data delivery method (similar
                         to request id)
                     6457:
                       type: string
-                      description: Underlying Conid. Use /trsrv/secdef to get more
+                      description:
+                        Underlying Conid. Use /trsrv/secdef to get more
                         information about the security
                     6509:
                       type: string
@@ -2125,17 +2165,17 @@ paths:
   /iserver/marketdata/{conid}/unsubscribe:
     get:
       tags:
-      - Market Data
+        - Market Data
       summary: Market Data Cancel (Single)
       description: |
         Cancel market data for given conid. To cancel all market data request(s), see /iserver/marketdata/unsubscribeall.
       parameters:
-      - name: conid
-        in: path
-        description: contract id
-        required: true
-        schema:
-          type: string
+        - name: conid
+          in: path
+          description: contract id
+          required: true
+          schema:
+            type: string
       responses:
         200:
           description: confirms market data for conid is canceled
@@ -2153,9 +2193,10 @@ paths:
   /iserver/marketdata/unsubscribeall:
     get:
       tags:
-      - Market Data
+        - Market Data
       summary: Market Data Cancel (All)
-      description: "Cancel all market data request(s). To cancel market data for given\
+      description:
+        "Cancel all market data request(s). To cancel market data for given\
         \ conid, see /iserver/marketdata/{conid}/unsubscribe. \n"
       responses:
         200:
@@ -2167,12 +2208,13 @@ paths:
                 properties:
                   confirmed:
                     type: boolean
-                    description: true means market data is canceled, false means it
+                    description:
+                      true means market data is canceled, false means it
                       is not.
   /iserver/marketdata/history:
     get:
       tags:
-      - Market Data
+        - Market Data
       summary: Market Data History
       description: |
         Get historical market Data for given conid, length of data is controlled by 'period' and 'bar'.
@@ -2180,44 +2222,48 @@ paths:
         e.g. period =1y with bar =1w returns 52 data points (Max of 1000 data points supported).
         **Note**: There's a limit of 5 concurrent requests. Excessive requests will return a 'Too many requests' status 429 response.
       parameters:
-      - name: conid
-        in: query
-        description: contract id
-        required: true
-        schema:
-          type: string
-      - name: exchange
-        in: query
-        description: Exchange of the conid (e.g. ISLAND, NYSE, etc.). Default value
-          is empty which corresponds to primary exchange of the conid.
-        schema:
-          type: string
-      - name: period
-        in: query
-        description: available time period-- {1-30}min, {1-8}h, {1-1000}d, {1-792}w,
-          {1-182}m, {1-15}y
-        required: true
-        schema:
-          type: string
-      - name: bar
-        in: query
-        description: possible value-- 1min, 2min, 3min, 5min, 10min, 15min, 30min,
-          1h, 2h, 3h, 4h, 8h, 1d, 1w, 1m
-        schema:
-          type: string
-      - name: outsideRth
-        in: query
-        description: For contracts that support it, will determine if historical data
-          includes outside of regular trading hours.
-        schema:
-          type: boolean
+        - name: conid
+          in: query
+          description: contract id
+          required: true
+          schema:
+            type: string
+        - name: exchange
+          in: query
+          description:
+            Exchange of the conid (e.g. ISLAND, NYSE, etc.). Default value
+            is empty which corresponds to primary exchange of the conid.
+          schema:
+            type: string
+        - name: period
+          in: query
+          description:
+            available time period-- {1-30}min, {1-8}h, {1-1000}d, {1-792}w,
+            {1-182}m, {1-15}y
+          required: true
+          schema:
+            type: string
+        - name: bar
+          in: query
+          description:
+            possible value-- 1min, 2min, 3min, 5min, 10min, 15min, 30min,
+            1h, 2h, 3h, 4h, 8h, 1d, 1w, 1m
+          schema:
+            type: string
+        - name: outsideRth
+          in: query
+          description:
+            For contracts that support it, will determine if historical data
+            includes outside of regular trading hours.
+          schema:
+            type: boolean
       responses:
         200:
           description: Returns an object
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/history-data'
+                $ref: "#/components/schemas/history-data"
         429:
           description: Too many requests
           content:
@@ -2232,42 +2278,44 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/system-error'
+                $ref: "#/components/schemas/system-error"
   /iserver/contract/{conid}/info:
     get:
       tags:
-      - Contract
+        - Contract
       summary: Contract Details
-      description: Using the Contract Identifier get contract info. You can use this
+      description:
+        Using the Contract Identifier get contract info. You can use this
         to prefill your order before you submit an order
       parameters:
-      - name: conid
-        in: path
-        description: contract id
-        required: true
-        schema:
-          type: string
+        - name: conid
+          in: path
+          description: contract id
+          required: true
+          schema:
+            type: string
       responses:
         200:
           description: returns an object
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/contract'
+                $ref: "#/components/schemas/contract"
   /iserver/secdef/search:
     post:
       tags:
-      - Contract
+        - Contract
       summary: Search by symbol or name
-      description: Specify an underlying to search what derivative contract(s) it
+      description:
+        Specify an underlying to search what derivative contract(s) it
         has. This endpoint must be called before using /secdef/info
       requestBody:
         description: Symbol or Company Name to be searched
         content:
-          '*/*':
+          "*/*":
             schema:
               required:
-              - symbol
+                - symbol
               type: object
               properties:
                 symbol:
@@ -2275,11 +2323,13 @@ paths:
                   description: symbol or name to be searched
                 name:
                   type: boolean
-                  description: should be true if the search is to be performed by
+                  description:
+                    should be true if the search is to be performed by
                     name. false by default.
                 secType:
                   type: string
-                  description: If search is done by name, only the assets provided
+                  description:
+                    If search is done by name, only the assets provided
                     in this field will be returned. Currently, only STK is supported.
         required: true
       responses:
@@ -2323,7 +2373,8 @@ paths:
                             description: Asset Class
                           months:
                             type: string
-                            description: List of expiration month(s) and year(s) in
+                            description:
+                              List of expiration month(s) and year(s) in
                               MMMYY format separated by semicolon
                           symbol:
                             type: string
@@ -2332,7 +2383,8 @@ paths:
                             description: Listing Exchange
                           legSecType:
                             type: string
-                            description: For combo's defines the asset class for each
+                            description:
+                              For combo's defines the asset class for each
                               leg
         500:
           description: error while processing the request
@@ -2347,33 +2399,33 @@ paths:
   /iserver/secdef/strikes:
     get:
       tags:
-      - Contract
+        - Contract
       summary: Get strikes for Options/Warrant
       description: You can get available contract months and exchanges from "/iserver/secdef/search"
       parameters:
-      - name: conid
-        in: query
-        description: contract id
-        required: true
-        schema:
-          type: string
-      - name: sectype
-        in: query
-        description: OPT/WAR
-        required: true
-        schema:
-          type: string
-      - name: month
-        in: query
-        description: contract month
-        required: true
-        schema:
-          type: string
-      - name: exchange
-        in: query
-        description: optional, default is SMART
-        schema:
-          type: string
+        - name: conid
+          in: query
+          description: contract id
+          required: true
+          schema:
+            type: string
+        - name: sectype
+          in: query
+          description: OPT/WAR
+          required: true
+          schema:
+            type: string
+        - name: month
+          in: query
+          description: contract month
+          required: true
+          schema:
+            type: string
+        - name: exchange
+          in: query
+          description: optional, default is SMART
+          schema:
+            type: string
       responses:
         200:
           description: returns an object contains call/put strike prices
@@ -2404,44 +2456,46 @@ paths:
   /iserver/secdef/info:
     get:
       tags:
-      - Contract
+        - Contract
       summary: Get available conids of future/option/warrant/cash/CFD
-      description: For option and warrant, you can get strike price from "/iserver/secdef/strikes"
+      description:
+        For option and warrant, you can get strike price from "/iserver/secdef/strikes"
         endpoint. Must call /secdef/search for the underlying contract first.
       parameters:
-      - name: conid
-        in: query
-        description: underlying contract id
-        required: true
-        schema:
-          type: string
-      - name: sectype
-        in: query
-        description: FUT/OPT/WAR/CASH/CFD
-        required: true
-        schema:
-          type: string
-      - name: month
-        in: query
-        description: contract month, only required for FUT/OPT/WAR in the format MMMYY,
-          example JAN00
-        schema:
-          type: string
-      - name: exchange
-        in: query
-        description: optional, default is SMART
-        schema:
-          type: string
-      - name: strike
-        in: query
-        description: optional, only required for OPT/WAR
-        schema:
-          type: string
-      - name: right
-        in: query
-        description: C for call, P for put
-        schema:
-          type: string
+        - name: conid
+          in: query
+          description: underlying contract id
+          required: true
+          schema:
+            type: string
+        - name: sectype
+          in: query
+          description: FUT/OPT/WAR/CASH/CFD
+          required: true
+          schema:
+            type: string
+        - name: month
+          in: query
+          description:
+            contract month, only required for FUT/OPT/WAR in the format MMMYY,
+            example JAN00
+          schema:
+            type: string
+        - name: exchange
+          in: query
+          description: optional, default is SMART
+          schema:
+            type: string
+        - name: strike
+          in: query
+          description: optional, only required for OPT/WAR
+          schema:
+            type: string
+        - name: right
+          in: query
+          description: C for call, P for put
+          schema:
+            type: string
       responses:
         200:
           description: returns an array of objects
@@ -2461,9 +2515,10 @@ paths:
   /iserver/scanner/params:
     get:
       tags:
-      - Scanner
+        - Scanner
       summary: get lists of available scanners
-      description: Returns an object contains four lists contain all parameters for
+      description:
+        Returns an object contains four lists contain all parameters for
         scanners
       responses:
         200:
@@ -2535,14 +2590,14 @@ paths:
   /iserver/scanner/run:
     post:
       tags:
-      - Scanner
+        - Scanner
       summary: run scanner to get a list of contracts
       requestBody:
         description: scanner-params request
         content:
-          '*/*':
+          "*/*":
             schema:
-              $ref: '#/components/schemas/scanner-params'
+              $ref: "#/components/schemas/scanner-params"
         required: true
       responses:
         200:
@@ -2578,8 +2633,8 @@ paths:
   /iserver/account/pnl/partitioned:
     get:
       tags:
-      - PnL
-      - Account
+        - PnL
+        - Account
       summary: PnL for the selected account
       description: |
         Returns an object containing PnL for the selected account and its models (if any).
@@ -2598,13 +2653,13 @@ paths:
   /trsrv/secdef:
     post:
       tags:
-      - Contract
+        - Contract
       summary: Secdef by Conid
       description: Returns a list of security definitions for the given conids
       requestBody:
         description: request body
         content:
-          '*/*':
+          "*/*":
             schema:
               type: object
               properties:
@@ -2620,36 +2675,38 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/secdef'
+                $ref: "#/components/schemas/secdef"
       x-codegen-request-body-name: body
   /trsrv/secdef/schedule:
     get:
       tags:
-      - Contract
+        - Contract
       summary: Get trading schedule for symbol
       description: Returns the trading schedule up to a month for the requested contract
       parameters:
-      - name: assetClass
-        in: query
-        description: |
-          specify the asset class of the contract.
-          Available values-- Stock: STK, Option: OPT, Future: FUT, Contract For Difference: CFD, Warrant: WAR, Forex: SWP, Mutual Fund: FND, Bond: BND, Inter-Commodity Spreads: ICS
-        required: true
-        schema:
-          type: string
-      - name: symbol
-        in: query
-        description: Underlying Symbol for specified contract, for example 'AAPL'
-          for US Stock - Apple Inc.
-        required: true
-        schema:
-          type: string
-      - name: exchange
-        in: query
-        description: Native exchange for contract, for example 'NASDAQ' for US Stock
-          - Apple Inc.
-        schema:
-          type: string
+        - name: assetClass
+          in: query
+          description: |
+            specify the asset class of the contract.
+            Available values-- Stock: STK, Option: OPT, Future: FUT, Contract For Difference: CFD, Warrant: WAR, Forex: SWP, Mutual Fund: FND, Bond: BND, Inter-Commodity Spreads: ICS
+          required: true
+          schema:
+            type: string
+        - name: symbol
+          in: query
+          description:
+            Underlying Symbol for specified contract, for example 'AAPL'
+            for US Stock - Apple Inc.
+          required: true
+          schema:
+            type: string
+        - name: exchange
+          in: query
+          description:
+            Native exchange for contract, for example 'NASDAQ' for US Stock
+            - Apple Inc.
+          schema:
+            type: string
       responses:
         200:
           description: Returns an object
@@ -2665,7 +2722,8 @@ paths:
                     description: null is returned.
                   schedules:
                     type: array
-                    description: Always contains at least one 'tradingTime'  and zero
+                    description:
+                      Always contains at least one 'tradingTime'  and zero
                       or more 'sessionTime' tags
                     items:
                       type: object
@@ -2674,7 +2732,8 @@ paths:
                           type: integer
                         tradingScheduleDate:
                           type: integer
-                          description: 20000101 stands for any Sat, 20000102 stands
+                          description:
+                            20000101 stands for any Sat, 20000102 stands
                             for any Sun, ... 20000107 stands for any Fri. Any other
                             date stands for itself.
                         sessions:
@@ -2686,9 +2745,11 @@ paths:
                               type: integer
                             prop:
                               type: string
-                              description: If the whole trading day is considered
+                              description:
+                                If the whole trading day is considered
                                 LIQUID then the value 'LIQUID' is returned.
-                          description: If the LIQUID hours differs from the total
+                          description:
+                            If the LIQUID hours differs from the total
                             trading day then a separate 'session' tag is returned.
                         tradingTimes:
                           type: object
@@ -2703,16 +2764,16 @@ paths:
   /trsrv/futures:
     get:
       tags:
-      - Contract
+        - Contract
       summary: Security Futures by Symbol
       description: Returns a list of non-expired future contracts for given symbol(s)
       parameters:
-      - name: symbols
-        in: query
-        description: list of case-sensitive symbols separated by comma
-        required: true
-        schema:
-          type: string
+        - name: symbols
+          in: query
+          description: list of case-sensitive symbols separated by comma
+          required: true
+          schema:
+            type: string
       responses:
         200:
           description: returns an object with symbol and and array of its future contracts
@@ -2722,7 +2783,7 @@ paths:
                 type: object
                 properties:
                   symbol:
-                    $ref: '#/components/schemas/futures'
+                    $ref: "#/components/schemas/futures"
         500:
           description: error while processing the request
           content:
@@ -2735,16 +2796,16 @@ paths:
   /trsrv/stocks:
     get:
       tags:
-      - Contract
+        - Contract
       summary: Security Stocks by Symbol
       description: Returns an object contains all stock contracts for given symbol(s)
       parameters:
-      - name: symbols
-        in: query
-        description: list of upper-sensitive symbols separated by comma
-        required: true
-        schema:
-          type: string
+        - name: symbols
+          in: query
+          description: list of upper-sensitive symbols separated by comma
+          required: true
+          schema:
+            type: string
       responses:
         200:
           description: returns an object with symbols
@@ -2754,7 +2815,7 @@ paths:
                 type: object
                 properties:
                   symbol:
-                    $ref: '#/components/schemas/stocks'
+                    $ref: "#/components/schemas/stocks"
         500:
           description: error while processing the request
           content:
@@ -2769,29 +2830,29 @@ components:
     notifications:
       type: array
       items:
-        $ref: '#/components/schemas/notification'
+        $ref: "#/components/schemas/notification"
     notification:
       type: object
       properties:
-          D:
-            type: string
-            description: notification date
-          ID:
-            type: string
-            description: unique way to reference this notification
-          FC:
-            type: string
-            description: FYI code, we can use it to find whether the disclaimer is
-              accepted or not in settings
-          MD:
-            type: string
-            description: content of notification
-          MS:
-            type: string
-            description: title of notification
-          R:
-            type: string
-            description: 0-unread, 1-read
+        D:
+          type: string
+          description: notification date
+        ID:
+          type: string
+          description: unique way to reference this notification
+        FC:
+          type: string
+          description: FYI code, we can use it to find whether the disclaimer is
+            accepted or not in settings
+        MD:
+          type: string
+          description: content of notification
+        MS:
+          type: string
+          description: title of notification
+        R:
+          type: string
+          description: 0-unread, 1-read
       description: notification
     performance:
       type: object
@@ -2803,7 +2864,8 @@ components:
           properties:
             dates:
               type: array
-              description: array of dates, the length should be same as the length
+              description:
+                array of dates, the length should be same as the length
                 of returns inside data.
               items:
                 type: string
@@ -2828,7 +2890,8 @@ components:
                     type: string
                   returns:
                     type: array
-                    description: each value stands for price change percent of corresponding
+                    description:
+                      each value stands for price change percent of corresponding
                       date in dates array
                     items:
                       type: number
@@ -2841,7 +2904,8 @@ components:
           properties:
             dates:
               type: array
-              description: array of dates, the length should be same as the length
+              description:
+                array of dates, the length should be same as the length
                 of returns inside data.
               items:
                 type: string
@@ -2866,7 +2930,8 @@ components:
                     type: string
                   returns:
                     type: array
-                    description: each value stands for price change percent of corresponding
+                    description:
+                      each value stands for price change percent of corresponding
                       date in dates array
                     items:
                       type: number
@@ -2879,7 +2944,8 @@ components:
           properties:
             dates:
               type: array
-              description: array of dates, the length should be same as the length
+              description:
+                array of dates, the length should be same as the length
                 of returns inside data.
               items:
                 type: string
@@ -2904,14 +2970,16 @@ components:
                     type: string
                   returns:
                     type: array
-                    description: each value stands for price change percent of corresponding
+                    description:
+                      each value stands for price change percent of corresponding
                       date in dates array
                     items:
                       type: number
                   end:
                     type: string
                     description: end date-- yyyyMMdd
-          description: Net asset value data for the account or consolidated accounts.
+          description:
+            Net asset value data for the account or consolidated accounts.
             NAV data is not applicable to benchmarks.
         pm:
           type: string
@@ -2948,7 +3016,8 @@ components:
           description: same as request
         includesRealTime:
           type: boolean
-          description: Indicates whether current day and realtime data is included
+          description:
+            Indicates whether current day and realtime data is included
             in the result
         from:
           type: number
@@ -2960,45 +3029,45 @@ components:
           type: array
           description: Sorted by date descending
           items:
-            $ref: '#/components/schemas/transaction'
+            $ref: "#/components/schemas/transaction"
       description: account transactions
     transaction:
       type: object
       properties:
-              acctid:
-                type: string
-              conid:
-                type: number
-              cur:
-                type: string
-                description: currency code
-              fxRate:
-                type: number
-                description: Conversion rate from asset currency to response currency
-              desc:
-                type: string
-                description: Transaction description
-              date:
-                type: string
-                description: Date of transaction.  Epoch time, GMT
-              type:
-                type: string
-                description: |
-                  Transaction Type Name: Examples: "Sell", "Buy", "Corporate Action",
-                  "Dividend Payment", "Transfer", "Payment in Lieu"
-                  Dividends and Transfers do not have price and quantity in response
-              qty:
-                type: number
-                description: Not applicable for all transaction types
-              pr:
-                type: number
-                description: In asset currency. Not be applicable for all transaction
-                  types.
-              amt:
-                type: number
-                description: |-
-                  Raw value, no formatting. Net transaction amount (may include commission, tax).
-                  In asset currency
+        acctid:
+          type: string
+        conid:
+          type: number
+        cur:
+          type: string
+          description: currency code
+        fxRate:
+          type: number
+          description: Conversion rate from asset currency to response currency
+        desc:
+          type: string
+          description: Transaction description
+        date:
+          type: string
+          description: Date of transaction.  Epoch time, GMT
+        type:
+          type: string
+          description: |
+            Transaction Type Name: Examples: "Sell", "Buy", "Corporate Action",
+            "Dividend Payment", "Transfer", "Payment in Lieu"
+            Dividends and Transfers do not have price and quantity in response
+        qty:
+          type: number
+          description: Not applicable for all transaction types
+        pr:
+          type: number
+          description: In asset currency. Not be applicable for all transaction
+            types.
+        amt:
+          type: number
+          description: |-
+            Raw value, no formatting. Net transaction amount (may include commission, tax).
+            In asset currency
     history-result:
       type: object
       properties:
@@ -3038,7 +3107,8 @@ components:
           type: number
         P:
           type: string
-          description: Object, payload depends on event type. See confluence page
+          description:
+            Object, payload depends on event type. See confluence page
             for IGEvntUpd.
     market-data:
       type: object
@@ -3118,195 +3188,195 @@ components:
     positions:
       type: array
       items:
-        $ref: '#/components/schemas/position'
+        $ref: "#/components/schemas/position"
     position:
       type: object
       properties:
-          acctId:
+        acctId:
+          type: string
+        conid:
+          type: integer
+        contractDesc:
+          type: string
+        assetClass:
+          type: string
+        position:
+          type: number
+        mktPrice:
+          type: number
+        mktValue:
+          type: number
+        currency:
+          type: string
+        avgCost:
+          type: number
+        avgPrice:
+          type: number
+        realizedPnl:
+          type: number
+        unrealizedPnl:
+          type: number
+        exchs:
+          type: string
+        expiry:
+          type: string
+        putOrCall:
+          type: string
+        multiplier:
+          type: number
+        strike:
+          type: number
+        exerciseStyle:
+          type: string
+        undConid:
+          type: integer
+        conExchMap:
+          type: array
+          items:
             type: string
-          conid:
-            type: integer
-          contractDesc:
-            type: string
-          assetClass:
-            type: string
-          position:
-            type: number
-          mktPrice:
-            type: number
-          mktValue:
-            type: number
-          currency:
-            type: string
-          avgCost:
-            type: number
-          avgPrice:
-            type: number
-          realizedPnl:
-            type: number
-          unrealizedPnl:
-            type: number
-          exchs:
-            type: string
-          expiry:
-            type: string
-          putOrCall:
-            type: string
-          multiplier:
-            type: number
-          strike:
-            type: number
-          exerciseStyle:
-            type: string
-          undConid:
-            type: integer
-          conExchMap:
-            type: array
-            items:
-              type: string
-          baseMktValue:
-            type: number
-          baseMktPrice:
-            type: number
-          baseAvgCost:
-            type: number
-          baseAvgPrice:
-            type: number
-          baseRealizedPnl:
-            type: number
-          baseUnrealizedPnl:
-            type: number
-          name:
-            type: string
-          lastTradingDay:
-            type: string
-          group:
-            type: string
-          sector:
-            type: string
-          sectorGroup:
-            type: string
-          ticker:
-            type: string
-          undComp:
-            type: string
-          undSym:
-            type: string
-          fullName:
-            type: string
-          pageSize:
-            type: integer
-          model:
-            type: string
+        baseMktValue:
+          type: number
+        baseMktPrice:
+          type: number
+        baseAvgCost:
+          type: number
+        baseAvgPrice:
+          type: number
+        baseRealizedPnl:
+          type: number
+        baseUnrealizedPnl:
+          type: number
+        name:
+          type: string
+        lastTradingDay:
+          type: string
+        group:
+          type: string
+        sector:
+          type: string
+        sectorGroup:
+          type: string
+        ticker:
+          type: string
+        undComp:
+          type: string
+        undSym:
+          type: string
+        fullName:
+          type: string
+        pageSize:
+          type: integer
+        model:
+          type: string
       description: Account Information
     allocations:
       type: array
       items:
-        $ref: '#/components/schemas/allocation'
+        $ref: "#/components/schemas/allocation"
     allocation:
       type: object
       properties:
-          assetClass:
-            type: object
-            properties:
-              long:
-                type: object
-                properties:
-                  STK:
-                    type: number
-                  OPT:
-                    type: number
-                  FUT:
-                    type: number
-                  WAR:
-                    type: number
-                  BOND:
-                    type: number
-                  CASH:
-                    type: number
-                description: long positions allocation
-              short:
-                type: object
-                properties:
-                  STK:
-                    type: number
-                  OPT:
-                    type: number
-                  FUT:
-                    type: number
-                  WAR:
-                    type: number
-                  BOND:
-                    type: number
-                  CASH:
-                    type: number
-                description: short positions allocation
-            description: portfolio allocation by asset class
-          sector:
-            type: object
-            properties:
-              long:
-                type: object
-                properties:
-                  Others:
-                    type: number
-                  Utilities:
-                    type: number
-                  Energy:
-                    type: number
-                  Technology:
-                    type: number
-                  Financial:
-                    type: number
-                  Communications:
-                    type: number
-                description: long positions allocation
-              short:
-                type: object
-                properties:
-                  Industrial:
-                    type: number
-                  Consumer:
-                    type: number
-                  Diversified:
-                    type: number
-                description: short positions allocation
-            description: portfolio allocation by sector
-          group:
-            type: object
-            properties:
-              long:
-                type: object
-                properties:
-                  Computers:
-                    type: number
-                  Semiconductors:
-                    type: number
-                  Others:
-                    type: number
-                  Chemicals:
-                    type: number
-                  Apparel:
-                    type: number
-                  Communications:
-                    type: number
-                description: long positions allocation
-              short:
-                type: object
-                properties:
-                  Banks:
-                    type: number
-                  Airlines:
-                    type: number
-                  Internet:
-                    type: number
-                description: short positions allocation
-            description: portfolio allocation by group
+        assetClass:
+          type: object
+          properties:
+            long:
+              type: object
+              properties:
+                STK:
+                  type: number
+                OPT:
+                  type: number
+                FUT:
+                  type: number
+                WAR:
+                  type: number
+                BOND:
+                  type: number
+                CASH:
+                  type: number
+              description: long positions allocation
+            short:
+              type: object
+              properties:
+                STK:
+                  type: number
+                OPT:
+                  type: number
+                FUT:
+                  type: number
+                WAR:
+                  type: number
+                BOND:
+                  type: number
+                CASH:
+                  type: number
+              description: short positions allocation
+          description: portfolio allocation by asset class
+        sector:
+          type: object
+          properties:
+            long:
+              type: object
+              properties:
+                Others:
+                  type: number
+                Utilities:
+                  type: number
+                Energy:
+                  type: number
+                Technology:
+                  type: number
+                Financial:
+                  type: number
+                Communications:
+                  type: number
+              description: long positions allocation
+            short:
+              type: object
+              properties:
+                Industrial:
+                  type: number
+                Consumer:
+                  type: number
+                Diversified:
+                  type: number
+              description: short positions allocation
+          description: portfolio allocation by sector
+        group:
+          type: object
+          properties:
+            long:
+              type: object
+              properties:
+                Computers:
+                  type: number
+                Semiconductors:
+                  type: number
+                Others:
+                  type: number
+                Chemicals:
+                  type: number
+                Apparel:
+                  type: number
+                Communications:
+                  type: number
+              description: long positions allocation
+            short:
+              type: object
+              properties:
+                Banks:
+                  type: number
+                Airlines:
+                  type: number
+                Internet:
+                  type: number
+              description: short positions allocation
+          description: portfolio allocation by group
       description: allocation
     accounts:
       type: array
       items:
-        $ref: '#/components/schemas/account'
+        $ref: "#/components/schemas/account"
     account:
       type: object
       properties:
@@ -3446,35 +3516,37 @@ components:
       type: array
       description: events
       items:
-        type: object
-        properties:
-          index_date_type:
+        $ref: "#/components/schemas/event"
+    event:
+      type: object
+      properties:
+        index_date_type:
+          type: string
+        event_type:
+          type: string
+        data:
+          type: object
+          properties: {}
+          description: will be different for different event types
+        conids:
+          type: array
+          items:
             type: string
-          event_type:
-            type: string
-          data:
-            type: object
-            properties: {}
-            description: will be different for different event types
-          conids:
-            type: array
-            items:
-              type: string
-              description: conid in string
-          index_date:
-            type: string
-            description: for exmple 20180817T040000+0000
-          source:
-            type: string
-            description: for example RSE
-          event_key:
-            type: string
-            description: for example 11662135
-          tooltips:
-            type: object
-            properties: {}
-          status:
-            type: string
+            description: conid in string
+        index_date:
+          type: string
+          description: for exmple 20180817T040000+0000
+        source:
+          type: string
+          description: for example RSE
+        event_key:
+          type: string
+          description: for example 11662135
+        tooltips:
+          type: object
+          properties: {}
+        status:
+          type: string
     alert-request:
       type: object
       properties:
@@ -3490,7 +3562,8 @@ components:
           description: The message you want to receive via email or text message
         alertRepeatable:
           type: integer
-          description: whether alert is repeatable or not, so value can only be 0
+          description:
+            whether alert is repeatable or not, so value can only be 0
             or 1, this has to be 1 for MTA alert
         email:
           type: string
@@ -3517,7 +3590,8 @@ components:
             value can only be 0 or 1, set to 1 to enable the alert only in IBKR mobile
         showPopup:
           type: integer
-          description: value can only be 0 or 1, set to 1 to allow to show alert in
+          description:
+            value can only be 0 or 1, set to 1 to allow to show alert in
             pop-ups
         toolId:
           type: integer
@@ -3541,9 +3615,10 @@ components:
                 example: 8314@SMART
               operator:
                 type: string
-                description: optional, operator for the current condition, can be
+                description:
+                  optional, operator for the current condition, can be
                   >= or <=
-                example: '>='
+                example: ">="
               triggerMethod:
                 type: string
                 description: optional, only some type of conditions have triggerMethod
@@ -3579,7 +3654,8 @@ components:
           description: whether alert is active or not, so value can only be 0 or 1
         alert_repeatable:
           type: integer
-          description: whether alert is repeatable or not, so value can only be 0
+          description:
+            whether alert is repeatable or not, so value can only be 0
             or 1
         alert_email:
           type: string
@@ -3610,7 +3686,8 @@ components:
             value can only be 0 or 1, set to 1 to enable the alert only in IBKR mobile
         alert_show_popup:
           type: integer
-          description: value can only be 0 or 1, set to 1 to allow to show alert in
+          description:
+            value can only be 0 or 1, set to 1 to allow to show alert in
             pop-ups
         alert_triggered:
           type: boolean
@@ -3642,7 +3719,8 @@ components:
           description: size of conditions array
         condition_outside_rth:
           type: integer
-          description: whether allowing the condition can be triggered outside of
+          description:
+            whether allowing the condition can be triggered outside of
             regular trading hours, 1 means allow
         conditions:
           type: array
@@ -3662,9 +3740,10 @@ components:
                 example: FB Stock (NASDAQ.NMS)
               condition_operator:
                 type: string
-                description: optional, operator for the current condition, can be
+                description:
+                  optional, operator for the current condition, can be
                   >= or <=
-                example: '>='
+                example: ">="
               condition_trigger_method:
                 type: string
                 description: optional, only some type of conditions have triggerMethod
@@ -3692,7 +3771,8 @@ components:
           description: Connected to backend
         competing:
           type: boolean
-          description: Brokerage session is competing, e.g. user is logged in to IBKR
+          description:
+            Brokerage session is competing, e.g. user is logged in to IBKR
             Mobile, WebTrader, TWS or other trading platforms.
         fail:
           type: string
@@ -3744,7 +3824,8 @@ components:
               type: array
               items:
                 type: string
-                description: store available order types for this contract outside
+                description:
+                  store available order types for this contract outside
                   regular hours
             defaultSize:
               type: number
@@ -3769,7 +3850,8 @@ components:
               type: string
             increment:
               type: string
-      description: Contains all details of the contract, including rules you can use
+      description:
+        Contains all details of the contract, including rules you can use
         when placing orders
     secdef-info:
       type: object
@@ -3808,7 +3890,8 @@ components:
           description: Formatted expiration, strike and right
         maturityDate:
           type: string
-          description: Format YYYYMMDD, the date on which the underlying transaction
+          description:
+            Format YYYYMMDD, the date on which the underlying transaction
             settles if the option is exercised
         multiplier:
           type: string
@@ -3857,7 +3940,8 @@ components:
             Z = Frozen, Y = Frozen Delayed. The second char is the secondary code: P = Snapshot Available, p = Consolidated.
         mktDataDelay:
           type: integer
-          description: The time it takes, in milliseconds, to process the historical
+          description:
+            The time it takes, in milliseconds, to process the historical
             data request
         outsideRth:
           type: boolean
@@ -3949,7 +4033,8 @@ components:
           type: string
         order_ref:
           type: string
-          description: User defined string used to identify the order. Value is set
+          description:
+            User defined string used to identify the order. Value is set
             using "cOID" field while placing an order.
     modify-order:
       type: object
@@ -4087,7 +4172,8 @@ components:
           type: string
         status:
           type: string
-          description: "PendingSubmit - Indicates the order was sent, but confirmation\
+          description:
+            "PendingSubmit - Indicates the order was sent, but confirmation\
             \ has not been received that it has been received by the destination.\
             \ \n                Occurs most commonly if an exchange is closed.\nPendingCancel\
             \ - Indicates that a request has been sent to cancel an order but confirmation\
@@ -4125,7 +4211,8 @@ components:
           description: Only exists in child order of bracket
         order_ref:
           type: string
-          description: User defined string used to identify the order. Value is set
+          description:
+            User defined string used to identify the order. Value is set
             using "cOID" field while placing an order.
       description: contains all the order related info
     set-account:
@@ -4142,24 +4229,28 @@ components:
     wagers:
       type: array
       items:
-        type: object
-        properties:
-          conid:
-            type: number
-          curr:
-            type: string
-          desc:
-            type: string
-          part:
-            type: string
+        $ref: "#/components/schemas/wager"
         description: List of wagers
+    wager:
+      type: object
+      properties:
+        conid:
+          type: number
+        curr:
+          type: string
+        desc:
+          type: string
+        part:
+          type: string
     inds:
       type: array
       items:
-        type: object
-        properties:
-          conid:
-            type: number
+        $ref: "#/components/schemas/ind"
+    ind:
+      type: object
+      properties:
+        conid:
+          type: number
     secdef:
       type: array
       items:
@@ -4197,21 +4288,23 @@ components:
     futures:
       type: array
       items:
-        type: object
-        properties:
-          symbol:
-            type: string
-          conid:
-            type: integer
-            description: conid of the future contract
-          underlyingConid:
-            type: integer
-          expirationDate:
-            type: string
-          ltd:
-            type: string
-            description: last trading day
-        description: future contract information
+        $ref: "#/components/schemas/future"
+    future:
+      type: object
+      properties:
+        symbol:
+          type: string
+        conid:
+          type: integer
+          description: conid of the future contract
+        underlyingConid:
+          type: integer
+        expirationDate:
+          type: string
+        ltd:
+          type: string
+          description: last trading day
+      description: future contract information
     stocks:
       type: array
       description: |

@@ -13,7 +13,7 @@ options:
   modelNames: {} # override model type names
   enumNames: {} # override enum type names
   enumUndecodableCase: false # whether to add undecodable case to enums
-  codableResponses: true # constrains all responses/model to be Codable
+  codableResponses: false # constrains all responses/model to be Codable
   propertyNames: {} # override property names
   anyType: Any # override Any in generated models
   numberType: Double # number type without format
@@ -28,9 +28,9 @@ options:
       version: 4.9.0
 templateFiles:
   - path: README.md
-  - path: Package.swift
-  - path: Cartfile
-  - path: Info.plist
+ # - path: Package.swift
+ # - path: Cartfile
+ # - path: Info.plist
   - path: Sources/API.swift
   - path: Sources/Coding.swift
   - path: Sources/APIRequest.swift
@@ -41,8 +41,8 @@ templateFiles:
   - path: Sources/APIResult.swift
   - path: Sources/RequestBehaviour.swift
   - path: Sources/AnyCodable.swift
-  - path: Podspec.podspec
-    destination: "{{ options.name }}.podspec"
+ # - path: Podspec.podspec
+ #   destination: "{{ options.name }}.podspec"
   - path: Sources/Enum.swift
     context: enums
     destination: "Sources/Enums/{{ enumName }}.swift"

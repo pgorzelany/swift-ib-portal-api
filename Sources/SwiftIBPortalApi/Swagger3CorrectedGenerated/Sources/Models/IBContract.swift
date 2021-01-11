@@ -12,8 +12,6 @@ public struct IBContract: APIModel {
 
     public let companyName: String?
 
-    public let companyName: String?
-
     /** same as that in request */
     public let conId: String?
 
@@ -106,9 +104,8 @@ public struct IBContract: APIModel {
 
     }
 
-    public init(category: String? = nil, companyName: String? = nil, companyName: String? = nil, conId: String? = nil, currency: String? = nil, exchange: String? = nil, industry: String? = nil, instrumentType: String? = nil, localSymbol: String? = nil, rth: Bool? = nil, rules: Rules? = nil) {
+    public init(category: String? = nil, companyName: String? = nil, conId: String? = nil, currency: String? = nil, exchange: String? = nil, industry: String? = nil, instrumentType: String? = nil, localSymbol: String? = nil, rth: Bool? = nil, rules: Rules? = nil) {
         self.category = category
-        self.companyName = companyName
         self.companyName = companyName
         self.conId = conId
         self.currency = currency
@@ -125,7 +122,6 @@ public struct IBContract: APIModel {
 
         category = try container.decodeIfPresent("category")
         companyName = try container.decodeIfPresent("companyName")
-        companyName = try container.decodeIfPresent("company_name")
         conId = try container.decodeIfPresent("con_id")
         currency = try container.decodeIfPresent("currency")
         exchange = try container.decodeIfPresent("exchange")
@@ -141,7 +137,6 @@ public struct IBContract: APIModel {
 
         try container.encodeIfPresent(category, forKey: "category")
         try container.encodeIfPresent(companyName, forKey: "companyName")
-        try container.encodeIfPresent(companyName, forKey: "company_name")
         try container.encodeIfPresent(conId, forKey: "con_id")
         try container.encodeIfPresent(currency, forKey: "currency")
         try container.encodeIfPresent(exchange, forKey: "exchange")

@@ -32,11 +32,11 @@ extension IBPortalApi.Account {
                 public let accounts: [String]?
 
                 /** Account Id and its alias */
-                public let aliases: [String: Any]?
+                public let aliases: [String: AnyCodable]?
 
                 public let selectedAccount: String?
 
-                public init(accounts: [String]? = nil, aliases: [String: Any]? = nil, selectedAccount: String? = nil) {
+                public init(accounts: [String]? = nil, aliases: [String: AnyCodable]? = nil, selectedAccount: String? = nil) {
                     self.accounts = accounts
                     self.aliases = aliases
                     self.selectedAccount = selectedAccount

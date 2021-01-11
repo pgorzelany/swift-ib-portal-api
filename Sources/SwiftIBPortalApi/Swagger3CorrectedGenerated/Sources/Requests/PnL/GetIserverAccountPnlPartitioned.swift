@@ -31,9 +31,9 @@ To receive streaming PnL the endpoint /ws can be used. Refer to [Streaming WebSo
              */
             public struct Status200: APIModel {
 
-                public let acctId: [String: Any]?
+                public let acctId: [String: AnyCodable]?
 
-                public init(acctId: [String: Any]? = nil) {
+                public init(acctId: [String: AnyCodable]? = nil) {
                     self.acctId = acctId
                 }
 

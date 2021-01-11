@@ -3794,8 +3794,6 @@ components:
         con_id:
           type: string
           description: same as that in request
-        company_name:
-          type: string
         exchange:
           type: string
         local_symbol:

@@ -10,7 +10,7 @@ public struct IBEvent: APIModel {
     public let conids: [String]?
 
     /** will be different for different event types */
-    public let data: [String: Any]?
+    public let data: [String: AnyCodable]?
 
     /** for example 11662135 */
     public let eventKey: String?
@@ -27,9 +27,9 @@ public struct IBEvent: APIModel {
 
     public let status: String?
 
-    public let tooltips: [String: Any]?
+    public let tooltips: [String: AnyCodable]?
 
-    public init(conids: [String]? = nil, data: [String: Any]? = nil, eventKey: String? = nil, eventType: String? = nil, indexDate: String? = nil, indexDateType: String? = nil, source: String? = nil, status: String? = nil, tooltips: [String: Any]? = nil) {
+    public init(conids: [String]? = nil, data: [String: AnyCodable]? = nil, eventKey: String? = nil, eventType: String? = nil, indexDate: String? = nil, indexDateType: String? = nil, source: String? = nil, status: String? = nil, tooltips: [String: AnyCodable]? = nil) {
         self.conids = conids
         self.data = data
         self.eventKey = eventKey

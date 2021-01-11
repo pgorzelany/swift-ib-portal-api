@@ -105,15 +105,15 @@ extension IBPortalApi.Contract {
                 }
 
             }
-            public typealias SuccessType = [String: Any]
+            public typealias SuccessType = [String: AnyCodable]
 
             /** returns an array of objects */
-            case status200([String: Any])
+            case status200([String: AnyCodable])
 
             /** error while processing the request */
             case status500(Status500)
 
-            public var success: [String: Any]? {
+            public var success: [String: AnyCodable]? {
                 switch self {
                 case .status200(let response): return response
                 default: return nil
@@ -128,7 +128,7 @@ extension IBPortalApi.Contract {
             }
 
             /// either success or failure value. Success is anything in the 200..<300 status code range
-            public var responseResult: APIResponseResult<[String: Any], Status500> {
+            public var responseResult: APIResponseResult<[String: AnyCodable], Status500> {
                 if let successValue = success {
                     return .success(successValue)
                 } else if let failureValue = failure {
@@ -161,7 +161,7 @@ extension IBPortalApi.Contract {
 
             public init(statusCode: Int, data: Data, decoder: ResponseDecoder) throws {
                 switch statusCode {
-                case 200: self = try .status200(decoder.decodeAny([String: Any].self, from: data))
+                case 200: self = try .status200(decoder.decodeAny([String: AnyCodable].self, from: data))
                 case 500: self = try .status500(decoder.decode(Status500.self, from: data))
                 default: throw APIClientError.unexpectedStatusCode(statusCode: statusCode, data: data)
                 }

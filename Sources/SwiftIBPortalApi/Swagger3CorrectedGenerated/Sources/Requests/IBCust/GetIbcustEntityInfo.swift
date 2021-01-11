@@ -41,7 +41,7 @@ extension IBPortalApi.IBCust {
 
                     public let canTrade: Bool?
 
-                    public let identDocs: [[String: Any]]?
+                    public let identDocs: [[String: AnyCodable]]?
 
                     public let name: Name?
 
@@ -138,7 +138,7 @@ extension IBPortalApi.IBCust {
 
                     }
 
-                    public init(address: Address? = nil, canSign: Bool? = nil, canTrade: Bool? = nil, identDocs: [[String: Any]]? = nil, name: Name? = nil, type: String? = nil) {
+                    public init(address: Address? = nil, canSign: Bool? = nil, canTrade: Bool? = nil, identDocs: [[String: AnyCodable]]? = nil, name: Name? = nil, type: String? = nil) {
                         self.address = address
                         self.canSign = canSign
                         self.canTrade = canTrade

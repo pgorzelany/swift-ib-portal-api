@@ -8,8 +8,8 @@
 import Foundation
 import SwiftIBPortalApi
 
-let apiClient = APIClient(baseURL: "https:google.com")
-let request = IBPortalApi.Account.GetIserverAccounts.Request()
+let apiClient = APIClient(baseURL: "https://localhost:5000/v1/portal")
+let request = IBPortalApi.Session.GetSsoValidate.Request()
 apiClient.makeRequest(request) { response in
     switch response.result {
     case .failure(let error):

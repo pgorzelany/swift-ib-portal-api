@@ -10,6 +10,9 @@ let package = Package(
         .library(
             name: "SwiftIBPortalApi",
             targets: ["SwiftIBPortalApi"]),
+        .executable(
+            name: "SwiftIBPortalApiExample",
+            targets: ["SwiftIBPortalApiExample"]),
     ],
     dependencies: [
         // Dependencies declare other packages that this package depends on.
@@ -24,5 +27,8 @@ let package = Package(
         .testTarget(
             name: "SwiftIBPortalApiTests",
             dependencies: ["SwiftIBPortalApi"]),
+        .target(
+            name: "SwiftIBPortalApiExample",
+            dependencies: ["SwiftIBPortalApi"])
     ]
 )

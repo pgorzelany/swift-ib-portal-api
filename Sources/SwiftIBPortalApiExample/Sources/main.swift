@@ -8,16 +8,16 @@
 import Foundation
 import SwiftIBPortalApi
 
-let apiClient = APIClient(baseURL: "https://localhost:5000/v1/portal")
+//let apiClient = APIClient(baseURL: "https://localhost:5000/v1/portal")
 let validateSSORequest = IBPortalApi.Session.GetSsoValidate.Request()
 let getPortfolioAccountsRequest = IBPortalApi.Account.GetPortfolioAccounts.Request()
 
 let handle = Task.runDetached {
     do {
-        let ssoValidateResponse = await try apiClient.makeRequest(validateSSORequest)
-        print(ssoValidateResponse.success)
-        let getIServerAccountsResponse = await try apiClient.makeRequest(getPortfolioAccountsRequest)
-        print(getIServerAccountsResponse.success)
+//        let ssoValidateResponse = await try apiClient.makeRequest(validateSSORequest)
+//        print(ssoValidateResponse.success)
+//        let getIServerAccountsResponse = await try apiClient.makeRequest(getPortfolioAccountsRequest)
+//        print(getIServerAccountsResponse.success)
     } catch {
         print(error)
     }

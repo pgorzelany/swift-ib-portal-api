@@ -7,9 +7,10 @@
 
 import Foundation
 
-struct IBExampleRequest: IBApiRequest {
-    typealias Response = [String]
-    var urlRequest: URLRequest {
-        return URLRequest(url: URL(string: "")!)
+public struct IBExampleRequest: IBApiRequest {
+    public typealias Response = [String]
+    public var urlRequest: URLRequest {
+        return URLRequest(url: URL(string: "https://onet.pl")!)
     }
+    public init() {}
 }

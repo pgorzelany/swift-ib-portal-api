@@ -12,7 +12,7 @@ The unofficial Swift API client library for Interactive Broker Client Portal Web
 
 ## Setup Requirements
 
-Before making requests through the api you need to authenticate and make a connection through the IB Gatewayas describe in the [getting started section of the docs](https://interactivebrokers.github.io/cpwebapi/). You can use an IB demo account to try out the api.
+Before making requests through the api you need to authenticate and make a connection through the IB Gateway as describe in the [getting started section of the docs](https://interactivebrokers.github.io/cpwebapi/). You can use an IB demo account to try out the api.
 
 ## API Documentation and Resources
 

@@ -15,7 +15,14 @@ apiClient.makeRequest(request) { response in
     case .failure(let error):
         print(error)
     case .success(let responseValue):
-        print(responseValue.success)
+        switch responseValue {
+        case .status200(let succes):
+            print(succes)
+        case .status401:
+            print("It was a 401")
+        case .status500:
+            print("It was a 500")
+        }
     }
 }
 

@@ -68,3 +68,28 @@ apiClient.makeDecodableRequest(ssoValidateRequest) { result in
 
 RunLoop.main.run()
 ```
+
+## Future usage
+In the near future Swift will get modern [async/await](https://github.com/apple/swift-evolution/blob/main/proposals/0296-async-await.md) and a first class [actor model](https://github.com/DougGregor/swift-evolution/blob/actors/proposals/nnnn-actors.md) for developing highly concurrent systems. The development of a client that make use of those features can be found on the async-await branch. When developed the usage will look like this:
+
+```
+import Foundation
+import SwiftIBPortalApi
+
+let apiClient = APIClient(baseURL: "https://localhost:5000/v1/portal")
+let validateSSORequest = IBPortalApi.Session.GetSsoValidate.Request()
+let getPortfolioAccountsRequest = IBPortalApi.Account.GetPortfolioAccounts.Request()
+
+let handle = Task.runDetached {
+    do {
+        let ssoValidateResponse = await try apiClient.makeRequest(validateSSORequest)
+        print(ssoValidateResponse.success)
+        let getPortfolioAccountsResponse = await try apiClient.makeRequest(getPortfolioAccountsRequest)
+        print(getPortfolioAccountsResponse.success)
+    } catch {
+        print(error)
+    }
+}
+
+RunLoop.main.run()
+```

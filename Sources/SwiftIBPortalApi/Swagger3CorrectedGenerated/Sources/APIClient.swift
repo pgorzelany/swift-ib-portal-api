@@ -91,60 +91,12 @@ public class APIClient {
     private func makeNetworkRequest<T>(request: APIRequest<T>, urlRequest: URLRequest, cancellableRequest: CancellableRequest, requestBehaviour: RequestBehaviourGroup, completionQueue: DispatchQueue, complete: @escaping (APIResponse<T>) -> Void) {
         requestBehaviour.beforeSend()
 
-        if request.service.isUpload {
-            sessionManager.upload(
-                multipartFormData: { multipartFormData in
-                    for (name, value) in request.formParameters {
-                        if let file = value as? UploadFile {
-                            switch file.type {
-                            case let .url(url):
-                                if let fileName = file.fileName, let mimeType = file.mimeType {
-                                    multipartFormData.append(url, withName: name, fileName: fileName, mimeType: mimeType)
-                                } else {
-                                    multipartFormData.append(url, withName: name)
-                                }
-                            case let .data(data):
-                                if let fileName = file.fileName, let mimeType = file.mimeType {
-                                    multipartFormData.append(data, withName: name, fileName: fileName, mimeType: mimeType)
-                                } else {
-                                    multipartFormData.append(data, withName: name)
-                                }
-                            }
-                        } else if let url = value as? URL {
-                            multipartFormData.append(url, withName: name)
-                        } else if let data = value as? Data {
-                            multipartFormData.append(data, withName: name)
-                        } else if let string = value as? String {
-                            multipartFormData.append(Data(string.utf8), withName: name)
-                        }
-                    }
-                },
-                with: urlRequest,
-                encodingCompletion: { result in
-                    switch result {
-                    case .success(let uploadRequest, _, _):
-                        cancellableRequest.networkRequest = uploadRequest
-                        uploadRequest.responseData { dataResponse in
-                            self.handleResponse(request: request, requestBehaviour: requestBehaviour, dataResponse: dataResponse, completionQueue: completionQueue, complete: complete)
-                        }
-                    case .failure(let error):
-                        let apiError = APIClientError.requestEncodingError(error)
-                        requestBehaviour.onFailure(error: apiError)
-                        let response = APIResponse<T>(request: request, result: .failure(apiError))
-
-                        completionQueue.async {
-                            complete(response)
-                        }
-                    }
-            })
-        } else {
-            let networkRequest = sessionManager.request(urlRequest)
+        let networkRequest = sessionManager.request(urlRequest)
                 .responseData(queue: decodingQueue) { dataResponse in
                     self.handleResponse(request: request, requestBehaviour: requestBehaviour, dataResponse: dataResponse, completionQueue: completionQueue, complete: complete)
 
             }
             cancellableRequest.networkRequest = networkRequest
-        }
     }
 
     private func handleResponse<T>(request: APIRequest<T>, requestBehaviour: RequestBehaviourGroup, dataResponse: DataResponse<Data>, completionQueue: DispatchQueue, complete: @escaping (APIResponse<T>) -> Void) {

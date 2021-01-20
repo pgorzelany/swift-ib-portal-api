@@ -45,6 +45,30 @@ public class APIClient {
     ///   - completionQueue: The queue that complete will be called on
     ///   - complete: A closure that gets passed the APIResponse
     /// - Returns: A cancellable request. Not that cancellation will only work after any validation RequestBehaviours have run
+    public func makeDecodableRequest<T>(_ request: APIRequest<T>, behaviours: [RequestBehaviour] = [], completionQueue: DispatchQueue = DispatchQueue.main, complete: @escaping (APIResult<T.SuccessType>) -> Void) -> CancellableRequest? {
+        return makeRequest(request, behaviours: behaviours, completionQueue: completionQueue) { response in
+            switch response.result {
+            case .failure(let error):
+                complete(.failure(error))
+            case .success(let responseValue):
+                guard responseValue.successful, let success = responseValue.success else {
+                    complete(.failure(APIClientError.errorStatusCode(statusCode: responseValue.statusCode, response: responseValue.response)))
+                    return
+                }
+
+                complete(.success(success))
+            }
+        }
+    }
+
+    /// Makes a network request
+    ///
+    /// - Parameters:
+    ///   - request: The API request to make
+    ///   - behaviours: A list of behaviours that will be run for this request. Merged with APIClient.behaviours
+    ///   - completionQueue: The queue that complete will be called on
+    ///   - complete: A closure that gets passed the APIResponse
+    /// - Returns: A cancellable request. Not that cancellation will only work after any validation RequestBehaviours have run
     @discardableResult
     public func makeRequest<T>(_ request: APIRequest<T>, behaviours: [RequestBehaviour] = [], completionQueue: DispatchQueue = DispatchQueue.main, complete: @escaping (APIResponse<T>) -> Void) -> CancellableRequest? {
         // create composite behaviour to make it easy to call functions on array of behaviours

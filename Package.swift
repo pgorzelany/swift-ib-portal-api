@@ -23,12 +23,16 @@ let package = Package(
         // Targets can depend on other targets in this package, and on products in packages this package depends on.
         .target(
             name: "SwiftIBPortalApi",
-            dependencies: ["Alamofire"]),
+            dependencies: ["Alamofire"],
+            swiftSettings: [.unsafeFlags(["-Xfrontend", "-enable-experimental-concurrency"])]
+        ),
         .testTarget(
             name: "SwiftIBPortalApiTests",
             dependencies: ["SwiftIBPortalApi"]),
         .target(
             name: "SwiftIBPortalApiExample",
-            dependencies: ["SwiftIBPortalApi"])
+            dependencies: ["SwiftIBPortalApi"],
+            swiftSettings: [.unsafeFlags(["-Xfrontend", "-enable-experimental-concurrency"])]
+        )
     ]
 )

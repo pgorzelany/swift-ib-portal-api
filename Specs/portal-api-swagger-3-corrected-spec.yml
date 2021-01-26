@@ -1460,22 +1460,6 @@ paths:
         \ they happen, see status field.\nTo receive streaming live orders the endpoint\
         \ /ws can be used. Refer to [Streaming WebSocket Data](https://interactivebrokers.github.io/cpwebapi/RealtimeSubscription.html)\
         \ for details.\n"
-      requestBody:
-        description: an array of filters
-        content:
-          "*/*":
-            schema:
-              type: object
-              properties:
-                filters:
-                  type: array
-                  items:
-                    type: string
-                    description:
-                      "Only return list of orders for filter value. More\
-                      \ than one filter can be specified comma separated. \nAcceptable\
-                      \ values are inactive,pending_submit,pre_submitted,submitted,filled,pending_cancel,cancelled,warn_state,sort_by_time.\n"
-        required: false
       responses:
         200:
           description: An object contains two arrays

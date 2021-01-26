@@ -18,71 +18,12 @@ To receive streaming live orders the endpoint /ws can be used. Refer to [Streami
     */
     public enum GetIserverAccountOrders {
 
-        public static let service = APIService<Response>(id: "getIserverAccountOrders", tag: "Order", method: "GET", path: "/iserver/account/orders", hasBody: true, securityRequirements: [])
+        public static let service = APIService<Response>(id: "getIserverAccountOrders", tag: "Order", method: "GET", path: "/iserver/account/orders", hasBody: false, securityRequirements: [])
 
         public final class Request: APIRequest<Response> {
 
-            /** The endpoint is meant to be used in polling mode, e.g. requesting every x seconds.
-            The response will contain two objects, one is notification, the other is orders. 
-            Orders is the list of live orders (cancelled, filled, submitted). 
-            Notifications contains information about execute orders as they happen, see status field.
-            To receive streaming live orders the endpoint /ws can be used. Refer to [Streaming WebSocket Data](https://interactivebrokers.github.io/cpwebapi/RealtimeSubscription.html) for details.
-             */
-            public struct Body: APIModel {
-
-                public let filters: [String]?
-
-                public init(filters: [String]? = nil) {
-                    self.filters = filters
-                }
-
-                public init(from decoder: Decoder) throws {
-                    let container = try decoder.container(keyedBy: StringCodingKey.self)
-
-                    filters = try container.decodeArrayIfPresent("filters")
-                }
-
-                public func encode(to encoder: Encoder) throws {
-                    var container = encoder.container(keyedBy: StringCodingKey.self)
-
-                    try container.encodeIfPresent(filters, forKey: "filters")
-                }
-
-            }
-
-            public struct Options {
-
-                public var filters: [String]?
-
-                public init(filters: [String]? = nil) {
-                    self.filters = filters
-                }
-            }
-
-            public var options: Options
-
-            public var body: Body?
-
-            public init(body: Body?, options: Options, encoder: RequestEncoder? = nil) {
-                self.body = body
-                self.options = options
-                super.init(service: GetIserverAccountOrders.service) { defaultEncoder in
-                    return try (encoder ?? defaultEncoder).encode(body)
-                }
-            }
-
-            /// convenience initialiser so an Option doesn't have to be created
-            public convenience init(filters: [String]? = nil, body: Body? = nil) {
-                let options = Options(filters: filters)
-                self.init(body: body, options: options)
-            }
-
-            public override var formParameters: [String: Any] {
-                var params: [String: Any] = [:]
-                if let filters = options.filters {
-                  params["filters"] = filters
-                }
-                return params
+            public init() {
+                super.init(service: GetIserverAccountOrders.service)
             }
         }
 

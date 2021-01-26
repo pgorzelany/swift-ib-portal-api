@@ -14,6 +14,7 @@ public enum APIClientError: Error {
     case unknownError(Error)
     case errorStatusCode(statusCode: Int, response: Any)
 
+
     public var name:String {
         switch self {
         case .unexpectedStatusCode: return "Unexpected status code"
@@ -37,8 +38,7 @@ extension APIClientError: CustomStringConvertible {
         case .requestEncodingError(let error): return "\(name): \(error)"
         case .networkError(let error): return "\(name): \(error.localizedDescription)"
         case .unknownError(let error): return "\(name): \(error.localizedDescription)"
-        case .errorStatusCode(let statusCode, _):
-            return "\(name): \(statusCode)"
+        case .errorStatusCode(let statusCode, _): return "\(name): \(statusCode)"
         }
     }
 }

@@ -47,6 +47,7 @@ let handle = Task.runDetached {
         let ssoResponse = await try apiClient.makeDecodableRequest(ssoValidateRequest)
         print(ssoResponse)
         let authStatusResponse = await try apiClient.makeDecodableRequest(authStatusRequest)
+        print(authStatusResponse)
         let accountsResponse = await try apiClient.makeDecodableRequest(accountsRequest)
         print(accountsResponse)
         guard let firstAccount = accountsResponse.first, let accountId = firstAccount.accountId else {
@@ -61,17 +62,18 @@ let handle = Task.runDetached {
         let positionsRequest = IBPortalApi.Portfolio.GetPortfolioByAccountIdPositionsByPageId.Request(accountId: accountId, pageId: "0")
         let positionsResponse = await try apiClient.makeDecodableRequest(positionsRequest)
         print(positionsResponse)
+        while !(await try apiClient.makeDecodableRequest(authStatusRequest).authenticated ?? false) {
+            print("Not authenticated")
+            let reauthenticateResponse = await try apiClient.makeDecodableRequest(reauthenticateRequest)
+            print(reauthenticateResponse)
+            print(await try apiClient.makeDecodableRequest(authStatusRequest))
+        }
+        print("Authenticated")
         let ordersRequest = IBPortalApi.Order.GetIserverAccountOrders.Request()
         #warning("Something is wrong here, we should not send a body in a get request")
         let ordersResponse = await try apiClient.makeDecodableRequest(ordersRequest)
         print(ordersResponse)
         // Need to authenticate a brokerage session before making orders
-//        while !(await try apiClient.makeDecodableRequest(authStatusRequest).authenticated ?? false) {
-//            print("Not authenticated")
-//            let reauthenticateResponse = await try apiClient.makeDecodableRequest(reauthenticateRequest)
-//            print(reauthenticateResponse)
-//        }
-//        print("Authenticated")
     } catch {
         print(error)
     }

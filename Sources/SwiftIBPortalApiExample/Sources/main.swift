@@ -71,9 +71,22 @@ let handle = Task.runDetached {
         print("Authenticated")
         let ordersRequest = IBPortalApi.Order.GetIserverAccountOrders.Request()
         #warning("Something is wrong here, we should not send a body in a get request")
-        let ordersResponse = await try apiClient.makeDecodableRequest(ordersRequest)
-        print(ordersResponse)
-        // Need to authenticate a brokerage session before making orders
+//        let ordersResponse = await try apiClient.makeDecodableRequest(ordersRequest)
+//        print(ordersResponse)
+        let appleConId = "265598"
+        let googleConId = "208813720"
+        let marketDataSnapshotRequest = IBPortalApi.MarketData.GetIserverMarketdataSnapshot.Request(conids: "\(appleConId),\(googleConId)")
+        let dataSnapshotResponse = await try apiClient.makeDecodableRequest(marketDataSnapshotRequest)
+        print(dataSnapshotResponse)
+        let dataHistoryRequest = IBPortalApi.MarketData.GetIserverMarketdataHistory.Request(conid: googleConId, exchange: nil, period: "1y", bar: "1d", outsideRth: false)
+//        let dataHistoryResponse = await try apiClient.makeDecodableRequest(dataHistoryRequest)
+//        print(dataHistoryResponse)
+        let buyOrderRequest = IBPortalApi.Order.PostIserverAccountByAccountIdOrder.Request(accountId: accountId, body: IBOrderRequest(acctId: accountId, allocationMethod: nil, cOID: "my-google-trade", conid: Int(googleConId)!, fxQty: nil, isCurrencyConversion: false, listingExchange: nil, orderType: "MKT", outsideRTH: false, parentId: nil, price: nil, quantity: 3, referrer: nil, secType: "\(googleConId):STK", side: "BUY", ticker: "GOOG", tif: "DAY", useAdaptive: false))
+        let buyOrderResponse = await try apiClient.makeDecodableRequest(buyOrderRequest)
+        print(buyOrderResponse)
+        let buyOrderReplyRequest = IBPortalApi.Order.PostIserverReplyByReplyid.Request(replyid: buyOrderResponse.first!.id!, body: IBPortalApi.Order.PostIserverReplyByReplyid.Request.Body(confirmed: true))
+        let buyOrderReplyResponse = await try apiClient.makeDecodableRequest(buyOrderReplyRequest)
+        print(buyOrderReplyResponse)
     } catch {
         print(error)
     }
